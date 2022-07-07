@@ -121,6 +121,9 @@
     <value>failure</value>
     <comment>DB 실패시</comment>
   </data>
+  <data name="MSG_CAPTION_ERROR" xml:space="preserve">
+    <value>MSG_CAPTION_ERROR</value>
+  </data>
   <data name="success" xml:space="preserve">
     <value>success</value>
     <comment>DB 성공시</comment>

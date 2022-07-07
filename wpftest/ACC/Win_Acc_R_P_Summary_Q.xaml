@@ -1,0 +1,427 @@
+﻿<UserControl x:Class="WizMes_Alpha_JA.Win_Acc_R_P_Summary_Q"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WizMes_Alpha_JA"        
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d" 
+             d:DesignHeight="620" d:DesignWidth="820">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="88*" />
+            <RowDefinition Height="532*" />
+        </Grid.RowDefinitions>
+        <!-- 전체 중 상단 -->
+        <Grid Grid.Row="0" Background="{DynamicResource WizMes_Alpha_JA}" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="130*" />
+                <ColumnDefinition Width="200*" />
+                <ColumnDefinition Width="200*" />
+                <ColumnDefinition Width="89*" />
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--<Grid Grid.Row="3" Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <RadioButton x:Name="date" Grid.Column="0" Click="date_Click">발생일</RadioButton>
+                    <RadioButton x:Name="sellMM" Grid.Column="1" Click="sellMM_Click">매출월</RadioButton>
+                </StackPanel>
+            </Grid>-->
+
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <ToggleButton x:Name="tbnOutware" Margin="1"
+                              Checked="tbnOutware_Checked" Unchecked="tbnOutware_Unchecked" >
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="#368AFF" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                    <Viewbox Margin="6">
+                        <TextBlock Text="수금" />
+                    </Viewbox>
+                </ToggleButton>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+                <ToggleButton x:Name="tbnStuffin" Grid.Row="1" Grid.Column="1" Margin="1"
+                              Checked="tbnStuffin_Checked" Unchecked="tbnStuffin_Unchecked" >
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="#FFE08C" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                    <Viewbox Margin="6">
+                        <TextBlock Text="지불" />
+                    </Viewbox>
+                </ToggleButton>
+            </Grid>
+
+
+            <!--<TextBlock Grid.Row="0" Grid.Column="2" Margin="1" Text="부터" />-->
+            <!--<TextBlock Grid.Row="1" Grid.Column="2" Margin="1" Text="까지" />-->
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*" />
+                    <ColumnDefinition Width="95*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblPeriod" Grid.Column="0" MouseLeftButtonUp="lblPeriod_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkPeriod" VerticalAlignment="Center"
+                                      Checked="chkPeriod_Checked" Unchecked="chkPeriod_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock Text=" 일 자" VerticalAlignment="Center" Margin="-5,0,0,0" />
+                    </StackPanel>
+                </Label>
+                <DatePicker x:Name="dtpSDate" Grid.Column="1" Padding="0"
+                                    local:DatePickerMonthCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="yyyy-MM-dd"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*" />
+                    <ColumnDefinition Width="95*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="~"  HorizontalAlignment="Right" 
+                       Background="{x:Null}" />
+                <DatePicker x:Name="dtpEDate" Grid.Column="1" Padding="0"
+                                    local:DatePickerMonthCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="yyyy-MM-dd"/>
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnLastMonth" Grid.Column="0" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnLastMonth_Click" >
+                    <TextBlock Text="전월" Margin="-2" />
+                </Button>
+                <Button x:Name="btnThisMonth" Grid.Column="1" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnThisMonth_Click" >
+                    <TextBlock Text="금월" Margin="-2" />
+                </Button>
+                <Button x:Name="btnYesterday" Grid.Column="2" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnYesterday_Click" >
+                    <TextBlock Text="전일" Margin="-2" />
+                </Button>
+                <Button x:Name="btnToday" Grid.Column="3" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnToday_Click" >
+                    <TextBlock Text="금일" Margin="-2" />
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblCompany" Grid.Column="0" VerticalContentAlignment="Center" 
+                       MouseLeftButtonUp="lblCompany_MouseLeftButtonUp">
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkCompany"  VerticalAlignment="Center"
+                                      Checked="chkCompany_Checked" Unchecked="chkCompany_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock Text="매출사업장" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+
+                <ComboBox x:Name="cboCompany" Grid.Column="1" IsEnabled="True" Visibility="Visible"
+                          Background="White"/>
+                <!--<Button x:Name="btnPfCustom" Grid.Column="2" IsEnabled="False" Click="btnPfCustom_Click" >
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>-->
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblCustom" Grid.Row="0" Grid.Column="0"
+                       VerticalContentAlignment="Center" MouseLeftButtonUp="lblCustom_MouseLeftButtonUp">
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkCustom" VerticalAlignment="Center"
+                                       Checked="chkCustom_Checked" Unchecked="chkCustom_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock Text="거래처(약)" VerticalAlignment="Center" Margin="-5,0,0,0" />
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtCustom" Grid.Column="1"
+                         IsEnabled="False" Keyboard.KeyDown="txtCustom_KeyDown"/>
+                <Button x:Name="btnpfCustom" Grid.Column="2" IsEnabled="False" Click="btnPfCustom_Click" Visibility="Visible">
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+
+                <!--지불 입금계정-->
+                <Label x:Name="lblMiddle" Grid.Column="0" VerticalContentAlignment="Center"  Visibility="Visible"
+                        >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkMiddle"  VerticalAlignment="Center"
+                                      Checked="ChkMiddle_Checked" Unchecked="ChkMiddle_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkMiddle" Text="출금계정" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtMiddle" Grid.Column="1" Visibility="Hidden"
+                         IsEnabled="False" />
+                <Button x:Name="btnPfMiddle" Grid.Column="2" IsEnabled="False" Click="btnPfMiddle_Click" Visibility="Hidden">
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>
+
+                 <!--수급일때 입금계정-->
+                <Label x:Name="lblBSItem" Grid.Column="0" VerticalContentAlignment="Center"  Visibility="Visible"
+                        >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkBSItem"  VerticalAlignment="Center"
+                                      Checked="chkBSItem_Checked" Unchecked="chkBSItem_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkBSItem" Text="입금계정" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtBSItem" Grid.Column="1" Visibility="Visible"
+                         IsEnabled="False" />
+                <Button x:Name="btnPfBSItem" Grid.Column="2" IsEnabled="False" Click="btnPfBSItem_Click" Visibility="Visible">
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>
+
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblSalesCharge"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
+                       MouseLeftButtonUp="lblSalesCharge_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkSalesCharge"  VerticalAlignment="Center"
+                                      Checked="chkSalesCharge_Checked" Unchecked="chkSalesCharge_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkSalesCharge" Text="영업사원" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtSalesCharge"  Grid.Column="1" IsEnabled="False" Visibility="Visible"
+                         Keyboard.KeyDown="txtSalesCharge_KeyDown"/>
+                <Button x:Name="btnPfSalesCharge" Grid.Column="2" IsEnabled="False" Click="btnPfSalesCharge_Click" Visibility="Visible">
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblMoney"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
+                       MouseLeftButtonUp="lblMoney_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkMoney"  VerticalAlignment="Center"
+                                      Checked="chkMoney_Checked" Unchecked="chkMoney_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkMoney" Text="화폐" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <ComboBox x:Name="cboMoney" Grid.Column="1" IsEnabled="True" Visibility="Visible"
+                          Background="White"/>
+            </Grid>
+
+            <Grid Grid.Column="5" Grid.RowSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="23*"/>
+                    <ColumnDefinition Width="85*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0"  VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch"  Background="AliceBlue" >
+                    <TextBlock Text="집" Margin="3" />
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch"  Background="AliceBlue" >
+                    <TextBlock Text="계" Margin="3" />
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch"  Background="AliceBlue" >
+                    <TextBlock Text="항" Margin="3" />
+                </TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch"  Background="AliceBlue">
+                    <TextBlock Text="목" Margin="3" />
+                </TextBlock>
+
+                <CheckBox x:Name="chkCollectionYear" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" 
+                          VerticalAlignment="Center" 
+                          Checked="chkCollectionYear_Checked" Unchecked="chkCollectionYear_Unchecked" Margin="5,0,0,0" Height="21" Width="70">
+                    <TextBlock Text="년 도" Margin="-3,-2,-2,-2" />
+                </CheckBox>
+                <CheckBox x:Name="chkCollectionMonth" Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Left" 
+                          VerticalAlignment="Center"
+                          Checked="chkCollectionMonth_Checked" Unchecked="chkCollectionMonth_Unchecked" Margin="5,0,0,0" Height="21" Width="67">
+                    <TextBlock x:Name="month" Text="입금월 " Margin="-3,-2,-2,-2" />
+                </CheckBox>
+                <CheckBox x:Name="chkCollectionCustom" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" 
+                          VerticalAlignment="Center"
+                          Checked="chkCollectionCustom_Checked" Unchecked="chkCollectionCustom_Unchecked" Margin="5,0,-1,1" Height="20" Width="71">
+                    <TextBlock Text="거래처" Margin="-3,-2,-2,-2" />
+                </CheckBox>
+                <CheckBox x:Name="chkCollectionArticle" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" 
+                          VerticalAlignment="Center"
+                          Checked="chkCollectionArticle_Checked"  Unchecked="chkCollectionArticle_Unchecked" Margin="5,1,-4,0" Height="20" Width="74">
+                    <TextBlock Text="계정과목" Margin="-3,-2,-2,-2" />
+                </CheckBox>
+            </Grid>
+
+
+
+
+            <Grid Grid.Column="6" Grid.RowSpan="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btnSearch" Grid.Column="0"  Click="btnSearch_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiSearch}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblSearch},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnClose" Grid.Column="1" Click="btnClose_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiClose}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblClose},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnExcel" Grid.Column="0" Click="btnExcel_Click">
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiExcel}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblExcel},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnPrint" Grid.Column="1" Click="btnPrint_Click">
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiPrint}"  VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblPrint},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <!-- //전체 중 상단 -->
+
+
+        <!-- 전체 중 하단 -->
+        <GroupBox x:Name="grbdgdOutGrid" Grid.Row="1" Margin="1" Visibility="Visible" Header="수금지불내역" BorderBrush="Gray">
+            <Grid Grid.Row="1">
+
+
+                <DataGrid  x:Name="dgdOutSummaryGrid" 
+                           IsReadOnly="True" Grid.Row="0" SelectionChanged="dgdOutGrid_SelectionChanged">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=ColorLightLightGray}" Value="true">
+                                    <Setter Property="Background" Value="WhiteSmoke" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=ColorLightGray}" Value="true">
+                                    <Setter Property="Background" Value="Silver" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=ColorGray}" Value="true">
+                                    <Setter Property="Background" Value="Gray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="dgdtxtcolYear" Header="년도" Width="*" Binding="{Binding YYYY}" Visibility="Hidden"/>
+                        <DataGridTextColumn x:Name="dgdtxtcolMonth" Header="입금월" Width="*" Binding="{Binding YYYYMM}" Visibility="Hidden"/>
+                        <DataGridTextColumn x:Name="dgdtxtcolCustom" Header="거래처" Width="*" Binding="{Binding customnat}" CellStyle="{StaticResource NumericDataGridCell}" Visibility="Hidden"/>
+                        <DataGridTextColumn  x:Name="dgdtxtcolArticle" Header="계정과목" Width="*" Binding="{Binding RPitemName}" CellStyle="{StaticResource NumericDataGridCell}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="금액" Width="auto" Binding="{Binding SumAmount}" />
+                        <DataGridTextColumn x:Name="dgdtxtcolUnit" Header="단위" Width="*" Binding="{Binding CurrencyUnitname}" />
+                        <DataGridTextColumn x:Name="dgdtxtcolPer" Header="비율" Width="*" Binding="{Binding Per}" />
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+
+
+        <!-- //전체 중 하단 -->
+
+    </Grid>
+</UserControl>

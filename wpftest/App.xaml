@@ -1,9 +1,299 @@
-﻿<Application x:Class="wpftest.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:wpftest"
-             StartupUri="MainWindow.xaml">
+<Application x:Class="WizMes_Alpha_JA.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:WizMes_Alpha_JA" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Startup="Application_Startup">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source ="/XamlDictionay/WizardDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- 전체의 글꼴 및 글자크기 설정 -->
+            <Style TargetType="{x:Type Window}" x:Name="AllFont">
+                <!--<Setter Property="FontSize" Value="20" />-->
+                <Setter Property="FontFamily" Value="{Binding FontFamily,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" />
+                <Setter Property="FontStyle" Value="{Binding FontStyle,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" />
+            </Style>
+
+            <Style TargetType="DataGrid" >
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="AutoGenerateColumns" Value="False" />
+                <Setter Property="EnableColumnVirtualization" Value="True"/>
+                <Setter Property="EnableRowVirtualization" Value="True" />
+                <EventSetter Event="MouseLeftButtonDown" Handler="MouseLeftDoubleClick"/>
+            </Style>
+
+            <!-- 전체 데이터 그리드의 칼럼 헤더를 중간으로 -->
+            <Style TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Background" Value="#365fb1" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderThickness" Value="0.7" />
+                <Setter Property="BorderBrush" Value="White" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="8">
+                        <Setter Property="FontSize" Value="9.6" />
+                        <!--<Setter Property="Margin" Value="6,0,6,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="10">
+                        <Setter Property="FontSize" Value="12" />
+                        <!--<Setter Property="Margin" Value="7,0,7,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="11">
+                        <Setter Property="FontSize" Value="13.2" />
+                        <!--<Setter Property="Margin" Value="7.5,0,7.5,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="12">
+                        <Setter Property="FontSize" Value="14.4" />
+                        <!--<Setter Property="Margin" Value="8,0,8,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="13">
+                        <Setter Property="FontSize" Value="15.6" />
+                        <!--<Setter Property="Margin" Value="8.5,0,8.5,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="14">
+                        <Setter Property="FontSize" Value="16.8" />
+                        <!--<Setter Property="Margin" Value="9,0,9,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="15">
+                        <Setter Property="FontSize" Value="18" />
+                        <!--<Setter Property="Margin" Value="9.5,0,9.5,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="16">
+                        <Setter Property="FontSize" Value="19.2" />
+                        <!--<Setter Property="Margin" Value="10,0,10,0" />-->
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding TheFont,RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="18">
+                        <Setter Property="FontSize" Value="21.6" />
+                        <!--<Setter Property="Margin" Value="11,0,11,0" />-->
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#eff9ff" />
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Viewbox>
+                                <ContentPresenter Content="{TemplateBinding Content}" Margin="2"/>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.3" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Setter Property="Opacity" Value="1.0" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="ToggleButton" >
+                <Setter Property="Background" Value="#eff9ff" />
+            </Style>
+
+            <Style TargetType="DatePicker">
+                <Setter Property="Background" Value="White"/>
+            </Style>
+
+            <Style TargetType="DatePickerTextBox" >
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding DatePickerDateFormat.DateFormat}" Value="yyyy">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Viewbox>
+                                        <TextBlock Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}},
+                                StringFormat='yyyy'}"  Margin="2"/>
+                                    </Viewbox>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding DatePickerDateFormat.DateFormat}" Value="yyyy-MM">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Viewbox>
+                                        <TextBlock Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}},
+                                StringFormat='yyyy-MM'}"  Margin="2"/>
+                                    </Viewbox>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding DatePickerDateFormat.DateFormat}" Value="yyyy-MM-dd">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Viewbox>
+                                        <TextBlock Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}},
+                                StringFormat='yyyy-MM-dd'}"  Margin="2"/>
+                                    </Viewbox>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="CheckBox" >
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Viewbox Margin="3">
+                                <ContentPresenter Content="{TemplateBinding Content}" Margin="2"/>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Background" Value="#ededed" />
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Label}" >
+                            <Border BorderBrush="Gray"
+                                BorderThickness="1"
+                                Background="{TemplateBinding Background}"
+                                Padding="2"
+                                SnapsToDevicePixels="True"
+                                CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+	                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Viewbox>
+                                <ContentPresenter Content="{TemplateBinding Content}" Margin="2"/>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type Border}">
+                <Style.Triggers>
+                    <Trigger Property="IsFocused" Value="true">
+                        <Setter Property="Background" Value="Blue" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="InputCommaZeroTextBox" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxZero_TextChanged"/>
+                <Setter Property="TextAlignment" Value="Right"/>
+            </Style>
+            <Style x:Key="InputCommaOneTextBox" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxOne_TextChanged"/>
+                <Setter Property="TextAlignment" Value="Right"/>
+            </Style>
+            <Style x:Key="InputCommaTwoTextBox" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxTwo_TextChanged"/>
+                <Setter Property="TextAlignment" Value="Right"/>
+            </Style>
+            <Style x:Key="InputCommaZeroAndEssentialTextBox" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxZero_TextChanged"/>
+                <Setter Property="TextAlignment" Value="Right"/>
+                <Setter Property="Background" Value="#fff2d2" />
+            </Style>
+            <Style x:Key="InputCommaOneAndEssentialTextBox" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxOne_TextChanged"/>
+                <Setter Property="TextAlignment" Value="Right"/>
+                <Setter Property="Background" Value="#fff2d2" />
+            </Style>
+            <Style x:Key="InputCommaTwoAndEssentialTextBox" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxTwo_TextChanged"/>
+                <Setter Property="TextAlignment" Value="Right"/>
+                <Setter Property="Background" Value="#fff2d2" />
+            </Style>
+            <Style x:Key="InputCommaZeroTextBoxNoRight" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxZero_TextChanged"/>
+            </Style>
+            <Style x:Key="InputCommaOneTextBoxNoRight" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxOne_TextChanged"/>
+            </Style>
+            <Style x:Key="InputCommaTwoTextBoxNoRight" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxTwo_TextChanged"/>
+            </Style>
+            <Style x:Key="InputCommaZeroAndEssentialTextBoxNoRight" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxZero_TextChanged"/>
+                <Setter Property="Background" Value="#fff2d2" />
+            </Style>
+            <Style x:Key="InputCommaOneAndEssentialTextBoxNoRight" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxOne_TextChanged"/>
+                <Setter Property="Background" Value="#fff2d2" />
+            </Style>
+            <Style x:Key="InputCommaTwoAndEssentialTextBoxNoRight" TargetType="TextBox">
+                <EventSetter Event="TextChanged" Handler="TextBoxTwo_TextChanged"/>
+                <Setter Property="Background" Value="#fff2d2" />
+            </Style>
+            <!-- 백 그라운드에 넣을 이미지 키값으로 지정 -->
+            <ImageBrush x:Key="WizMes_Alpha_JA" ImageSource="Images/WizMes_Alpha_JA.jpg" />
+            <ImageBrush x:Key="WizMes_Alpha_JANoIcon" ImageSource="Images/WizMes_Alpha_JA_Largesize_noIcon.jpg" />
+
+
+
+            <Style x:Key="Win10ComboBox" TargetType="{x:Type ComboBox}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ComboBox">
+                            <Grid>
+                                <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                                    <ToggleButton.Template>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="5" Background="LightGray" BorderBrush="LightGray" BorderThickness="1" />
+                                                <Border Grid.Column="0" CornerRadius="5,0,0,5"  Margin="1"  Background="#fff2d2"  BorderBrush="LightGray" BorderThickness="0,0,1,0" />
+                                                <Path x:Name="Arrow" Grid.Column="1"  Fill="#fff2d2" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                                    <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                                </Trigger>
+                                                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                                    <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
+                                <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
+                                <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                                <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
+                                    <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                        <Border x:Name="DropDownBorder" Background="#fff2d2" />
+                                        <ScrollViewer SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True" />
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Popup>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                </Style.Triggers>
+            </Style>
+
+
+
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

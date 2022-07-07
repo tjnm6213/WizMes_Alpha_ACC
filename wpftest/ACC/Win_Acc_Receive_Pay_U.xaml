@@ -1,0 +1,878 @@
+﻿<UserControl x:Class="WizMes_Alpha_JA.Win_Acc_Receive_Pay_U"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WizMes_Alpha_JA"        
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d" 
+             d:DesignHeight="620" d:DesignWidth="820">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="88*" />
+            <RowDefinition Height="532*" />
+        </Grid.RowDefinitions>
+        <!-- 전체 중 상단 -->
+        <Grid Grid.Row="0" Background="{DynamicResource WizMes_Alpha_JA}" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="60*" />
+                <ColumnDefinition Width="130*" />
+                <ColumnDefinition Width="150*" />
+                <ColumnDefinition Width="150*" />
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <ToggleButton x:Name="tbnReceive" Margin="1"
+                              Checked="tbnReceive_Checked" Unchecked="tbnReceive_Unchecked">
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="#FFE08C" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                    <Viewbox Margin="6">
+                        <TextBlock Text="입  금" />
+                    </Viewbox>
+                </ToggleButton>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+                <ToggleButton x:Name="tbnPay" Grid.Row="1" Grid.Column="1" Margin="1"
+                              Checked="tbnPay_Checked" Unchecked="tbnPay_Unchecked" >
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="#368AFF" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                    <Viewbox Margin="6">
+                        <TextBlock Text="출  금" />
+                    </Viewbox>
+                </ToggleButton>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*" />
+                    <ColumnDefinition Width="95*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblPeriod" Grid.Column="0" MouseLeftButtonUp="lblPeriod_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkPeriod" VerticalAlignment="Center"
+                                      Checked="chkPeriod_Checked" Unchecked="chkPeriod_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock Text=" 일 자" VerticalAlignment="Center" Margin="-5,0,0,0" />
+                    </StackPanel>
+                </Label>
+                <DatePicker x:Name="dtpSDate" Grid.Column="1" Padding="0"
+                                    local:DatePickerMonthCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="yyyy-MM-dd" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                <DatePicker x:Name="dtpSDate2" Grid.Column="1" Padding="0" Visibility="Hidden"
+                                    local:DatePickerMonthCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="yyyy-MM" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*" />
+                    <ColumnDefinition Width="95*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="~"  HorizontalAlignment="Right" 
+                       Background="{x:Null}" />
+                <DatePicker x:Name="dtpEDate" Grid.Column="1" Padding="0"
+                                    local:DatePickerMonthCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="yyyy-MM-dd" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                <DatePicker x:Name="dtpEDate2" Grid.Column="1" Padding="0" Visibility="Hidden"
+                                    local:DatePickerMonthCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="yyyy-MM" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnLastMonth" Grid.Column="0" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnLastMonth_Click" >
+                    <TextBlock Text="전월" Margin="-2" />
+                </Button>
+                <Button x:Name="btnThisMonth" Grid.Column="1" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnThisMonth_Click" >
+                    <TextBlock Text="금월" Margin="-2" />
+                </Button>
+                <Button x:Name="btnYesterday" Grid.Column="2" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnYesterday_Click" >
+                    <TextBlock Text="전일" Margin="-2" />
+                </Button>
+                <Button x:Name="btnToday" Grid.Column="3" HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center" Click="btnToday_Click" >
+                    <TextBlock Text="금일" Margin="-2" />
+                </Button>
+            </Grid>
+            
+
+            <!--검색조건부분-->
+            <Grid Grid.Row="0" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblCompany" Grid.Column="0" VerticalContentAlignment="Center" 
+                       MouseLeftButtonUp="lblCompany_MouseLeftButtonUp">
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkCompany"  VerticalAlignment="Center"
+                                      Checked="chkCompany_Checked" Unchecked="chkCompany_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock Text="매출사업장" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+
+                <ComboBox x:Name="cboCompany" Grid.Column="1" IsEnabled="True" Visibility="Visible"
+                          Background="White"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblCustom" Grid.Row="0" Grid.Column="0"
+                       VerticalContentAlignment="Center" MouseLeftButtonUp="lblCustom_MouseLeftButtonUp">
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkCustom" VerticalAlignment="Center"
+                                       Checked="chkCustom_Checked" Unchecked="chkCustom_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock Text="수금처(약)" VerticalAlignment="Center" Margin="-5,0,0,0" />
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtCustom" Grid.Column="1"
+                         IsEnabled="False" Keyboard.KeyDown="txtCustom_KeyDown"/>
+                <Button x:Name="btnpfCustom" Grid.Column="2" IsEnabled="False" Click="btnPfCustom_Click" Visibility="Visible">
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="lblBSItem" Grid.Column="0" VerticalContentAlignment="Center"  Visibility="Visible"
+                       MouseLeftButtonUp="lblBSItem_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkBSItem"  VerticalAlignment="Center"
+                                      Checked="chkBSItem_Checked" Unchecked="chkBSItem_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkBSItem" Text="계정과목" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtBSItem" Grid.Column="1" Visibility="Visible" Keyboard.KeyDown="txtBSItem_KeyDown"
+                         IsEnabled="False" />
+                <Button x:Name="btnPfBSItem" Grid.Column="2" IsEnabled="False" Click="btnPfBSItem_Click" Visibility="Visible">
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="lblSalesCharge" Grid.Column="0" VerticalContentAlignment="Center"  Visibility="Visible"
+                       MouseLeftButtonUp="lblSalesCharge_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkSalesCharge"  VerticalAlignment="Center"
+                                      Checked="chkSalesCharge_Checked" Unchecked="chkSalesCharge_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkSalesCharge" Text="영업사원" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtSalesCharge" Grid.Column="1" Visibility="Visible" Keyboard.KeyDown="txtSalesCharge_KeyDown"
+                         IsEnabled="False" />
+                <Button x:Name="btnPfSalesCharge" Grid.Column="2" IsEnabled="False" Click="btnPfSalesCharge_Click" Visibility="Visible">
+                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                </Button>
+            </Grid>
+
+
+            <Grid Grid.Row="0" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblMoney"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
+                       MouseLeftButtonUp="lblMoney_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkMoney"  VerticalAlignment="Center"
+                                      Checked="chkMoney_Checked" Unchecked="chkMoney_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkMoney" Text="화폐" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <ComboBox x:Name="cboMoney" Grid.Column="1" IsEnabled="True" Visibility="Visible"
+                          Background="White"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblBank"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
+                       MouseLeftButtonUp="lblBank_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkBank"  VerticalAlignment="Center"
+                                      Checked="chkBank_Checked" Unchecked="chkBank_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkBank" Text="은행" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <ComboBox x:Name="cboBank" Grid.Column="1"></ComboBox>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblNowDate"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
+                       MouseLeftButtonUp="lblNowDate_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkNowDate"  VerticalAlignment="Center"
+                                      Checked="chkNowDate_Checked" Unchecked="chkNowDate_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkNowDate" Text="당일수금분" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <ComboBox x:Name="cboNowDate" Grid.Column="1"></ComboBox>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="20*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblName"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
+                       MouseLeftButtonUp="lblName_MouseLeftButtonUp" >
+                    <StackPanel Orientation="Horizontal" Margin="-2">
+                        <Viewbox VerticalAlignment="Center">
+                            <CheckBox x:Name="chkName"  VerticalAlignment="Center"
+                                      Checked="chkName_Checked" Unchecked="chkName_Unchecked"/>
+                        </Viewbox>
+                        <TextBlock x:Name="tbkName" Text="입금자명" VerticalAlignment="Center" Margin="-5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <TextBox x:Name="txtName" Grid.Column="1" />
+            </Grid>
+
+
+            <!--오른쪽 상단 기능-->
+            <Grid Grid.Column="6" Grid.RowSpan="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btnSearch" Grid.Column="0" Grid.Row="0" Click="btnSearch_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiSearch}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblSearch},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnClose" Grid.Column="1"  Grid.Row="0" Click="btnClose_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiClose}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblClose},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btnAdd" Grid.Column="0" Click="btnAdd_Click"  >
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiInsert}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblInsert},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnUpdate" Grid.Column="1" Click="btnUpdate_Click">
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiUpdate}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblUpdate},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnSave" Grid.Column="0" Visibility="Visible" Click="btnSave_Click">
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiSave}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblSave},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnCancel" Grid.Column="1" Visibility="Visible"  Click="btnCancel_Click">
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiCancle}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblCancle},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnDelete" Grid.Column="0" Click="btnDelete_Click">
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiDelete}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblDelete},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnExcel" Grid.Column="1" Grid.Row="0" Click="btnExcel_Click">
+                        <StackPanel Orientation="Horizontal" Margin="-2">
+                            <Image Source="{DynamicResource btiExcel}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblExcel},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    
+                </Grid>
+            </Grid>
+        </Grid>
+        <!-- //전체 중 상단 -->
+
+
+        <!-- 오른쪽 그리드  -->
+        
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+            <DataGrid x:Name="dgdReceiveGrid" IsReadOnly="True" Grid.Column="0" SelectionChanged="dgdReceiveGrid_SelectionChanged" Margin="0,5,0,30">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=ColorLightLightGray}" Value="true">
+                                <Setter Property="Background" Value="WhiteSmoke" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=ColorLightGray}" Value="true">
+                                <Setter Property="Background" Value="Silver" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=ColorGray}" Value="true">
+                                <Setter Property="Background" Value="Gray" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Width="auto" Binding="{Binding Num}"/>
+                    <DataGridTextColumn Header="일자" Width="auto" Binding="{Binding RPDate}" />
+                    <DataGridTextColumn Header="화폐" Width="auto" Binding="{Binding CurrencyUnit}"/>
+                    <DataGridTextColumn Header="수금처(약)" Width="auto" Binding="{Binding KCustom}" />
+                    <DataGridTextColumn Header="수금계정" Width="auto" Binding="{Binding BSItem}" />
+                    <DataGridTextColumn Header="영업사원" Width="auto" Binding="{Binding SalesCharge}" />
+                    <DataGridTextColumn Header="현금수금" Width="auto" Binding="{Binding CashAmount}" />
+                    <DataGridTextColumn Header="어음수근" Width="auto" Binding="{Binding BillAmount}" />
+                    <DataGridTextColumn Header="은행입금" Width="auto" Binding="{Binding BankAmount}" />
+                    <DataGridTextColumn Header="수금합계" Width="auto" Binding="{Binding SumAmount}" />
+                    <DataGridTextColumn Header="할인액" Width="auto" Binding="{Binding DCAmount}" />
+                    <DataGridTextColumn x:Name="비고"  Header="수금액" Width="auto" Binding="{Binding Comments}" />
+                    <DataGridTextColumn Header="입출금번호" Width="auto" Binding="{Binding RPNo}" />
+                    <DataGridTextColumn Header="은행명" Width="auto" Binding="{Binding BankName}" />
+                    <DataGridTextColumn Header="입금자명" Width="auto" Binding="{Binding KCustomName}" />
+                    <DataGridTextColumn Header="어음번호" Width="auto" Binding="{Binding BillNo}" />
+                    <DataGridTextColumn Header="계정과목코드" Width="auto" Binding="{Binding RPItemCode}" />
+                    <DataGridTextColumn Header="대체계정과목코드" Width="auto" Binding="{Binding RefBSNO}" />
+                    <DataGridTextColumn Header="대체계정과목" Width="auto" Binding="{Binding RefRPItemCode}" />
+                    <DataGridTextColumn Header="대체계정적요" Width="auto" Binding="{Binding RefComments}" />
+                    <DataGridTextColumn Header="대체계정건여" Width="auto" Binding="{Binding RefAccountYN}" />
+                    <DataGridTextColumn Header="대체계정발생금액" Width="auto" Binding="{Binding RefAmount}" />
+      
+                </DataGrid.Columns>
+            </DataGrid>
+                <!--오른쪽 수금등록-->
+            <GroupBox x:Name="grbAddItems" Header="수금등록" Grid.Column="1" Grid.RowSpan="2" BorderBrush="Gray">
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" >
+                            <TextBlock Text="사업장" Margin="-1" />
+                        </Label>
+                        <ComboBox x:Name="cboCompany2"  Grid.Column="1"  Background="#fff2d2" SelectedValue="{Binding CompanyID}"/>
+                    </Grid>
+                    
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblgrbBSITEM" Grid.Column="0" HorizontalContentAlignment="Left">
+                            <TextBlock Text="입출금번호" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbBsItem" Grid.Column="1" Background="LightGreen"
+                                 Text="{Binding RPNo}"/>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="일     자" Margin="-1" />
+                        </Label>
+                        <DatePicker x:Name="dtpDate2" Grid.Column="1" Padding="0"
+                                   />
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="103*" />
+                            <ColumnDefinition Width="22*" />
+                        </Grid.ColumnDefinitions>
+                        <Label  Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="입금계정과목" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbReceivePayItems" Grid.Column="1" 
+                                 Keyboard.KeyDown="txtgrbReceivePayItems_KeyDown"
+                                 Text="{Binding BSItem}" Tag="{Binding RPItemCode}" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                        <Button x:Name="btngrbpftxtgrbReceivePayItems"  Grid.Column="2" IsEnabled="True" 
+                                Click="btngrbpftxtgrbReceivePayItems_Click" local:FocusAdvancement.AdvancesByEnterKey="True">
+                            <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                        </Button>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="103*" />
+                            <ColumnDefinition Width="22*" />
+                        </Grid.ColumnDefinitions>
+                        <Label  Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="오더번호" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtOrderNo" Grid.Column="1"  
+                                 Keyboard.KeyDown="txtOrderNo_KeyDown"
+                                 Text="{Binding OrderNo}" Tag="{Binding OrderNo}" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                        <Button x:Name="btnOrderNo"  Grid.Column="2" IsEnabled="True" 
+                                Click="btnPfOrderNo_Click" local:FocusAdvancement.AdvancesByEnterKey="True">
+                            <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}" />
+                        </Button>
+                    </Grid>
+                    
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="화폐단위" Margin="-1" />
+                        </Label>
+                        <ComboBox x:Name="cboCurrencyUnit" Grid.Column="1" Background="#fff2d2"
+                                  DropDownClosed="cboCurrencyUnit_DropDownClosed" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="103*" />
+                            <ColumnDefinition Width="22*" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lbrgrbKCustom" Grid.Column="0"  HorizontalContentAlignment="Left" >
+                            <TextBlock Text="수금처(약)" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbCustom" Grid.Column="1" Background="#fff2d2"
+                                 Keyboard.KeyDown="txtgrbCustom_KeyDown" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                 Text="{Binding KCustom}" Tag="{Binding KCustom}"/>
+                        <Button x:Name="btngrbpfCustom"  Grid.Column="2" IsEnabled="True"
+                                Click="btngrbpfCustom_Click" local:FocusAdvancement.AdvancesByEnterKey="True">
+                            <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                        </Button>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="103*" />
+                            <ColumnDefinition Width="22*" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblgrbSalesCharge" Grid.Column="0"  HorizontalContentAlignment="Left" >
+                            <TextBlock Text="영업사원" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbSalesCharge" Grid.Column="1" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                 Keyboard.KeyDown="txtgrbSalesCharge_KeyDown"
+                                 Text="{Binding SalesCharge}" Tag="{Binding CustomID}"/>
+                        <Button x:Name="btngrbSalesCharge"  Grid.Column="2" IsEnabled="True" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                Click="btngrbSalesCharge_Click">
+                            <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="입금은행" Margin="-1" />
+                        </Label>
+                        <ComboBox x:Name="cbogrbBank" Grid.Column="1" Background="#fff2d2" SelectedValue="{Binding BankID}" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                  
+                                  />
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="은행입금" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbBankPay" Grid.Column="1" 
+                                 PreviewTextInput="txtgrbBankPay_PreviewTextInput"
+                                
+                                 TextChanged="txtgrbBankPay_TextChanged"
+                                 Text="{Binding BankAmount}"
+                                 local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="현금수금" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbCash" Grid.Column="1" 
+                                 Text="{Binding CashAmount}"
+                                 PreviewTextInput="txtgrbCash_PreviewTextInput"
+                                
+                                 TextChanged="txtgrbCash_TextChanged" 
+                                 local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="어음수금" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbBankPaper" Grid.Column="1"
+                                 Text="{Binding BillAmount}"
+                                 PreviewTextInput="txtgrbBankPaper_PreviewTextInput"
+                                 Keyboard.KeyDown="txtgrbBankPaper_KeyDown"
+                                 TextChanged="txtgrbBankPaper_TextChanged" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="카드수금" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbCard" Grid.Column="1" 
+                                 Text="{Binding CardAmount}"
+                                 PreviewTextInput="txtgrbCard_PreviewTextInput"
+                                 Keyboard.KeyDown="txtgrbCard_KeyDown"
+                                 TextChanged="txtgrbCard_TextChanged" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="13">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="78*" />
+                            <ColumnDefinition Width="32*" />
+                            <ColumnDefinition Width="91*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="수금합계" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbTotalAmount"  Grid.Column="1"  Background="#fff2d2" 
+                                 Text="{Binding SumAmount}"
+                                 PreviewTextInput="txtgrbTotalAmount_PreviewTextInput" Grid.ColumnSpan="2" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="감액(DC)" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbDiscount" Grid.Column="1" 
+                                 Text="{Binding DCAmount}"
+                                 PreviewTextInput="txtgrbDiscount_PreviewTextInput"
+                                 Keyboard.KeyDown="txtgrbDiscount_KeyDown"
+                                 TextChanged="txtgrbDiscount_TextChanged" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"  HorizontalContentAlignment="Left">
+                            <TextBlock Text="어음번호" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbBankPaperNo" Grid.Column="1" 
+                                 Text="{Binding BillNo}"
+                                 Keyboard.KeyDown="txtgrbBankPaperNo_KeyDown" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                        
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="적요" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbSemiComment" Grid.Column="1"
+                                 Text="{Binding RefComments}"
+                                 Keyboard.KeyDown="txtgrbSemiComment_KeyDown" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="17">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="입금자명" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbReceiveName" Grid.Column="1" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                 Text="{Binding ReceivePersonName}"
+                                 />
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="대체계정여부" Margin="-1" />
+                        </Label>
+                        <ComboBox x:Name="cboRefYN" Grid.Column="1" Background="#fff2d2" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                 />
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="19">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="대체발생금액" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbRefAmount" Grid.Column="1" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                 Text="{Binding RefAmount}"
+                                 />
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="103*" />
+                            <ColumnDefinition Width="22*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="lbrgrbRefBSItem" Grid.Column="0"  HorizontalContentAlignment="Left" >
+                            <TextBlock Text="대체계정과목" Margin="-1" />
+                        </Label>
+
+                        <TextBox x:Name="txtgrbRefBSItem" Grid.Column="1" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                 Keyboard.KeyDown="txtgrbRefBSItem_KeyDown"
+                                 Text="{Binding RefRPItemCode}" Tag="{Binding RefRPItemCode}"/>
+                        <Button x:Name="btngrbpfRefBSItem"  Grid.Column="2" IsEnabled="True"
+                                Click="btngrbpfRefBSItem_Click">
+                            <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                        </Button>
+                        
+                    </Grid>
+                    <Grid Grid.Column="0" Grid.Row="21" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*" />
+                            <ColumnDefinition Width="125*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" HorizontalContentAlignment="Left" >
+                            <TextBlock Text="대체적요" Margin="-1" />
+                        </Label>
+                        <TextBox x:Name="txtgrbRefComments" Grid.Column="1" Grid.RowSpan="2" local:FocusAdvancement.AdvancesByEnterKey="True"
+                                 Text="{Binding RefComments}"
+                                 />
+                        <CheckBox x:Name="chkToday" Grid.Column="0" Grid.Row="1" Content="당일수금분" VerticalContentAlignment="Center"
+                                  local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+
+                </Grid>
+                
+            </GroupBox>
+            <!--집계-->
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox x:Name="grbSum" Header="집계" BorderBrush="Gray" Margin="1">
+                        <DataGrid x:Name="dgSum">
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="합계"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="현금" Width="2*" Binding="{Binding Count}" Visibility="Visible"/>
+                                <DataGridTextColumn Header="어음" Width="2*" Binding="{Binding SumQty}" Visibility="Visible"/>
+                                <DataGridTextColumn x:Name="rowPay" Header="지불" Width="2*" Binding="{Binding SumTotalAmount}" Visibility="Hidden"/>
+                                <DataGridTextColumn Header="은행" Width="2*" Binding="{Binding Sumdollar}" Visibility="Visible"/>
+                                <DataGridTextColumn Header="합계" Width="2*" Binding="{Binding sumdollar}" Visibility="Visible"/>
+                                <DataGridTextColumn Header="감액" Width="2*" Binding="{Binding sumdollar}" Visibility="Visible"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="SearchCount" Grid.Column="1" Text="검색건수: 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button x:Name="btnPrint" Grid.Column="0" Grid.Row="1" Click="btnPrint_Click" Margin="5,5,5,5" Content="수금List인쇄">
+                        </Button>
+                    <Button x:Name="btnSearchMoney" Grid.Column="1" Grid.Row="1" Click="btnSearchMoney_Click" Margin="5,5,5,5" Content="잔액조회">
+                        </Button>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+     
+        
+    <!-- //전체 중 하단 -->
+       
+       
+    </Grid>
+</UserControl>

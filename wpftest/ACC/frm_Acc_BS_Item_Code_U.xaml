@@ -1,0 +1,430 @@
+﻿<UserControl x:Class="WizMes_Alpha_JA.frm_Acc_BS_Item_Code_U"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WizMes_Alpha_JA"
+             mc:Ignorable="d" Loaded="UserControl_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="88*" />
+            <RowDefinition Height="532*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{DynamicResource WizMes_Alpha_JA}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="130*" />
+                <ColumnDefinition Width="260*" />
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="300*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ToggleButton x:Name="btnSales" IsChecked="False" Click="btnSales_Click" Margin="1">
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="#368AFF" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                    <Viewbox Margin="6">
+                        <TextBlock Text="매  출" />
+                    </Viewbox>
+                </ToggleButton>
+
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--<ToggleButton x:Name="btnBuy" Content="매  입"  Margin="10,1,10,1" IsChecked="False" Click="btnBuy_Click"/>-->
+
+                <ToggleButton x:Name="btnBuy" IsChecked="False" Click="btnBuy_Click" Margin="1">
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="#FFE08C" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                    <Viewbox Margin="6">
+                        <TextBlock Text="매  입" />
+                    </Viewbox>
+                </ToggleButton>
+            </Grid>
+            <Grid Grid.Column="4" Grid.RowSpan="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnSearch"  Grid.Column="2" Margin="1" Click="btnSearch_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiSearch}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblSearch},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnAdd" Grid.Column="3" Margin="1" Click="btnAdd_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiInsert}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblInsert},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnUpdate" Grid.Column="4" Margin="1" Click="btnUpdate_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiUpdate}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblUpdate},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnClose" Grid.Column="5" Margin="1" Click="btnClose_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiClose}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblClose},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--<Button x:Name="btnBarCode" Grid.Column="0" Margin="1" Click="btnBarCode_Click" Visibility="Hidden">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiBarCode}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblBarCode},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>-->
+                    <!--<Button x:Name="btnPrint" Grid.Column="1" Margin="1" Click="btnPrint_Click" Visibility="Hidden">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource btiPrint}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Source={StaticResource tblPrint},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button>-->
+                    <Button x:Name="btnExcel" Grid.Column="2" Margin="1" Click="btnExcel_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiExcel}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblExcel},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnDelete" Grid.Column="5" Margin="1" Click="btnDelete_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiDelete}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblDelete},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="btnSave" Grid.Column="3" Margin="1" Visibility="Hidden" Click="btnSave_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiSave}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblSave},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnCancel" Grid.Column="4" Margin="1" Visibility="Hidden" Click="btnCancel_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiCancle}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblCancle},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Label x:Name="lblNotUseSrh" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center" MouseLeftButtonUp="LblNotUseSrh_MouseLeftButtonUp">
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox>
+                                <CheckBox x:Name="chkNotUseSrh" Padding="0"/>
+                            </Viewbox>
+                            <TextBlock Text="사용안함 포함" VerticalAlignment="Center" Margin="-2" Padding="0"/>
+                        </StackPanel>
+                    </Label>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Grid.Column="1" Header="매출" BorderBrush="Gray">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label x:Name="lblMsg" Grid.Row="0" Margin="10,5,275,10" Visibility="Hidden" 
+                         VerticalAlignment="Center" HorizontalContentAlignment="Center" Background="Yellow" >
+                        <TextBlock x:Name="tbkMsg" Text="자료 입력 (추가)중" />
+                    </Label>
+                    <Grid Grid.Row="1" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="1.5*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="코 드" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            <TextBox x:Name="txtCode" Grid.Column="1" Margin="1" Padding="1,3,1,3" IsEnabled="False"
+                                             Style="{DynamicResource essentialTextBox}" Text="{Binding BSItemCode}" KeyDown="TxtKName_KeyDown"/>
+                            <TextBox x:Name="txtCode2" Grid.Column="2" Margin="1" Padding="1,3,1,3" IsEnabled="False"
+                                              Text="{Binding BSItemCode}" />
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="한글명칭" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="txtKName" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2" Margin="1" Padding="1,3,1,3" IsEnabled="False"
+                                            Text="{Binding BSItemName}" KeyDown="TxtKName_KeyDown" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="영문명칭" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="txtEName" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2" Margin="1" Padding="1,3,1,3" IsEnabled="False"
+                                            Text="{Binding BSItemNameEng}" KeyDown="TxtEName_KeyDown" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="99*" />
+                            <ColumnDefinition Width="99*" />
+                            <ColumnDefinition Width="93*" />
+                            <ColumnDefinition Width="154*" />
+
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="관리순서" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="txtOrder" Grid.Column="1" Grid.Row="0" Margin="1" Padding="1,3,1,3" IsEnabled="False"
+                                            Text="{Binding Seq}" KeyDown="TxtOrder_KeyDown" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                        <Label Grid.Column="2" Grid.Row="0" Content="사용여부" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,1">
+                            <RadioButton x:Name="chkYes" VerticalContentAlignment="Center" HorizontalAlignment="Right" IsEnabled="False"
+                              Width="18" Margin="3" local:FocusAdvancement.AdvancesByEnterKey="True"/>
+                            <TextBlock Text="예(Y)" HorizontalAlignment="Left"/>
+                            <RadioButton x:Name="chkNo" VerticalContentAlignment="Center" HorizontalAlignment="Right" IsEnabled="False"
+                               Width="18" Margin="3"/>
+                            <TextBlock Text="아니오(N)" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="비고" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="txtComments" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2" Margin="1" Padding="1,3,1,3" IsEnabled="False"
+                                            Text="{Binding Comments}" KeyDown="TxtComments_KeyDown"/>
+                    </Grid>
+                    <TextBlock x:Name="tbMain" Grid.Row="6" Grid.ColumnSpan="3" Grid.RowSpan="2" TextWrapping="Wrap" Margin="-1" Padding="0"
+                           Text="※ Main항목으로 등록하면 입출고 발생시 자동 매입, 매출이 생성됩니다. &#10;   모든 항목은 반드시 소분류까지 등록해야 매입에 적용됩니다."/>
+
+                </Grid>
+            </GroupBox>
+
+
+            <Grid Grid.Row="2" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="27*"/>
+                    <ColumnDefinition Width="38*"/>
+                </Grid.ColumnDefinitions>
+                <TabControl x:Name="tabAll" Background="#f0f0f0" TabStripPlacement="Top" Margin="1,1,1,0.6" Grid.ColumnSpan="2" >
+
+                    <!--대분류 탭-->
+                    <TabItem x:Name="tabLarge" Header="대분류" MouseLeftButtonUp="tabLarge_Click">
+                        <DataGrid x:Name="dgdLarge" Margin="5" SelectionChanged="dgdLarge_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="코드" Binding="{Binding BSItemCode}" Width="auto"/>
+                                <DataGridTextColumn Header="대분류명" Binding="{Binding BSItemName}" Width="auto"/>
+                                <DataGridTextColumn Header="영문명" Binding="{Binding BSItemNameEng}" Width="auto"/>
+                                <DataGridTextColumn Header="관리순서" Binding="{Binding Seq}" Width="auto"/>
+                                <DataGridTextColumn Header="주품목여부" Binding="{Binding MainItemGbn}" Width="auto"/>
+                                <DataGridTextColumn Header="사용여부" Binding="{Binding UseYN}" Width="auto"/>
+                                <DataGridTextColumn Header="비고" Binding="{Binding Comments}" Width="auto"/>
+                                <DataGridTextColumn Header="전체코드"  Width="auto"/>
+                                <DataGridTextColumn Header="LCode" Binding="{Binding BSItemLCode }" Width="auto"/>
+                                <DataGridTextColumn Header="MCode" Binding="{Binding BSItemMCode }" Width="auto"/>
+                                <DataGridTextColumn Header="SCode" Binding="{Binding BSItemSCode}" Width="auto"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                    </TabItem>
+
+                    <!--중분류 탭-->
+                    <TabItem x:Name="tabMiddle" Header="중분류" MouseLeftButtonUp="tabMiddle_Click">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="123*"/>
+                                <ColumnDefinition Width="649*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.7*"/>
+                                <RowDefinition Height="0.7*"/>
+                                <RowDefinition Height="9.9*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1" Grid.Row="0" Content="대분류" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <ComboBox x:Name="cboLarge" Grid.Column="2" Grid.Row="0" Margin="1" 
+                                        Background="White" SelectionChanged="cboLarge_SelectionChanged"/>
+                            </Grid>
+                            <DataGrid x:Name="dgdMiddle" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" SelectionChanged="dgdMiddle_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="코드" Binding="{Binding BSItemCode}" Width="auto"/>
+                                    <DataGridTextColumn Header="중분류명" Binding="{Binding BSItemName}" Width="auto"/>
+                                    <DataGridTextColumn Header="영문명" Binding="{Binding BSItemNameEng}" Width="auto"/>
+                                    <DataGridTextColumn Header="관리순서" Binding="{Binding Seq}" Width="auto"/>
+                                    <DataGridTextColumn Header="주품목여부" Binding="{Binding MainItemGbn}" Width="auto"/>
+                                    <DataGridTextColumn Header="사용여부" Binding="{Binding UseYN}" Width="auto"/>
+                                    <DataGridTextColumn Header="비고" Binding="{Binding Comments}" Width="auto"/>
+                                    <DataGridTextColumn Header="전체코드"  Width="auto"/>
+                                    <DataGridTextColumn Header="LCode" Binding="{Binding BSItemLCode }" Width="auto"/>
+                                    <DataGridTextColumn Header="MCode" Binding="{Binding BSItemMCode }" Width="auto"/>
+                                    <DataGridTextColumn Header="SCode" Binding="{Binding BSItemSCode}" Width="auto"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+                    <!--항목 탭-->
+                    <TabItem x:Name="tabList" Header="항목" MouseLeftButtonUp="tabList_Click">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.7*"/>
+                                <RowDefinition Height="0.7*"/>
+                                <RowDefinition Height="9.3*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1" Grid.Row="0" Content="대분류" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <ComboBox x:Name="cboLarge2" Grid.Column="2" Grid.Row="0" Margin="1"  
+                                        Background="White" SelectionChanged="cboLarge2_SelectionChanged"/>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1" Content="중분류" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <ComboBox x:Name="cboMiddle" Grid.Column="2" Grid.Row="0" Margin="1" 
+                                        Background="White"  SelectionChanged="cboMiddle_SelectionChanged" />
+                            </Grid>
+                            <DataGrid x:Name="dgdList" Grid.Row="2" Margin="5" SelectionChanged="dgdList_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="코드" Binding="{Binding BSItemCode}" Width="auto"/>
+                                    <DataGridTextColumn Header="항목명" Binding="{Binding BSItemName}" Width="auto"/>
+                                    <DataGridTextColumn Header="영문명" Binding="{Binding BSItemNameEng}" Width="auto"/>
+                                    <DataGridTextColumn Header="관리순서" Binding="{Binding Seq}" Width="auto"/>
+                                    <DataGridTextColumn Header="주품목여부" Binding="{Binding MainItemGbn}" Width="auto"/>
+                                    <DataGridTextColumn Header="사용여부" Binding="{Binding UseYN}" Width="auto"/>
+                                    <DataGridTextColumn Header="비고" Binding="{Binding Comments}" Width="auto"/>
+                                    <DataGridTextColumn Header="전체코드"  Width="auto"/>
+                                    <DataGridTextColumn Header="LCode" Binding="{Binding BSItemLCode }" Width="auto"/>
+                                    <DataGridTextColumn Header="MCode" Binding="{Binding BSItemMCode }" Width="auto"/>
+                                    <DataGridTextColumn Header="SCode" Binding="{Binding BSItemSCode}" Width="auto"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
