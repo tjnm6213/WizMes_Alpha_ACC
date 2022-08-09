@@ -581,12 +581,18 @@ namespace WizMes_Alpha_JA
         // 항목 탭 클릭 이벤트
         private void tabList_Click(object sender, MouseButtonEventArgs e)
         {
+            lblProduct.Visibility = Visibility.Visible;
+            chkProduct.Visibility = Visibility.Visible;
+            chkBuyOrSales.Visibility = Visibility.Visible;
+            lblBuyOrSales.Visibility = Visibility.Visible;
+
             if (Equals(sender, e.Source))
             {
                 cboLarge2.SelectedIndex = -1;
                 cboMiddle.SelectedIndex = -1;
                 rowNum = 0;
                 re_Search(rowNum);
+
             }
         }
 

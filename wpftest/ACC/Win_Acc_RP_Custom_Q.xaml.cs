@@ -13,552 +13,432 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WizMes_Alpha_JA.PopUp;
 using WizMes_Alpha_JA.PopUP;
-using WPF.MDI;
 
 namespace WizMes_Alpha_JA
 {
     /// <summary>
-    /// Win_Acc_Remain_Summary_Q_CodeView.xaml에 대한 상호 작용 논리
+    /// Win_mtr_Subul_Q_New.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class Win_Acc_RP_Custom_Q : UserControl
     {
-        private Microsoft.Office.Interop.Excel.Application excelapp;
-        private Microsoft.Office.Interop.Excel.Workbook workbook;
-        private Microsoft.Office.Interop.Excel.Worksheet worksheet;
-        private Microsoft.Office.Interop.Excel.Range workrange;
-        private Microsoft.Office.Interop.Excel.Worksheet stempsheet;
-        private Microsoft.Office.Interop.Excel.Worksheet copysheet;
-        private Microsoft.Office.Interop.Excel.Worksheet pastesheet;
-        // 엑셀 활용 용도 (프린트)
+        int rowNum = 0;
 
-        WizMes_Alpha_JA.PopUp.NoticeMessage msg = new PopUp.NoticeMessage();
-        //(기다림 알림 메시지창)
-
-        string RPGbn = string.Empty;
+        ScrollViewer scrollView = null;
+        ScrollViewer scrollView2 = null;
 
         public Win_Acc_RP_Custom_Q()
         {
             InitializeComponent();
         }
 
-        // 로드 이벤트.
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Lib.Instance.UiLoading(sender);
-            chkPeriod.IsChecked = true;
-          
-            tbnOutware.IsChecked = true;  // 로드시 수금버튼 기본선택.
+            // 스크롤 동기화
+            scrollView = dgdMainHeader;
+            scrollView2 = getScrollbar(dgdMain);
 
+            if (null != scrollView)
+            {
+                scrollView.ScrollChanged += new ScrollChangedEventHandler(scrollView_ScrollChanged);
+            }
+            if (null != scrollView2)
+            {
+                scrollView2.ScrollChanged += new ScrollChangedEventHandler(scrollView_ScrollChanged);
+            }
 
-        }
-
-
-        #region (상단 조회조건 체크박스 enable 모음)
-        // 수금/지불 토글버튼
-        private void tbnOutware_Checked(object sender, RoutedEventArgs e)
-        {
-            tbnStuffin.IsChecked = false;
+            chkDateSrh.IsChecked = true;
             tbnOutware.IsChecked = true;
-
-            // 매출버튼 클릭. > 명칭변경 및 항목, 그리드 체인지.
-            tbnOutware_Checked();
+            dtpSDate.SelectedDate = DateTime.Today;
+            //dtpEDate.SelectedDate = DateTime.Today;
         }
-        // 수금 버튼 
-        private void tbnOutware_Unchecked(object sender, RoutedEventArgs e)
+
+        #region Header 부분 - 검색조건
+
+        // 일자
+        private void lblDateSrh_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            tbnOutware.IsChecked = false;
-            tbnStuffin.IsChecked = true;
+            if (chkDateSrh.IsEnabled == true)
+            {
+                if (chkDateSrh.IsChecked == true)
+                {
+                    chkDateSrh.IsChecked = false;
+                }
+                else
+                {
+                    chkDateSrh.IsChecked = true;
+                }
+            }
         }
-        // 지불 버튼
-        private void tbnStuffin_Checked(object sender, RoutedEventArgs e)
+        private void chkDateSrh_Checked(object sender, RoutedEventArgs e)
         {
-            tbnOutware.IsChecked = false;
-            tbnStuffin.IsChecked = true;
-            
+            if (chkDateSrh.IsEnabled == true)
+            {
+                chkDateSrh.IsChecked = true;
+                dtpSDate.IsEnabled = true;
+                //dtpEDate.IsEnabled = true;
 
-            // 출금버튼 클릭. > 명칭변경 및 항목, 그리드 체인지.
-            tbnStuffin_Checked();
+             
+                btnLastYear.IsEnabled = true;
+                btnThisYear.IsEnabled = true;
+            }
         }
-       
-        private void tbnStuffin_Unchecked(object sender, RoutedEventArgs e)
+        private void chkDateSrh_Unchecked(object sender, RoutedEventArgs e)
         {
-            tbnStuffin.IsChecked = false;
-            tbnOutware.IsChecked = true;
+            if (chkDateSrh.IsEnabled == true)
+            {
+                chkDateSrh.IsChecked = false;
+                dtpSDate.IsEnabled = false;
+                //dtpEDate.IsEnabled = false;
 
-
+             
+                btnLastYear.IsEnabled = false;
+                btnThisYear.IsEnabled = false;
+            }
         }
 
-
-        #endregion
-
-        #region 날짜선택
-        private void lblPeriod_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (chkPeriod.IsChecked == true) { chkPeriod.IsChecked = false; }
-            else { chkPeriod.IsChecked = true; }
-        }
-        // 기간
-        private void chkPeriod_Checked(object sender, RoutedEventArgs e)
-        {
-            dtpSDate.IsEnabled = true;
-
-        }
-        // 기간
-        private void chkPeriod_Unchecked(object sender, RoutedEventArgs e)
-        {
-            dtpSDate.IsEnabled = false;
-
-        }
-
-        private void btnLastYear_Click(object sender, RoutedEventArgs e)
-        {
-            DateTime ThatYear1 = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)); // 선택한 일자 달의 1일!
-            DateTime LastYear1 = ThatYear1.AddYears(-1); // 저번년 1일
-    
-
-            dtpSDate.SelectedDate = LastYear1;
-           
-        }
+        // 전일 금일 전월 금월 버튼
+      
+        //금년
         private void btnThisYear_Click(object sender, RoutedEventArgs e)
         {
-            
-
+            dtpSDate.SelectedDate = Lib.Instance.BringThisYearDatetimeFormat()[0];
+            //dtpEDate.SelectedDate = Lib.Instance.BringThisYearDatetimeFormat()[1];
         }
-        #endregion
-
-
-        #region (토글버튼 체크 체인지 이벤트) CheckedChange
-        // 매출 클릭.
-        private void tbnOutware_Checked()
+        //전년
+        private void btnLastYear_Click(object sender, RoutedEventArgs e)
         {
-            this.DataContext = null;
+            dtpSDate.SelectedDate = Lib.Instance.BringLastYearDatetime()[0];
+     
+           
 
-            grbdgdOutGrid.Visibility = Visibility.Visible;
-            
-        }
+            //if (dtpSDate.SelectedDate != null)
+            //{
+            //    DateTime ThatMonth1 = dtpSDate.SelectedDate.Value.AddDays(-(dtpSDate.SelectedDate.Value.Day - 1)); // 선택한 일자 달의 1일!
 
-        // 매입 클릭.
-        private void tbnStuffin_Checked()
-        {
-            this.DataContext = null;
+            //    DateTime LastMonth1 = ThatMonth1.AddMonths(-1); // 저번달 1일
+            //    DateTime LastMonth31 = ThatMonth1.AddDays(-1); // 저번달 말일
 
-            grbdgdOutGrid.Visibility = Visibility.Visible;
+            //    dtpSDate.SelectedDate = LastMonth1;
+            //    dtpEDate.SelectedDate = LastMonth31;
+            //}
+            //else
+            //{
+            //    DateTime ThisMonth1 = DateTime.Today.AddDays(-(DateTime.Today.Day - 1)); // 이번달 1일
 
+            //    DateTime LastMonth1 = ThisMonth1.AddMonths(-1); // 저번달 1일
+            //    DateTime LastMonth31 = ThisMonth1.AddDays(-1); // 저번달 말일
 
-
-        }
-
-
-        #endregion
-
-
-        // 검색버튼 클릭.
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-          
-                if (tbnOutware.IsChecked == true) // 매출용 그리드
-                {
-                RPGbn = "1";
-                FillGrid();
-                }
-                else if (tbnStuffin.IsChecked == true) // 매입용 그리드
-                {
-                RPGbn = "2";
-                FillGrid();
-                }
+            //    dtpSDate.SelectedDate = LastMonth1;
+            //    dtpEDate.SelectedDate = LastMonth31;
             //}
         }
+      
 
-        #region (검색 >> 매출입 집계) FillGrid_dgdOutSummaryGrid
-        // 수금용 그리드 채우기.
+
+        #endregion // Header 부분 - 검색조건
+
+        #region Header 부분 - 오른쪽 버튼 모음 (검색, 닫기, 엑셀)
+
+        // 검색버튼
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            FillGrid();
+        }
+
+        private void beSearch()
+        {
+            //if (dtpEDate.SelectedDate != null)
+            //{
+            //    DateTime FromDate = dtpEDate.SelectedDate.Value.AddMonths(-11);
+            //    dtpSDate.SelectedDate = FromDate;
+            //}
+
+            re_search(rowNum);
+        }
+
+        // 닫기버튼
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Lib.Instance.ChildMenuClose(this.ToString());
+        }
+
+        // 엑셀버튼
+        private void btnExcel_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable dt = null;
+            string Name = string.Empty;
+
+            string[] lst = new string[2];
+            lst[0] = "기간별 작업자 실적";
+            lst[1] = dgdMain.Name;
+
+            ExportExcelxaml ExpExc = new ExportExcelxaml(lst);
+
+            ExpExc.ShowDialog();
+
+            if (ExpExc.DialogResult.HasValue)
+            {
+                if (ExpExc.choice.Equals(dgdMain.Name))
+                {
+                    if (ExpExc.Check.Equals("Y"))
+                        dt = Lib.Instance.DataGridToDTinHidden(dgdMain);
+                    else
+                        dt = Lib.Instance.DataGirdToDataTable(dgdMain);
+
+                    Name = dgdMain.Name;
+
+                    if (Lib.Instance.GenerateExcel(dt, Name))
+                        Lib.Instance.excel.Visible = true;
+                    else
+                        return;
+                }
+                else
+                {
+                    if (dt != null)
+                    {
+                        dt.Clear();
+                    }
+                }
+            }
+        }
+
+        #endregion // Header 부분 - 오른쪽 버튼 모음 (검색, 닫기, 엑셀)
+
+        private void re_search(int selectedIndex)
+        {
+            
+          
+            FillGrid();
+
+            if (dgdMain.Items.Count > 0)
+            {
+                dgdMain.SelectedIndex = selectedIndex;
+            }
+            else
+            {
+                MessageBox.Show("조회된 데이터가 없습니다.");
+                return;
+            }
+        }
+
+        #region 조회 메서드
+
         private void FillGrid()
         {
-            if (dgdOutSummaryGrid.Items.Count > 0)
+            string sBSGbn = string.Empty;
+            if(tbnStuffin.IsChecked == true)
             {
-                dgdOutSummaryGrid.Items.Clear();
+                sBSGbn = "2";
+            } else
+            {
+                sBSGbn = "1";
+            }
+            string[] Header = new string[12];
+
+            //DateTime ToDate = dtpEDate.SelectedDate.Value;
+            //ToDate = ToDate.AddMonths(1);
+
+            if (dgdMain.Items.Count > 0)
+            {
+                dgdMain.Items.Clear();
             }
 
             try
             {
-                //매출/ 매입 토글박스 구분.
-                
-
-                // 일자 체크여부 yn
-                int sBSDate = 0;
-                if (chkPeriod.IsChecked == true) { sBSDate = 1; }
-
-
-                DataSet ds = null;
                 Dictionary<string, object> sqlParameter = new Dictionary<string, object>();
-
                 sqlParameter.Clear();
 
-                sqlParameter.Add("RPGbn", RPGbn);       // 매출 매입 구분자.
+     
+                sqlParameter.Add("sYYYY", dtpSDate != null ? dtpSDate.SelectedDate.Value.ToString("yyyy") : "");
+                sqlParameter.Add("sBSGbn", sBSGbn);
+                sqlParameter.Add("nChkCompanyID", "0");
+                sqlParameter.Add("sCompanyID", "");
+           
 
-                ds = DataStore.Instance.ProcedureToDataSet("xp_Acc_R_P_Summary_Sum_WPF", sqlParameter, false);
-
+                DataSet ds = DataStore.Instance.ProcedureToDataSet("xp_Acc_RP_CustomYear_Q", sqlParameter, false);
 
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     DataTable dt = ds.Tables[0];
                     int i = 0;
-                    
-                    if (dt.Rows.Count == 1)
-                    {
-                        MessageBox.Show("조회된 데이터가 없습니다.");
-                    }
-                    else
+
+                    bool firstFlag = false;
+                    if (dt.Rows.Count > 1)
                     {
                         DataRowCollection drc = dt.Rows;
+
                         foreach (DataRow dr in drc)
                         {
                             i++;
-                                var WinAccBSSummary = new Win_Acc_Remain_Summary_Q_CodeView()
-                                {
-                                    SumAmount = dr["Amount"].ToString(),
-                                   
-                                    YYYY = dr["YYYY"].ToString(),
-                                    YYYYMM = dr["YYYYMM"].ToString(),
-                                    customnat = dr["CUSTOMShort"].ToString(),
-                                    RPitemName = dr["RPitemName"].ToString(),
-                                    CurrencyUnitname = dr["CurrencyUnitname"].ToString(),
-                                    SalesCharge = dr["SalesChargeName"].ToString()
 
+                            var WinR = new Win_Acc_RP_Custom_Q_CodeView()
+                            {
+                                Num = i,
 
-                                };
-                                // 콤마입히기 > 수량
-                                //if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.QTY))
-                                //{
-                                //    WinAccBSSummary.QTY = Lib.Instance.returnNumStringZero(WinAccBSSummary.QTY);
-                                //}
-                                // 콤마입히기 > 합계금액
-                                if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.TotalAmount))
-                                {
-                                    WinAccBSSummary.TotalAmount = Lib.Instance.returnNumStringZero(WinAccBSSummary.TotalAmount);
-                                }
-                                // 콤마입히기 > 부가세
-                                if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.VATAmount))
-                                {
-                                    WinAccBSSummary.VATAmount = Lib.Instance.returnNumStringZero(WinAccBSSummary.VATAmount);
-                                }
-                                // 콤마입히기 > 공급가액
-                                if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.Amount))
-                                {
-                                    WinAccBSSummary.Amount = Lib.Instance.returnNumStringZero(WinAccBSSummary.Amount);
-                                }
-                              dgdOutSummaryGrid.Items.Add(WinAccBSSummary);
+                                CompanyID = dr["CompanyID"].ToString(),
+                                BSGBN = dr["BSGBN"].ToString(),
+                                customID = dr["customID"].ToString(),
+                                KCustom = dr["KCustom"].ToString(),
+                                CurrencyUnit = dr["CurrencyUnit"].ToString(),
+
+                                InitRemainAmount = dr["InitRemainAmount"].ToString(),
+                                RPSumAmount01 = stringFormatN0(dr["RPSumAmount01"]),
+                                RPDCAmount01 = stringFormatN0(dr["RPDCAmount01"]),
+                                BSTotalAmount01 = stringFormatN0(dr["BSTotalAmount01"]),
+                                RemainAmount01 = stringFormatN0(dr["RemainAmount01"]),
+
+                                RPSumAmount02 = stringFormatN0(dr["RPSumAmount02"]),
+                                RPDCAmount02 = stringFormatN0(dr["RPDCAmount02"]),
+                                BSTotalAmount02 = stringFormatN0(dr["BSTotalAmount02"]),
+                                RemainAmount02 = stringFormatN0(dr["RemainAmount02"]),
+
+                                RPSumAmount03 = stringFormatN0(dr["RPSumAmount03"]),
+                                RPDCAmount03 = stringFormatN0(dr["RPDCAmount03"]),
+                                BSTotalAmount03 = stringFormatN0(dr["BSTotalAmount03"]),
+                                RemainAmount03 = stringFormatN0(dr["RemainAmount03"]),
+
+                                RPSumAmount04 = stringFormatN0(dr["RPSumAmount04"]),
+                                RPDCAmount04 = stringFormatN0(dr["RPDCAmount04"]),
+                                BSTotalAmount04 = stringFormatN0(dr["BSTotalAmount04"]),
+                                RemainAmount04 = stringFormatN0(dr["RemainAmount04"]),
+
+                                RPSumAmount05 = stringFormatN0(dr["RPSumAmount05"]),
+                                RPDCAmount05 = stringFormatN0(dr["RPDCAmount05"]),
+                                BSTotalAmount05 = stringFormatN0(dr["BSTotalAmount05"]),
+                                RemainAmount05 = stringFormatN0(dr["RemainAmount05"]),
+
+                                RPSumAmount06 = stringFormatN0(dr["RPSumAmount06"]),
+                                RPDCAmount06 = stringFormatN0(dr["RPDCAmount06"]),
+                                BSTotalAmount06 = stringFormatN0(dr["BSTotalAmount06"]),
+                                RemainAmount06 = stringFormatN0(dr["RemainAmount06"]),
+
+                                RPSumAmount07 = stringFormatN0(dr["RPSumAmount07"]),
+                                RPDCAmount07 = stringFormatN0(dr["RPDCAmount07"]),
+                                BSTotalAmount07 = stringFormatN0(dr["BSTotalAmount07"]),
+                                RemainAmount07 = stringFormatN0(dr["RemainAmount07"]),
+
+                                RPSumAmount08 = stringFormatN0(dr["RPSumAmount08"]),
+                                RPDCAmount08 = stringFormatN0(dr["RPDCAmount08"]),
+                                BSTotalAmount08 = stringFormatN0(dr["BSTotalAmount08"]),
+                                RemainAmount08 = stringFormatN0(dr["RemainAmount08"]),
+
+                                RPSumAmount09 = stringFormatN0(dr["RPSumAmount09"]),
+                                RPDCAmount09 = stringFormatN0(dr["RPDCAmount09"]),
+                                BSTotalAmount09 = stringFormatN0(dr["BSTotalAmount09"]),
+                                RemainAmount09 = stringFormatN0(dr["RemainAmount09"]),
+
+                                RPSumAmount10 = stringFormatN0(dr["RPSumAmount10"]),
+                                RPDCAmount10 = stringFormatN0(dr["RPDCAmount10"]),
+                                BSTotalAmount10 = stringFormatN0(dr["BSTotalAmount10"]),
+                                RemainAmount10 = stringFormatN0(dr["RemainAmount10"]),
+
+                                RPSumAmount11 = stringFormatN0(dr["RPSumAmount11"]),
+                                RPDCAmount11 = stringFormatN0(dr["RPDCAmount11"]),
+                                BSTotalAmount11 = stringFormatN0(dr["BSTotalAmount11"]),
+                                RemainAmount11 = stringFormatN0(dr["RemainAmount11"]),
+
+                                RPSumAmount12 = stringFormatN0(dr["RPSumAmount12"]),
+                                RPDCAmount12 = stringFormatN0(dr["RPDCAmount12"]),
+                                BSTotalAmount12 = stringFormatN0(dr["BSTotalAmount12"]),
+                                RemainAmount12 = stringFormatN0(dr["RemainAmount12"]),
+
+                                RPSumAmount13 = stringFormatN0(dr["RPSumAmount13"]),
+                                RPDCAmount13 = stringFormatN0(dr["RPDCAmount13"]),
+                                BSTotalAmount13 = stringFormatN0(dr["BSTotalAmount13"]),
+                                RemainAmount13 = stringFormatN0(dr["RemainAmount13"]),
+
+                            };
+
+                            ////헤더 값 세팅
+                            //if (firstFlag == false)
+                            //{
+                            //    Header[0] = getYearMonth(WinR.Month01);
+                            //    Header[1] = getYearMonth(WinR.Month02);
+                            //    Header[2] = getYearMonth(WinR.Month03);
+                            //    Header[3] = getYearMonth(WinR.Month04);
+                            //    Header[4] = getYearMonth(WinR.Month05);
+                            //    Header[5] = getYearMonth(WinR.Month06);
+                            //    Header[6] = getYearMonth(WinR.Month07);
+                            //    Header[7] = getYearMonth(WinR.Month08);
+                            //    Header[8] = getYearMonth(WinR.Month09);
+                            //    Header[9] = getYearMonth(WinR.Month10);
+                            //    Header[10] = getYearMonth(WinR.Month11);
+                            //    Header[11] = getYearMonth(WinR.Month12);
+
+                            //    firstFlag = true;
+                            //}
+
+                            
+                            dgdMain.Items.Add(WinR);
+
                         }
-
                     }
+
+                    //// 헤더 세팅!!!!!
+                    //dgdHeader1.Content = Header[0];
+                    //dgdHeader2.Content = Header[1];
+                    //dgdHeader3.Content = Header[2];
+                    //dgdHeader4.Content = Header[3];
+                    //dgdHeader5.Content = Header[4];
+                    //dgdHeader6.Content = Header[5];
+                    //dgdHeader7.Content = Header[6];
+                    //dgdHeader8.Content = Header[7];
+                    //dgdHeader9.Content = Header[8];
+                    //dgdHeader10.Content = Header[9];
+                    //dgdHeader11.Content = Header[10];
+                    //dgdHeader12.Content = Header[11];
+
+                    //tbkCount.Text = " ▶ 검색 결과 : " + i + " 건";
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("오류 발생, 오류 내용 : " + ex.ToString());
             }
-        }
-
-        #endregion
-
-
-       
-        // 데이터 그리드 항목 클릭_ SelectionChanged
-        private void dgdOutGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (tbnStuffin.IsChecked == true)
-            {
-                var WinAccSummary = dgdOutSummaryGrid.SelectedItem as Win_Acc_Remain_Summary_Q_CodeView;
-                if (WinAccSummary != null)
-                {
-                    this.DataContext = WinAccSummary;
-                }
-            }
-        }
-
-        //엑셀변환 요청하신 엑셀 파일로 수정. 2020.11.03, 장가빈
-        private void btnExcel_Click(object sender, RoutedEventArgs e)
-        {
-            //매입 1, 매출 2
-            string RPGbn = tbnStuffin.IsChecked == true ? "1" : "2";
-            string sDateMM = dtpSDate.SelectedDate.Value.ToString("yyyyMMdd").Substring(0, 6);
-
-            try
-            {
-                #region 기존 엑셀 이벤트
-
-                //DataTable dt = null;
-                //string Name = string.Empty;
-
-                //string[] dgdStr = new string[2];
-                //if (tbnOutware.IsChecked == true)
-                //{
-                //    dgdStr[0] = "매출 집계";
-                //    dgdStr[1] = dgdOutSummaryGrid.Name;
-                //}
-                //else
-                //{
-                //    dgdStr[0] = "매입 집계";
-                //    dgdStr[1] = dgdSummaryGrid.Name;
-                //}
-
-                //ExportExcelxaml ExpExc = new ExportExcelxaml(dgdStr);
-                //ExpExc.ShowDialog();
-
-                //if (ExpExc.DialogResult.HasValue)
-                //{
-                //    if (ExpExc.choice.Equals(dgdSummaryGrid.Name))
-                //    {
-                //        if (ExpExc.Check.Equals("Y"))
-                //            dt = Lib.Instance.DataGridToDTinHidden(dgdSummaryGrid);
-                //        else
-                //            dt = Lib.Instance.DataGirdToDataTable(dgdSummaryGrid);
-
-                //        Name = dgdSummaryGrid.Name;
-                //        if (Lib.Instance.GenerateExcel(dt, Name))
-                //            Lib.Instance.excel.Visible = true;
-                //        else
-                //            return;
-                //    }
-                //    else if (ExpExc.choice.Equals(dgdOutSummaryGrid.Name))
-                //    {
-                //        if (ExpExc.Check.Equals("Y"))
-                //            dt = Lib.Instance.DataGridToDTinHidden(dgdOutSummaryGrid);
-                //        else
-                //            dt = Lib.Instance.DataGirdToDataTable(dgdOutSummaryGrid);
-
-                //        Name = dgdOutSummaryGrid.Name;
-                //        if (Lib.Instance.GenerateExcel(dt, Name))
-                //            Lib.Instance.excel.Visible = true;
-                //        else
-                //            return;
-                //    }
-                //    else
-                //    {
-                //        if (dt != null)
-                //        {
-                //            dt.Clear();
-                //        }
-                //    }
-                //}
-
-                #endregion 기존 엑셀 이벤트
-
-                #region 호작질을 시작해보자.
-
-                // 년, 월, 거래처별 금액 합계 재조회.
-                DataTable dt = get_BS_SummayList(RPGbn, sDateMM);
-
-                // 엑셀 시작
-                excelapp = new Microsoft.Office.Interop.Excel.Application();
-
-
-                string MyBookPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\Report\\매입.출 집계표 양식.xls";
-                workbook = excelapp.Workbooks.Add(MyBookPath);
-                worksheet = workbook.Sheets["Form"];
-                stempsheet = workbook.Sheets["Stemp"];
-                pastesheet = workbook.Sheets["pastesheet"];
-
-
-                //페이지 계산
-                int rowCount = 0;
-                int copyLine = 0;           //??
-
-                DataRowCollection drc = dt.Rows;
-                foreach (DataRow dr in drc)
-                {
-                    rowCount++;              //반영할 데이터 갯수 rowCount ㅜㅜ 이렇게 밖에 모루겠다.
-                }
-                               
-                int Page = 1;               //페이지 변수
-                int PageAll = (int)Math.Ceiling(rowCount / 37.0);       //전체페이지 변수
-                int DataCount = 0;          //데이터 반영 활용 변수
-                int excelNum = 0;                  //엑셀 행번호 변수
-
-
-                int startRowIndex = 5; // 시작하는 행
-                //int endRowIndex = 37; // 마지막 행
-
-                int excelRow = 0;
-
-                for (int k = 0; k < dt.Rows.Count; k++)
-                {
-
-                    if (DataCount == 37 * Page)     //페이지 수 곱하기 한 페이지에 들어갈 수 있는 데이터 값과 같아지면
-                    {
-                        // Form 시트 내용 Print 시트에 복사 붙여넣기
-                        worksheet.Select();
-                        worksheet.UsedRange.EntireRow.Copy();
-                        pastesheet.Select();
-                        workrange = pastesheet.Cells[copyLine + 1, 1];
-                        workrange.Select();
-                        pastesheet.Paste();
-
-                        if (Page < PageAll)
-                        {
-                            Page++;                            //페이지 값 증가(전체페이지 값이 될 때까지)
-                            copyLine = ((Page - 1) * 43);      // copy 시작 값
-
-                            // 기존에 있는 데이터 지우기
-                            worksheet.Range["A5", "H41"].EntireRow.ClearContents();
-                            // 행번호 5번부터 시작하도록 초기화
-                            excelRow = startRowIndex;
-                            excelNum = 0;
-
-
-                        }
-                    }
-                                       
-                    DataRow dr = dt.Rows[k];
-
-                    if (k == 0) // 최초 한번 입력
-                    {
-                        // 일자 : 2020년 10월
-                        workrange = worksheet.get_Range("A2");
-                        workrange.Value2 = dr["YYYY"].ToString() + "년" + dr["MM"].ToString() + "월";
-
-                        //매입일 경우 
-                        if (RPGbn.Equals("1"))
-                        {
-                            workrange = worksheet.get_Range("A1");
-                            workrange.Value2 = "매입 집계표";
-                        }
-                        else
-                        {
-                            workrange = worksheet.get_Range("A1");
-                            workrange.Value2 = "매출 집계표";
-                        }
-
-                        //매입일 경우 
-                        if (RPGbn.Equals("1"))
-                        {
-                            workrange = worksheet.get_Range("E4");
-                            workrange.Value2 = "매입항목";
-                        }
-                        else
-                        {
-                            workrange = worksheet.get_Range("E4");
-                            workrange.Value2 = "매출항목";
-                        }
-                                               
-                    }
-
-                    //엑셀 행 지정
-                    excelRow = startRowIndex + excelNum;
-
-                    // 순번
-                    workrange = worksheet.get_Range("A" + excelRow);
-                    workrange.Value2 = k + 1;
-
-            
-                    // 매입(매출)항목
-                    //workrange = worksheet.get_Range("E" + excelRow);        // 년도
-                    workrange = worksheet.get_Range("B" + excelRow);
-                    workrange.Value2 = dr["YYYY"].ToString();
-
-                    // 월
-                    workrange = worksheet.get_Range("C" + excelRow);
-                    workrange.Value2 = dr["MM"].ToString();
-
-                    // 거래처
-                    workrange = worksheet.get_Range("D" + excelRow);
-                    workrange.Value2 = dr["KCustom"].ToString().Trim();
-
-                    //매입항목
-                    workrange = worksheet.get_Range("E" + excelRow);
-                    workrange.Value2 = dr["BSItemName"].ToString().Trim();
-
-                    // 공급가액
-                    workrange = worksheet.get_Range("F" + excelRow);
-                    workrange.Value2 = chkNullNum(dr["Amount"]);
-
-                    // 부가가치세
-                    workrange = worksheet.get_Range("G" + excelRow);
-                    workrange.Value2 = chkNullNum(dr["VATAmount"]);
-
-                    // 합계금액
-                    workrange = worksheet.get_Range("H" + excelRow);
-                    workrange.Value2 = chkNullNum(dr["TotalAmount"]);
-
-                    DataCount++; // 데이터 변수 1증가
-                    excelNum++; // 행 번호 임시변수 1증가
-                }
-
-                if (DataCount == rowCount)        //마지막페이지의 경우
-                {
-                    // Form 시트 내용 Print 시트에 복사 붙여넣기
-                    worksheet.Select();
-                    worksheet.UsedRange.EntireRow.Copy();
-                    pastesheet.Select();
-                    workrange = pastesheet.Cells[copyLine + 1, 1];
-                    workrange.Select();
-                    pastesheet.Paste();
-
-                }
-
-                // 2장 이상 넘어가면 페이지 넘버 입력
-                if (PageAll > 1)
-                {
-                    pastesheet.PageSetup.CenterFooter = "&P / &N";
-                }
-
-                // 기본 폼 활성화 후 보이도록
-                pastesheet.Activate();
-                pastesheet.Range["A1"].Select();
-
-                excelapp.Visible = true;
-                msg.Hide();
-
-
-                #endregion 호작질을 시작해보자.
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
             finally
             {
                 DataStore.Instance.CloseConnection();
             }
-
         }
 
-        //엑셀변환시 사용 프로시저. 2020.11.03, 
-        private DataTable get_BS_SummayList(string @RPGbn, string sDateMM)
-        {
-            DataTable dt = new DataTable();
-
-            try
-            {
-                Dictionary<string, object> sqlParameter = new Dictionary<string, object>();
-                sqlParameter.Clear();
-
-                sqlParameter.Add("@RPGbn", @RPGbn);
-                sqlParameter.Add("sDateMM", sDateMM);
-   
-
-                DataSet ds = DataStore.Instance.ProcedureToDataSet("3" +
-                    "", sqlParameter, false);
-
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    dt = ds.Tables[0];
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                DataStore.Instance.CloseConnection();
-            }
-
-            return dt;
-        }
+        #endregion // 조회 메서드
 
         #region 기타 메서드 모음
+
+        // 월 만들기
+        private string getYearMonth(string str)
+        {
+            str = str.Trim();
+
+            if (str.Length == 6)
+            {
+                string Y = str.Substring(0, 4);
+                string M = str.Substring(4, 2);
+
+                if (M.Substring(0, 1).Equals("0"))
+                {
+                    M = M.Substring(1, 1);
+                }
+
+                str = Y + "년 " + M + "월";
+            }
+            else if (str.Length == 8)
+            {
+                string Y = str.Substring(0, 4);
+                string M = str.Substring(4, 2);
+
+                if (M.Substring(0, 1).Equals("0"))
+                {
+                    M = M.Substring(1, 1);
+                }
+
+                str = Y + "년 " + M + "월";
+            }
+
+            return str;
+        }
 
         // 천마리 콤마, 소수점 버리기
         private string stringFormatN0(object obj)
@@ -575,7 +455,7 @@ namespace WizMes_Alpha_JA
         // 데이터피커 포맷으로 변경
         private string DatePickerFormat(string str)
         {
-            string result = str;
+            string result = "";
 
             if (str.Length == 8)
             {
@@ -586,6 +466,23 @@ namespace WizMes_Alpha_JA
             }
 
             return result;
+        }
+
+        // 시간 형식 6글자라면! 11:11:11
+        private string DateTimeFormat(string str)
+        {
+            str = str.Replace(":", "").Trim();
+
+            if (str.Length == 6)
+            {
+                string Hour = str.Substring(0, 2);
+                string Min = str.Substring(2, 2);
+                string Sec = str.Substring(4, 2);
+
+                str = Hour + ":" + Min + ":" + Sec;
+            }
+
+            return str;
         }
 
         // Int로 변환
@@ -662,187 +559,153 @@ namespace WizMes_Alpha_JA
             return result;
         }
 
-        // 소수로 변환
-        private float ConvertFloat(string str)
-        {
-            if (str == null) { return 0; }
-
-            float result = 0;
-            float chkFloat = 0;
-
-            if (!str.Trim().Equals(""))
-            {
-                str = str.Replace(",", "");
-
-                if (float.TryParse(str, out chkFloat) == true)
-                {
-                    result = float.Parse(str);
-                }
-            }
-
-            return result;
-        }
-
-        // 두글자면 중간에 띄어쓰기 한번
-        private string ResablyFormat(string str)
-        {
-            if (!str.Trim().Equals(""))
-            {
-                if (str.Trim().Length == 2)
-                {
-                    string F = str.Trim().Substring(0, 1);
-                    string S = str.Trim().Substring(1, 1);
-
-                    str = F + " " + S;
-                }
-            }
-
-            return str;
-        }
-
-        private object chkNullNum(object num)
-        {
-            if (num == null) { return 0; }
-
-            return num;
-        }
-
-        private string getYear(string str)
-        {
-            str = str.Trim().Replace("-", "").Replace("/", "").Replace(".", "");
-
-            if (str.Length == 8)
-            {
-                str = str.Substring(0, 4);
-            }
-
-            return str;
-        }
-
-        private string getMonth(string str)
-        {
-            str = str.Trim().Replace("-", "").Replace("/", "").Replace(".", "");
-
-            if (str.Length == 8)
-            {
-                str = str.Substring(4, 2);
-            }
-
-            return str;
-        }
-
         #endregion
 
+        #region 스크롤 Scroll 메서드 모음
 
-        //인쇄 
-        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        void scrollView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            PrintDialog printDialog = new PrintDialog();
+            var newOffset = e.HorizontalOffset;
 
-            if (printDialog.ShowDialog().GetValueOrDefault())
+            if ((null != scrollView) && (null != scrollView2))
             {
-                FontFamily fontFamily = new FontFamily("나눔고딕코딩");
-
-                Grid grid = new Grid();
-
-                grid.SetValue(FontFamilyProperty, fontFamily);
-                grid.SetValue(FontSizeProperty, 32d);
-
-                for (int i = 0; i < 5 ; i++)
-                {
-                    ColumnDefinition columnDefinition = new ColumnDefinition();
-
-                    grid.ColumnDefinitions.Add(columnDefinition);
-
-                    RowDefinition rowDefinition = new RowDefinition();
-
-                    grid.RowDefinitions.Add(rowDefinition);
-                }
-
-                grid.Background = new LinearGradientBrush
-                (
-                    Colors.Gray,
-                    Colors.White,
-                    new Point(0, 0),
-                    new Point(1, 1)
-                );
-
-                for (int i = 0; i < 25; i++)
-                {
-                    Button button = new Button();
-
-                    button.Margin = new Thickness(10);
-                    button.HorizontalAlignment = HorizontalAlignment.Center;
-                    button.VerticalAlignment = VerticalAlignment.Center;
-                    button.Content = $"버튼 {i + 1,0:d2}";
-
-                    grid.Children.Add(button);
-
-                    Grid.SetRow(button, i % 5);
-                    Grid.SetColumn(button, i / 5);
-                }
-
-                grid.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-
-                Point gridPoint = new Point
-                (
-                    (printDialog.PrintableAreaWidth - grid.DesiredSize.Width) / 2,
-                    (printDialog.PrintableAreaHeight - grid.DesiredSize.Height) / 2
-                );
-
-                Canvas.SetLeft(grid, gridPoint.X);
-                Canvas.SetTop(grid, gridPoint.Y);
-
-                Canvas canvas = new Canvas();
-
-                canvas.Width = printDialog.PrintableAreaWidth;
-                canvas.Height = printDialog.PrintableAreaHeight;
-                canvas.Background = null;
-
-                canvas.Children.Add(grid);
-
-                printDialog.PrintVisual(canvas, "Sample");
+                scrollView.ScrollToHorizontalOffset(newOffset);
+                scrollView2.ScrollToHorizontalOffset(newOffset);
             }
         }
+
+        private ScrollViewer getScrollbar(DependencyObject dep)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(dep); i++)
+            {
+                var child = VisualTreeHelper.GetChild(dep, i);
+                if ((null != child) && child is ScrollViewer)
+                {
+                    return (ScrollViewer)child;
+                }
+                else
+                {
+                    ScrollViewer sub = getScrollbar(child);
+                    if (sub != null)
+                    {
+                        return sub;
+                    }
+                }
+            }
+            return null;
+        }
+
+        #endregion // 스크롤 Scroll 메서드 모음
+
+        #region (상단 조회조건 체크박스 enable 모음)
+        // 수금/지불 토글버튼
+        private void tbnOutware_Checked(object sender, RoutedEventArgs e)
+        {
+            tbnStuffin.IsChecked = false;
+            tbnOutware.IsChecked = true;
+
+        }
+        // 수금 버튼 
+        private void tbnOutware_Unchecked(object sender, RoutedEventArgs e)
+        {
+            tbnOutware.IsChecked = false;
+            tbnStuffin.IsChecked = true;
+        }
+        // 지불 버튼
+        private void tbnStuffin_Checked(object sender, RoutedEventArgs e)
+        {
+            tbnOutware.IsChecked = false;
+            tbnStuffin.IsChecked = true;
+
+        }
+
+        private void tbnStuffin_Unchecked(object sender, RoutedEventArgs e)
+        {
+            tbnStuffin.IsChecked = false;
+            tbnOutware.IsChecked = true;
+
+
+        }
+        #endregion
     }
 
     class Win_Acc_RP_Custom_Q_CodeView
     {
-        public override string ToString()
-        {
-            return (this.ReportAllProperties());
-        }
-
         public int Num { get; set; }
-        public bool IsCheck { get; set; }
-        public string cls { get; set; }
-        public string VATAmount { get; set; }
-
-        public string YYYY { get; set; }
-        public string YYYYMM { get; set; }
-        public string sBSDate { get; set; }
-        public string RPGbn { get; set; }
-        public string nChkRPCompany { get; set; }
-        public string customnat { get; set; }
-        public string RPitemName { get; set; }
-
-        public string sRPCompany { get; set; }
-        public string nChkCustom { get; set; }
-        public string CustomNat { get; set; }
-        public string SalesCharge { get; set; }
-        public string nChkBSItem { get; set; }
-        public string nChkOrderNo { get; set; }
 
 
-        public string OrderNo { get; set; }
-        public string nChkCurrencyUnit { get; set; }
-        public string CurrencyUnitname { get; set; }
-        public string Per { get; set; }
-        public string SumAmount { get; set; }
-        public string TotalAmount { get; set; }
-        public string Amount { get; set; }
+        public string CompanyID { get; set; }
+        public string BSGBN { get; set; }
+        public string customID { get; set; }
+        public string KCustom { get; set; }
+        public string CurrencyUnit { get; set; }
+
+        public string InitRemainAmount { get; set; }
+        public string RPSumAmount01 { get; set; }
+        public string RPDCAmount01 { get; set; }
+        public string BSTotalAmount01 { get; set; }
+        public string RemainAmount01 { get; set; }
+
+        public string RPSumAmount02 { get; set; }
+        public string RPDCAmount02 { get; set; }
+        public string BSTotalAmount02 { get; set; }
+        public string RemainAmount02 { get; set; }
+
+        public string RPSumAmount03 { get; set; }
+        public string RPDCAmount03 { get; set; }
+        public string BSTotalAmount03 { get; set; }
+        public string RemainAmount03 { get; set; }
+
+        public string RPSumAmount04 { get; set; }
+        public string RPDCAmount04 { get; set; }
+        public string BSTotalAmount04 { get; set; }
+        public string RemainAmount04 { get; set; }
+
+        public string RPSumAmount05 { get; set; }
+        public string RPDCAmount05 { get; set; }
+        public string BSTotalAmount05 { get; set; }
+        public string RemainAmount05 { get; set; }
+
+        public string RPSumAmount06 { get; set; }
+        public string RPDCAmount06 { get; set; }
+        public string BSTotalAmount06 { get; set; }
+        public string RemainAmount06 { get; set; }
+
+        public string RPSumAmount07 { get; set; }
+        public string RPDCAmount07 { get; set; }
+        public string BSTotalAmount07 { get; set; }
+        public string RemainAmount07 { get; set; }
+
+        public string RPSumAmount08 { get; set; }
+        public string RPDCAmount08 { get; set; }
+        public string BSTotalAmount08 { get; set; }
+        public string RemainAmount08 { get; set; }
+
+        public string RPSumAmount09 { get; set; }
+        public string RPDCAmount09 { get; set; }
+        public string BSTotalAmount09 { get; set; }
+        public string RemainAmount09 { get; set; }
+
+        public string RPSumAmount10 { get; set; }
+        public string RPDCAmount10 { get; set; }
+        public string BSTotalAmount10 { get; set; }
+        public string RemainAmount10 { get; set; }
+
+        public string RPSumAmount11 { get; set; }
+        public string RPDCAmount11 { get; set; }
+        public string BSTotalAmount11 { get; set; }
+        public string RemainAmount11 { get; set; }
+
+        public string RPSumAmount12 { get; set; }
+        public string RPDCAmount12 { get; set; }
+        public string BSTotalAmount12 { get; set; }
+        public string RemainAmount12 { get; set; }
+
+        public string RPSumAmount13 { get; set; }
+        public string RPDCAmount13 { get; set; }
+        public string BSTotalAmount13 { get; set; }
+        public string RemainAmount13 { get; set; }
+
     }
-
-
-
 }
+

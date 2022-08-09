@@ -523,7 +523,7 @@ namespace WizMes_Alpha_JA
                             i++;
                                 var WinAccBSSummary = new Win_Acc_R_P_Summary_Q_CodeView()
                                 {
-                                    SumAmount = dr["Amount"].ToString(),
+                                    SumAmount = stringFormatN0(dr["Amount"]),
                                    
                                     YYYY = dr["YYYY"].ToString(),
                                     YYYYMM = dr["YYYYMM"].ToString(),

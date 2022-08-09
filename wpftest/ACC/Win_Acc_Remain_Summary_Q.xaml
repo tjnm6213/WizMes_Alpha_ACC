@@ -103,28 +103,26 @@
                     <ColumnDefinition Width="95*" />
                 </Grid.ColumnDefinitions>
                 <Label x:Name="lblPeriod" Grid.Column="0" MouseLeftButtonUp="lblPeriod_MouseLeftButtonUp" >
-                    <StackPanel Orientation="Horizontal" Margin="-2">
+                    <!--<StackPanel Orientation="Horizontal" Margin="-2">
                         <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkPeriod" VerticalAlignment="Center"
-                                      Checked="chkPeriod_Checked" Unchecked="chkPeriod_Unchecked"/>
-                        </Viewbox>
-                        <TextBlock Text="기준일자" VerticalAlignment="Center" Margin="-5,0,0,0" />
-                    </StackPanel>
+                            --><!--<CheckBox x:Name="chkPeriod" VerticalAlignment="Center"
+                                      Checked="chkPeriod_Checked" Unchecked="chkPeriod_Unchecked"/>--><!--
+                        </Viewbox>-->
+                        <TextBlock Text="기준일자" VerticalAlignment="Center" FontSize="50" HorizontalAlignment="Center" />
+                    <!--</StackPanel>-->
                 </Label>
                 <DatePicker x:Name="dtpSDate" Grid.Column="1" Padding="0"
-                                    local:DatePickerMonthCalendar.IsMonthYear="True"
+                                    
                                     local:DatePickerDateFormat.DateFormat="yyyy-MM-dd"/>
-                <DatePicker x:Name="dtpSDate2" Grid.Column="1" Padding="0"
-                                    local:DatePickerMonthCalendar.IsMonthYear="True"
-                                    local:DatePickerDateFormat.DateFormat="yyyy-MM"/>
+           
             </Grid>
             <Grid Grid.Row="1" Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <RadioButton x:Name="YYYY" Grid.Column="0" Content="발생일" VerticalContentAlignment="Center" Click="YYYY_Click" />
-                <RadioButton x:Name="YYYYMM" Grid.Column="1" Content="매출월" VerticalContentAlignment="Center" Click="YYYYMM_Click"/>
+                <!--<RadioButton x:Name="YYYY" Grid.Column="0" Content="발생일" VerticalContentAlignment="Center" Click="YYYY_Click" />
+                <RadioButton x:Name="YYYYMM" Grid.Column="1" Content="매출월" VerticalContentAlignment="Center" Click="YYYYMM_Click"/>-->
 
                 <!--<DatePicker x:Name="dtpEDate" Grid.Column="1" Padding="0"
                                     local:DatePickerMonthCalendar.IsMonthYear="True"
@@ -343,7 +341,7 @@
 
 
                 <DataGrid  x:Name="dgdOutSummaryGrid" 
-                           IsReadOnly="True" Grid.Row="0" SelectionChanged="dgdOutGrid_SelectionChanged">
+                           IsReadOnly="True" Grid.Row="0" SelectionChanged="dgdOutGrid_SelectionChanged" MouseDoubleClick="dgdOutSummaryGrid_MouseDoubleClick">
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Style.Triggers>
@@ -362,20 +360,9 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="dgdtxtcolNum"  Width="0.05*" Binding="{Binding Num}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom" Header="매출처" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount" Header="잔액" Width="*" Binding="{Binding YYYYMM}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolX"  Width="0.05*" />
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom2" Header="매출처" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount2" Header="잔액" Width="*" Binding="{Binding YYYYMM}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolX2"  Width="0.05*" />
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom3" Header="매출처" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount3" Header="잔액" Width="*" Binding="{Binding YYYYMM}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolX3"  Width="0.05*" />
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom4" Header="매출처" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount4" Header="잔액" Width="*" Binding="{Binding YYYYMM}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolX4"  Width="0.05*" />
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom5" Header="매출처" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount5" Header="잔액" Width="*" Binding="{Binding YYYYMM}"/>
+                        <DataGridTextColumn x:Name="dgdtxtcolCustom" Header="매출처" Width="*" Binding="{Binding KCustom}" />
+                        <DataGridTextColumn x:Name="dgdtxtcolAmount" Header="잔액" Width="*" Binding="{Binding RemainAmount}"/>
+                       
                       
 
 

@@ -446,13 +446,13 @@
                         </DataGrid.RowStyle>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="Sumqty" Header="매출량" Width="*" Binding="{Binding Sumqty}"/>
-                            <DataGridTextColumn Header="평균단가" Width="auto" Binding="{Binding SumAvgPrice}" />
+                            <DataGridTextColumn x:Name="Sumqty" Header="매출량" Width="*" Binding="{Binding qty}"/>
+                            <DataGridTextColumn Header="평균단가" Width="auto" Binding="{Binding AvgPrice}" />
                             <DataGridTextColumn Header="단위" Width="*" Binding="{Binding CurrencyUnitname}" />
-                            <DataGridTextColumn Header="매출액" Width="*" Binding="{Binding SumAmount}" />
-                            <DataGridTextColumn Header="반품액" Width="*" Binding="{Binding SumRtnAmount}" />
-                            <DataGridTextColumn x:Name="SumRPAMOUNT" Header="수금액" Width="*" Binding="{Binding SumRPAMOUNT}" />
-                            <DataGridTextColumn Header="감액(DC)" Width="*" Binding="{Binding SumRPDCAmount}" />
+                            <DataGridTextColumn Header="매출액" Width="*" Binding="{Binding TotalAmount}" />
+                            <DataGridTextColumn Header="반품액" Width="*" Binding="{Binding RtnAmount}" />
+                            <DataGridTextColumn x:Name="SumRPAMOUNT" Header="수금액" Width="*" Binding="{Binding RPAMOUNT}" />
+                            <DataGridTextColumn Header="감액(DC)" Width="*" Binding="{Binding RPDCAmount}" />
                             <DataGridTextColumn Header="비율" Width="*" Binding="{Binding RPDCAmountPcnt}" />
                         </DataGrid.Columns>
                     </DataGrid>

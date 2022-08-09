@@ -46,21 +46,22 @@ namespace WizMes_Alpha_JA
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Lib.Instance.UiLoading(sender);
- 
-            chkPeriod.IsChecked = true;
-         
 
+            //chkPeriod.IsChecked = true;
+
+            SetComboBox();
             tbnOutware.IsChecked = true;  // 로드시 수금버튼 기본선택.
 
 
             //처음 화면 로드시 집계항목은 모두 체크되어 있는 상태로 출력.
             chkCompany.IsChecked = true;
             cboCompany.SelectedIndex = 0;
-            chkPeriod.IsChecked = true;
+            //chkPeriod.IsChecked = true;
             dtpSDate.SelectedDate = DateTime.Today;
-            YYYY.IsChecked = true;
+            //YYYY.IsChecked = true;
 
         }
+
 
 
         #region (상단 조회조건 체크박스 enable 모음)
@@ -104,8 +105,8 @@ namespace WizMes_Alpha_JA
         // 기간
         private void lblPeriod_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (chkPeriod.IsChecked == true) { chkPeriod.IsChecked = false; }
-            else { chkPeriod.IsChecked = true; }
+            //if (chkPeriod.IsChecked == true) { chkPeriod.IsChecked = false; }
+            //else { chkPeriod.IsChecked = true; }
         }
         // 기간
         private void chkPeriod_Checked(object sender, RoutedEventArgs e)
@@ -122,7 +123,7 @@ namespace WizMes_Alpha_JA
         private void YYYY_Click(object sender, RoutedEventArgs e)
         {
             dtpSDate.Visibility = Visibility.Visible;
-            dtpSDate2.Visibility = Visibility.Hidden;
+           
            
             DateTime today = DateTime.Now.Date;
             DateTime firstday = today.AddDays(1 - today.Day);
@@ -132,15 +133,14 @@ namespace WizMes_Alpha_JA
 
         private void YYYYMM_Click(object sender, RoutedEventArgs e)
         {
-            dtpSDate2.Visibility = Visibility.Visible;
+          
             dtpSDate.Visibility = Visibility.Hidden;
 
 
             DateTime today = DateTime.Now.Date;
             DateTime firstday = today.AddDays(1 - today.Day);
             DateTime lastday = firstday.AddMonths(1).AddDays(-1);
-            dtpSDate2.SelectedDate = firstday;
-  
+           
 
         }
 
@@ -439,9 +439,7 @@ namespace WizMes_Alpha_JA
                 //매출/ 매입 토글박스 구분.
                 
 
-                // 일자 체크여부 yn
-                int sBSDate = 0;
-                if (chkPeriod.IsChecked == true) { sBSDate = 1; }
+
 
 
                 DataSet ds = null;
@@ -449,16 +447,15 @@ namespace WizMes_Alpha_JA
 
                 sqlParameter.Clear();
 
-                sqlParameter.Add("RPGbn", RPGbn);       // 매출 매입 구분자.
-                sqlParameter.Add("nDateGbn", sBSDate);
-                sqlParameter.Add("sDate", YYYY.IsChecked == true ? dtpSDate.SelectedDate.Value.ToString("yyyyMMdd") : dtpSDate2.SelectedDate.Value.ToString("yyyyMMdd"));
-                sqlParameter.Add("nChkRPCompany", chkCompany.IsChecked == true ? "1" : "0");
+                sqlParameter.Add("sDate", dtpSDate.SelectedDate.Value.ToString("yyyyMMdd"));
+                sqlParameter.Add("sBSGbn", tbnStuffin.IsChecked == true ? "2" : "1");    //1:buy 2:sale
+                sqlParameter.Add("nChkCompanyID", chkCompany.IsChecked == true ? "1" : "0");
 
-                sqlParameter.Add("sRPCompany", chkCompany.IsChecked == true ? "0001" : "");
+                sqlParameter.Add("sCompanyID ", chkCompany.IsChecked == true ? "0001" : "");
                 sqlParameter.Add("nChkCustom", chkCustom.IsChecked == true ? "1" : "0");
                 sqlParameter.Add("CustomID", txtCustom.Text != null ? txtCustom.Text.ToString() : "" );
-                sqlParameter.Add("nChkBSItem", chkBSItem.IsChecked == true ? "1" : "0");
-                sqlParameter.Add("BSItem", txtBSItem.Text != null ? txtBSItem.Text.ToString() : "");
+                sqlParameter.Add("nChkRPItemcode", chkBSItem.IsChecked == true ? "1" : "0");    // 입금계정 
+                sqlParameter.Add("RPItemcode", txtBSItem.Text != null ? txtBSItem.Text.ToString() : "");
 
                 sqlParameter.Add("nChkBusinessCharge", chkSalesCharge.IsChecked == true ? "1" : "0");
                 sqlParameter.Add("BusinessCharge", txtSalesCharge.Text != null ? txtSalesCharge.Text.ToString() : "");
@@ -467,7 +464,7 @@ namespace WizMes_Alpha_JA
 
 
 
-                ds = DataStore.Instance.ProcedureToDataSet("xp_Acc_R_P_Summary_Sum", sqlParameter, false);
+                ds = DataStore.Instance.ProcedureToDataSet("xp_Acc_RP_RemainSumbyCustom_Q", sqlParameter, false);
 
 
                 if (ds != null && ds.Tables.Count > 0)
@@ -487,14 +484,10 @@ namespace WizMes_Alpha_JA
                             i++;
                                 var WinAccBSSummary = new Win_Acc_Remain_Summary_Q_CodeView()
                                 {
-                                    SumAmount = dr["Amount"].ToString(),
-                                   
-                                    YYYY = dr["YYYY"].ToString(),
-                                    YYYYMM = dr["YYYYMM"].ToString(),
-                                    customnat = dr["CUSTOMShort"].ToString(),
-                                    RPitemName = dr["RPitemName"].ToString(),
-                                    CurrencyUnitname = dr["CurrencyUnitname"].ToString(),
-                                    SalesCharge = dr["SalesChargeName"].ToString()
+                                    Num = i,
+                                    customID = dr["customID"].ToString(),
+                                    KCustom = dr["KCustom"].ToString(),
+                                    RemainAmount = dr["RemainAmount"].ToString()
 
 
                                 };
@@ -503,24 +496,15 @@ namespace WizMes_Alpha_JA
                                 //{
                                 //    WinAccBSSummary.QTY = Lib.Instance.returnNumStringZero(WinAccBSSummary.QTY);
                                 //}
-                                // 콤마입히기 > 합계금액
-                                if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.TotalAmount))
+                               
+                                // 콤마입히기 > 잔액
+                                if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.RemainAmount))
                                 {
-                                    WinAccBSSummary.TotalAmount = Lib.Instance.returnNumStringZero(WinAccBSSummary.TotalAmount);
-                                }
-                                // 콤마입히기 > 부가세
-                                if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.VATAmount))
-                                {
-                                    WinAccBSSummary.VATAmount = Lib.Instance.returnNumStringZero(WinAccBSSummary.VATAmount);
-                                }
-                                // 콤마입히기 > 공급가액
-                                if (Lib.Instance.IsNumOrAnother(WinAccBSSummary.Amount))
-                                {
-                                    WinAccBSSummary.Amount = Lib.Instance.returnNumStringZero(WinAccBSSummary.Amount);
+                                    WinAccBSSummary.RemainAmount = Lib.Instance.returnNumStringZero(WinAccBSSummary.RemainAmount);
                                 }
                               dgdOutSummaryGrid.Items.Add(WinAccBSSummary);
                         }
-
+                        SearchCount.Text = "검색건수 : " + i.ToString() + " 건";
                     }
                 }
             }
@@ -1128,6 +1112,46 @@ namespace WizMes_Alpha_JA
                 printDialog.PrintVisual(canvas, "Sample");
             }
         }
+
+        //더블클릭하면 팝업 띄우기 
+        private void dgdOutSummaryGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // 재고현황(제품포함)
+            int i = 0;
+            foreach (MenuViewModel mvm in MainWindow.mMenulist)
+            {
+                if (mvm.Menu.Equals("거래처 잔액일보(총괄)"))
+                {
+                    break;
+                }
+                i++;
+            }
+            try
+            {
+               
+                    Type type = Type.GetType("WizMes_Alpha." + MainWindow.mMenulist[i].ProgramID.Trim(), true);
+                    object uie = Activator.CreateInstance(type);
+
+                    MainWindow.mMenulist[i].subProgramID = new MdiChild()
+                    {
+                        Title = "Alpha [" + MainWindow.mMenulist[i].MenuID.Trim() + "] " + MainWindow.mMenulist[i].Menu.Trim() +
+                                " (→" + MainWindow.mMenulist[i].ProgramID + ")",
+                        Height = SystemParameters.PrimaryScreenHeight * 0.8,
+                        MaxHeight = SystemParameters.PrimaryScreenHeight * 0.85,
+                        Width = SystemParameters.WorkArea.Width * 0.85,
+                        MaxWidth = SystemParameters.WorkArea.Width,
+                        Content = uie as UIElement,
+                        Tag = MainWindow.mMenulist[i]
+                    };
+                    Lib.Instance.AllMenuLogInsert(MainWindow.mMenulist[i].MenuID, MainWindow.mMenulist[i].Menu, MainWindow.mMenulist[i].subProgramID);
+                    MainWindow.MainMdiContainer.Children.Add(MainWindow.mMenulist[i].subProgramID as MdiChild);
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("해당 화면이 존재하지 않습니다.");
+            }
+        }
     }
 
     class Win_Acc_Remain_Summary_Q_CodeView
@@ -1139,32 +1163,12 @@ namespace WizMes_Alpha_JA
 
         public int Num { get; set; }
         public bool IsCheck { get; set; }
-        public string cls { get; set; }
-        public string VATAmount { get; set; }
-
-        public string YYYY { get; set; }
-        public string YYYYMM { get; set; }
-        public string sBSDate { get; set; }
-        public string RPGbn { get; set; }
-        public string nChkRPCompany { get; set; }
-        public string customnat { get; set; }
-        public string RPitemName { get; set; }
-
-        public string sRPCompany { get; set; }
-        public string nChkCustom { get; set; }
-        public string CustomNat { get; set; }
-        public string SalesCharge { get; set; }
-        public string nChkBSItem { get; set; }
-        public string nChkOrderNo { get; set; }
-
-
-        public string OrderNo { get; set; }
-        public string nChkCurrencyUnit { get; set; }
-        public string CurrencyUnitname { get; set; }
-        public string Per { get; set; }
-        public string SumAmount { get; set; }
-        public string TotalAmount { get; set; }
-        public string Amount { get; set; }
+        public string customID { get; set; }
+        public string KCustom { get; set; }
+        public string RemainAmount { get; set; }
+       
+       
+       
     }
 
 

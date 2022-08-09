@@ -281,9 +281,9 @@ namespace WizMes_Alpha_JA
                                     Num = i + 1,
                                     cls = dr["BSGBNNAME"].ToString(),
                                     Item = dr["LName"].ToString(),
-                                    Amount = dr["Amount"].ToString(),
-                                    VatAmount = dr["Vat"].ToString(),
-                                    TotalAmount = dr["TotAmount"].ToString(),
+                                    Amount = stringFormatN0(dr["Amount"]),
+                                    VatAmount = stringFormatN0(dr["Vat"]),
+                                    TotalAmount = stringFormatN0(dr["TotAmount"]),
                                     Currency = dr["currencyUnitName"].ToString()
                                 };
                                 // 콤마입히기 > 금액
@@ -311,11 +311,11 @@ namespace WizMes_Alpha_JA
                                     Num = j + 1,
                                     cls = dr["BSGBNName"].ToString(),
                                     Item = dr["LName"].ToString(),
-                                    Cash = dr["CashAmount"].ToString(),
-                                    Bank = dr["BankAmount"].ToString(),
-                                    Bill = dr["BillAmount"].ToString(),
-                                    DisCount = dr["DcAmount"].ToString(),
-                                    TotalAmount = dr["TotAmount"].ToString(),
+                                    Cash = stringFormatN0(dr["CashAmount"]),
+                                    Bank = stringFormatN0(dr["BankAmount"]),
+                                    Bill = stringFormatN0(dr["BillAmount"]),
+                                    DisCount = stringFormatN0(dr["DcAmount"]),
+                                    TotalAmount = stringFormatN0(dr["TotAmount"]),
                                     Currency = dr["currencyUnitName"].ToString(),
                                     AlterItem = dr["RefItemName"].ToString()
                                 };
@@ -454,9 +454,9 @@ namespace WizMes_Alpha_JA
                                     BankAmount = "",
                                     BillAmount = "",
                                     DcAmount = "",
-                                    RAmount = dr["RAmount"].ToString(),
+                                    RAmount = stringFormatN0(dr["RAmount"]),
 
-                                    PAmount = dr["PAmount"].ToString(),
+                                    PAmount = stringFormatN0(dr["PAmount"]),
                                     currencyUnitName = dr["currencyUnitName"].ToString()
                                 };
 
@@ -486,14 +486,14 @@ namespace WizMes_Alpha_JA
                                     KCustom = dr["CustomNat"].ToString(),
                                     BSItem = dr["RPItemName"].ToString(),
                                     RefComments = dr["RefComments"].ToString(),
-                                    CashAmount = dr["CashAmount"].ToString(),
+                                    CashAmount = stringFormatN0(dr["CashAmount"]),
                                     Bank = dr["BankName"].ToString(),
-                                    BankAmount = dr["BankAmount"].ToString(),
-                                    BillAmount = dr["BillAmount"].ToString(),
-                                    DcAmount = dr["DcAmount"].ToString(),
-                                    RAmount = dr["RAmount"].ToString(),
+                                    BankAmount = stringFormatN0(dr["BankAmount"]),
+                                    BillAmount = stringFormatN0(dr["BillAmount"]),
+                                    DcAmount = stringFormatN0(dr["DcAmount"]),
+                                    RAmount = stringFormatN0(dr["RAmount"]),
 
-                                    PAmount = dr["PAmount"].ToString(),
+                                    PAmount = stringFormatN0(dr["PAmount"]),
                                     currencyUnitName = dr["currencyUnitName"].ToString()
                                 };
                                 // 콤마입히기 > 현금
@@ -1134,7 +1134,12 @@ namespace WizMes_Alpha_JA
             return result;
         }
 
-       
+        // 천마리 콤마, 소수점 버리기
+        private string stringFormatN0(object obj)
+        {
+            return string.Format("{0:N0}", obj);
+        }
+
 
 
 

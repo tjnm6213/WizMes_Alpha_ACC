@@ -642,8 +642,8 @@
                             </StackPanel>
                         </TextBlock>
 
-                    <TextBlock x:Name="txtblockSearchTotalOut" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" Margin="1" 
-                                   Text="검색건수 : " FontWeight="Bold" />
+                   <!--<TextBlock x:Name="txtblockSearchTotalOut" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" Margin="1" 
+                                   Text="검색건수 : " FontWeight="Bold" />-->
 
 
 

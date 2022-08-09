@@ -60,11 +60,6 @@ namespace WizMes_Alpha_JA
             tbnReceive.IsChecked = true;    // 로드시 입금버튼 기본선택.
             txtgrbBsItem.IsEnabled = false;
             txtgrbTotalAmount.IsEnabled = false;
-            
-            cboCompany.SelectedValue = 0;
-            cboCurrencyUnit.SelectedValue = 0;
-            chkCompany.IsChecked = true;
-            cboCompany2.SelectedValue = 0;
         }
 
 
@@ -75,7 +70,6 @@ namespace WizMes_Alpha_JA
         {
             tbnPay.IsChecked = false;
             tbnReceive.IsChecked = true;
- 
 
             // 입금버튼 클릭. > 명칭변경 및 항목, 그리드 체인지.
             tbnReceive_CheckedChange();
@@ -85,7 +79,6 @@ namespace WizMes_Alpha_JA
         {
             tbnReceive.IsChecked = false;
             tbnPay.IsChecked = true;
-         
         }
         // 입금 / 출금 토글버튼
         private void tbnPay_Checked(object sender, RoutedEventArgs e)
@@ -187,229 +180,136 @@ namespace WizMes_Alpha_JA
 
         #endregion
 
-        // 매출사업장
-        private void lblCompany_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (chkCompany.IsChecked == true) { chkCompany.IsChecked = false; }
-            else { chkCompany.IsChecked = true; }
-        }
-        // 매출사업장
-        private void chkCompany_Checked(object sender, RoutedEventArgs e)
-        {
-            cboCompany.IsEnabled = true;
-            cboCompany.Focus();
-        }
-        // 매출사업장
-        private void chkCompany_Unchecked(object sender, RoutedEventArgs e)
-        {
-            cboCompany.IsEnabled = false;
-        }
-        // 수금처
+
+        // 거래처
         private void lblCustom_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (chkCustom.IsChecked == true) { chkCustom.IsChecked = false; }
             else { chkCustom.IsChecked = true; }
         }
-        // 수금처
+        // 거래처
         private void chkCustom_Checked(object sender, RoutedEventArgs e)
         {
             txtCustom.IsEnabled = true;
-            btnpfCustom.IsEnabled = true;
+            btnPfCustom.IsEnabled = true;
             txtCustom.Focus();
         }
-        // 수금처
+        // 거래처
         private void chkCustom_Unchecked(object sender, RoutedEventArgs e)
         {
             txtCustom.IsEnabled = false;
-            btnpfCustom.IsEnabled = false;
+            btnPfCustom.IsEnabled = false;
         }
-        // 계정과목
-        private void lblBSItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        // 매출항목
+        private void lblSaleItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (chkBSItem.IsChecked == true) { chkBSItem.IsChecked = false; }
-            else { chkBSItem.IsChecked = true; }
+            if (chkSaleItems.IsChecked == true) { chkSaleItems.IsChecked = false; }
+            else { chkSaleItems.IsChecked = true; }
         }
-        // 계정과목
-        private void chkBSItem_Checked(object sender, RoutedEventArgs e)
+        // 매출항목
+        private void chkSaleItems_Checked(object sender, RoutedEventArgs e)
         {
-            txtBSItem.IsEnabled = true;
-            btnPfBSItem.IsEnabled = true;
-            txtBSItem.Focus();
+            txtSaleItems.IsEnabled = true;
+            btnPfSaleItems.IsEnabled = true;
+            txtSaleItems.Focus();
         }
-        // 계정과목
-        private void chkBSItem_Unchecked(object sender, RoutedEventArgs e)
+        // 매출항목
+        private void chkSaleItems_Unchecked(object sender, RoutedEventArgs e)
         {
-            txtBSItem.IsEnabled = false;
-            btnPfBSItem.IsEnabled = false;
+            txtSaleItems.IsEnabled = false;
+            btnPfSaleItems.IsEnabled = false;
+        }
+        // 품명
+        private void lblArticle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (chkArticle.IsChecked == true) { chkArticle.IsChecked = false; }
+            else { chkArticle.IsChecked = true; }
+        }
+        // 품명
+        private void chkArticle_Checked(object sender, RoutedEventArgs e)
+        {
+            txtArticle.IsEnabled = true;
+            btnPfArticle.IsEnabled = true;
+            txtArticle.Focus();
+        }
+        // 품명
+        private void chkArticle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtArticle.IsEnabled = false;
+            btnPfArticle.IsEnabled = false;
+        }
+        // 오더번호
+        private void lblOrderNum_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (chkOrderNum.IsChecked == true) { chkOrderNum.IsChecked = false; }
+            else { chkOrderNum.IsChecked = true; }
+        }
+        // 오더번호
+        private void chkOrderNum_Checked(object sender, RoutedEventArgs e)
+        {
+            txtOrderNum.IsEnabled = true;
+            btnPfOrderNum.IsEnabled = true;
+            txtOrderNum.Focus();
+        }
+        // 오더번호
+        private void chkOrderNum_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtOrderNum.IsEnabled = false;
+            btnPfOrderNum.IsEnabled = false;
         }
 
-        // 영업사원
-        private void lblSalesCharge_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (chkSalesCharge.IsChecked == true) { chkSalesCharge.IsChecked = false; }
-            else { chkSalesCharge.IsChecked = true; }
-        }
-        // 영업사원
-        private void chkSalesCharge_Checked(object sender, RoutedEventArgs e)
-        {
-            txtSalesCharge.IsEnabled = true;
-            btnPfSalesCharge.IsEnabled = true;
-            txtSalesCharge.Focus();
-        }
-        // 영업사원
-        private void chkSalesCharge_Unchecked(object sender, RoutedEventArgs e)
-        {
-            txtSalesCharge.IsEnabled = false;
-            btnPfSalesCharge.IsEnabled = false;
-        }
-        //화폐
-        private void lblMoney_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (chkMoney.IsChecked == true) { chkMoney.IsChecked = false; }
-            else { chkMoney.IsChecked = true; }
-        }
-        // 화폐
-        private void chkMoney_Checked(object sender, RoutedEventArgs e)
-        {
-            cboMoney.IsEnabled = true;
-            cboMoney.Focus();
-        }
-        // 화폐
-        private void chkMoney_Unchecked(object sender, RoutedEventArgs e)
-        {
-            cboMoney.IsEnabled = false;
-        }
-        //은행
-        private void lblBank_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (chkBank.IsChecked == true) { chkBank.IsChecked = false; }
-            else { chkBank.IsChecked = true; }
-        }
-        // 은행
-        private void chkBank_Checked(object sender, RoutedEventArgs e)
-        {
-            cboBank.IsEnabled = true;
-            cboBank.Focus();
-        }
-        // 은행
-        private void chkBank_Unchecked(object sender, RoutedEventArgs e)
-        {
-            cboMoney.IsEnabled = false;
-        }
-        //당일수금분
-        private void lblNowDate_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (chkNowDate.IsChecked == true) { chkNowDate.IsChecked = false; }
-            else { chkNowDate.IsChecked = true; }
-        }
-        // 당일수금분
-        private void chkNowDate_Checked(object sender, RoutedEventArgs e)
-        {
-            cboNowDate.IsEnabled = true;
-            cboNowDate.Focus();
-        }
-
-        // 당일수금분
-        private void chkNowDate_Unchecked(object sender, RoutedEventArgs e)
-        {
-            cboNowDate.IsEnabled = false;
-        }
-        //입금자명
-        private void lblName_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (chkNowDate.IsChecked == true) { chkNowDate.IsChecked = false; }
-            else { chkNowDate.IsChecked = true; }
-        }
-        // 입금자명
-        private void chkName_Checked(object sender, RoutedEventArgs e)
-        {
-            txtName.IsEnabled = true;
-            txtName.Focus();
-        }
-        // 입금자명
-        private void chkName_Unchecked(object sender, RoutedEventArgs e)
-        {
-            txtName.IsEnabled = false;
-        }
         #endregion
 
         #region (콤보박스 세팅) SetComboBox
         private void SetComboBox()
         {
-            //매출거래처
-            List<string[]> listCompany = new List<string[]>();
-            string[] Company01 = new string[] { "0001", "(주)알파신소재" };
-            listCompany.Add(Company01);
 
-            ObservableCollection<CodeView> ovcCompany = ComboBoxUtil.Instance.Direct_SetComboBox(listCompany);
-            this.cboCompany.ItemsSource = ovcCompany;
-            this.cboCompany.DisplayMemberPath = "code_name";
-            this.cboCompany.SelectedValuePath = "code_id";
+            if (tbnPay.IsChecked == true)
+            {
+                // 거래종류 출금일 경우        
+                ObservableCollection<CodeView> ovcTransacClass = ComboBoxUtil.Instance.Gf_DB_CM_GetComCodeDataset(null, "PYM", "Y", "");
+                this.cboTransacClass.ItemsSource = ovcTransacClass;
+                this.cboTransacClass.DisplayMemberPath = "code_name";
+                this.cboTransacClass.SelectedValuePath = "code_id";
+            }
+            else if (tbnReceive.IsChecked == true)
+            {
 
-            ObservableCollection<CodeView> ovcCompany2 = ComboBoxUtil.Instance.Direct_SetComboBox(listCompany);
-            this.cboCompany2.ItemsSource = ovcCompany2;
-            this.cboCompany2.DisplayMemberPath = "code_name";
-            this.cboCompany2.SelectedValuePath = "code_id";
+                //거래종류 입금일 경우
+                List<string[]> depositlist = new List<string[]>();
+                string[] list03 = new string[] { "4", "현금입금" };
+                string[] list04 = new string[] { "5", "어음입금" };
+                //string[] list05 = new string[] { "6", "외화입금" };
+                depositlist.Add(list03);
+                depositlist.Add(list04);
+                //depositlist.Add(list05);
+
+                ObservableCollection<CodeView> depositClss = ComboBoxUtil.Instance.Direct_SetComboBox(depositlist);
+                this.cboTransacClass.ItemsSource = depositClss;
+                this.cboTransacClass.DisplayMemberPath = "code_name";
+                this.cboTransacClass.SelectedValuePath = "code_id";
+
+            }
+
 
             //매입,매출 화폐단위(입력)
             List<string[]> listPrice = new List<string[]>();
             string[] Price01 = new string[] { "0", "₩" };
-            string[] Price02 = new string[] { "1", "$" };
-            string[] Price03 = new string[] { "2", "EUR" };
-            string[] Price04 = new string[] { "3", "ALL" };
+            //string[] Price02 = new string[] { "1", "$" };
             listPrice.Add(Price01);
-            listPrice.Add(Price02);
-            listPrice.Add(Price03);
-            listPrice.Add(Price04);
+            //listPrice.Add(Price02);
 
-            ObservableCollection<CodeView> ovcPrice = ComboBoxUtil.Instance.Direct_SetComboBox(listPrice);
-            this.cboMoney.ItemsSource = ovcPrice;
-            this.cboMoney.DisplayMemberPath = "code_name";
-            this.cboMoney.SelectedValuePath = "code_id";
-
-            ObservableCollection<CodeView> ovcPrice2 = ComboBoxUtil.Instance.Direct_SetComboBox(listPrice);
-            this.cboCurrencyUnit.ItemsSource = ovcPrice;
+            ObservableCollection<CodeView> ovcCurrencyUnit = ComboBoxUtil.Instance.Direct_SetComboBox(listPrice);
+            this.cboCurrencyUnit.ItemsSource = ovcCurrencyUnit;
             this.cboCurrencyUnit.DisplayMemberPath = "code_name";
             this.cboCurrencyUnit.SelectedValuePath = "code_id";
 
 
-            // 은행
-            ObservableCollection<CodeView> ovcBank = ComboBoxUtil.Instance.GetBankList();
-            this.cboBank.ItemsSource = ovcBank;
-            this.cboBank.DisplayMemberPath = "code_name";
-            this.cboBank.SelectedValuePath = "code_id";
-
-            ObservableCollection<CodeView> ovcBank2 = ComboBoxUtil.Instance.GetBankList();
-            this.cbogrbBank.ItemsSource = ovcBank;
-            this.cbogrbBank.DisplayMemberPath = "code_name";
-            this.cbogrbBank.SelectedValuePath = "code_id";
-
-            //당일수금분
-            List<string[]> listToday = new List<string[]>();
-            string[] Today01 = new string[] { "0", "N" };
-            string[] Today02 = new string[] { "1", "Y" };
-            string[] Today03 = new string[] { "2", "ALL" };
-            listPrice.Add(Today01);
-            listPrice.Add(Today02);
-            listPrice.Add(Today03);
-
-            ObservableCollection<CodeView> ovcToday = ComboBoxUtil.Instance.Direct_SetComboBox(listToday);
-            this.cboNowDate.ItemsSource = ovcPrice;
-            this.cboNowDate.DisplayMemberPath = "code_name";
-            this.cboNowDate.SelectedValuePath = "code_id";
-
-            //대체계정여부
-            List<string[]> listRefYN = new List<string[]>();
-            string[] RefYN01 = new string[] { "0", "N" };
-            string[] RefYN02 = new string[] { "1", "Y" };
-            listRefYN.Add(RefYN01);
-            listRefYN.Add(RefYN02);
-
-
-            ObservableCollection<CodeView> ovcRefYN = ComboBoxUtil.Instance.Direct_SetComboBox(listRefYN);
-            this.cboRefYN.ItemsSource = ovcRefYN;
-            this.cboRefYN.DisplayMemberPath = "code_name";
-            this.cboRefYN.SelectedValuePath = "code_id";
+            // 계좌선택
+            ObservableCollection<CodeView> ovcAccountChoice = ComboBoxUtil.Instance.GetBankList();
+            this.cboAccountChoice.ItemsSource = ovcAccountChoice;
+            this.cboAccountChoice.DisplayMemberPath = "code_name";
+            this.cboAccountChoice.SelectedValuePath = "code_id";
 
         }
 
@@ -427,7 +327,7 @@ namespace WizMes_Alpha_JA
             btnCancel.Visibility = Visibility.Hidden;
             btnExcel.Visibility = Visibility.Visible;
             grbAddItems.IsHitTestVisible = false;
-            dgdReceiveGrid.IsHitTestVisible = true;
+            dgdReceive.IsHitTestVisible = true;
 
             InsertOrUpdate = string.Empty;
             //lblMsg.Visibility = Visibility.Hidden;
@@ -451,7 +351,7 @@ namespace WizMes_Alpha_JA
             btnExcel.Visibility = Visibility.Hidden;
             grbAddItems.IsHitTestVisible = true;
             //lblMsg.Visibility = Visibility.Visible;
-            dgdReceiveGrid.IsHitTestVisible = false;
+            dgdReceive.IsHitTestVisible = false;
 
             //입출금번호 - 쓸수 없음.
             txtgrbBsItem.IsEnabled = false;
@@ -486,6 +386,10 @@ namespace WizMes_Alpha_JA
             if (e.Key == Key.Enter)
             {
                 MainWindow.pf.ReturnCode(txtgrbCustom, (int)Defind_CodeFind.DCF_CUSTOM, "");
+                //KCustomName은 사용자가 입력하는 데이터로 테이블에 저장되고, 그 값을 불러오는 것으로 수정 2020.02.06, 장가빈
+                //KCustomName.Text = txtgrbCustom.Text;
+                KCustomName.Focus();
+                
             }
         }
         // 플러스파인더 그룹박스 거래처
@@ -497,77 +401,67 @@ namespace WizMes_Alpha_JA
 
 
         // 플러스파인더 계정과목
-        private void txtBSItem_KeyDown(object sender, KeyEventArgs e)
+        private void txtSaleItems_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 if (tbnReceive.IsChecked == true)
                 {
 
-                    MainWindow.pf.ReturnCode(txtBSItem, 80, "In");
+                    MainWindow.pf.ReturnCode(txtSaleItems, 80, "In");
                 }
                 else
                 {
-                    MainWindow.pf.ReturnCode(txtBSItem, 80, "Out");
+                    MainWindow.pf.ReturnCode(txtSaleItems, 80, "Out");
                 }
             }
         }
         // 플러스파인더 계정과목
-        private void btnPfBSItem_Click(object sender, RoutedEventArgs e)
+        private void btnPfSaleItems_Click(object sender, RoutedEventArgs e)
         {
             if (tbnReceive.IsChecked == true)
             {
 
-                MainWindow.pf.ReturnCode(txtBSItem, 80, "In");
+                MainWindow.pf.ReturnCode(txtSaleItems, 80, "In");
             }
             else
             {
-                MainWindow.pf.ReturnCode(txtBSItem, 80, "Out");
+                MainWindow.pf.ReturnCode(txtSaleItems, 80, "Out");
             }
         }
 
 
-        // 플러스파인더 영업사원
-        private void txtSalesCharge_KeyDown(object sender, KeyEventArgs e)
+        // 플러스파인더 품명
+        private void txtArticle_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                MainWindow.pf.ReturnCode(txtSalesCharge, (int)Defind_CodeFind.DCF_SalesCharge, "");
+                MainWindow.pf.ReturnCode(txtArticle, (int)Defind_CodeFind.DCF_Article, "");
             }
         }
-        // 플러스파인더 영업사원
-        private void btnPfSalesCharge_Click(object sender, RoutedEventArgs e)
+        // 플러스파인더 품명
+        private void btnPfArticle_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.pf.ReturnCode(txtSalesCharge, (int)Defind_CodeFind.DCF_SalesCharge, "");
+            MainWindow.pf.ReturnCode(txtArticle, (int)Defind_CodeFind.DCF_Article, "");
         }
-        // 플러스파인더 그룹박스 영업사원
-        private void txtgrbSalesCharge_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                MainWindow.pf.ReturnCode(txtSalesCharge, (int)Defind_CodeFind.DCF_SalesCharge, "");
-            }
-        }
-        // 플러스파인더 그룹박스 영업사원
-        private void btngrbSalesCharge_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.pf.ReturnCode(txtSalesCharge, (int)Defind_CodeFind.DCF_SalesCharge, "");
-        }
+
+
+
 
         // 플러스파인더 오더번호
-        private void txtOrderNo_KeyDown(object sender, KeyEventArgs e)
+        private void txtOrderNum_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 // 4번.
-                MainWindow.pf.ReturnCode(txtOrderNo, (int)Defind_CodeFind.DCF_ORDER, "");
+                MainWindow.pf.ReturnCode(txtOrderNum, (int)Defind_CodeFind.DCF_ORDER, "");
             }
         }
         // 플러스파인더 오더번호
-        private void btnPfOrderNo_Click(object sender, RoutedEventArgs e)
+        private void btnPfOrderNum_Click(object sender, RoutedEventArgs e)
         {
             // 4번.
-            MainWindow.pf.ReturnCode(txtOrderNo, (int)Defind_CodeFind.DCF_ORDER, "");
+            MainWindow.pf.ReturnCode(txtOrderNum, (int)Defind_CodeFind.DCF_ORDER, "");
         }
 
         // 플러스파인더 그룹박스 계정과목
@@ -587,9 +481,12 @@ namespace WizMes_Alpha_JA
                     MainWindow.pf.ReturnCode(txtgrbReceivePayItems, 32, "S");
                     txtgrbCustom.Focus();
                 }
-
+                //// 32번.
+                //MainWindow.pf.ReturnCode(txtgrbReceivePayItems, (int)Defind_CodeFind.DCF_ACCRCVITEM, "S");
+                //txtgrbCustom.Focus();
             }
         }
+
 
         // 플러스파인더 그룹박스 계정과목
         private void btngrbpftxtgrbReceivePayItems_Click(object sender, RoutedEventArgs e)
@@ -611,42 +508,6 @@ namespace WizMes_Alpha_JA
             //txtgrbCustom.Focus();
         }
 
-        //플러스파인더 그룹박스 대체계정
-        private void txtgrbRefBSItem_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (tbnReceive.IsChecked == true)
-                {
-                    // 33번. 입금 계정만 보이게
-                    MainWindow.pf.ReturnCode(txtgrbReceivePayItems, 33, "S");
-                    txtgrbCustom.Focus();
-                }
-                else if (tbnPay.IsChecked == true)
-                {
-                    // 32번. 출금 계정만 보이게
-                    MainWindow.pf.ReturnCode(txtgrbReceivePayItems, 32, "S");
-                    txtgrbCustom.Focus();
-                }
-
-            }
-        }
-        //플러스파인더 그룹박스 대체계정 
-        private void btngrbpfRefBSItem_Click(object sender, RoutedEventArgs e)
-        {
-            if (tbnReceive.IsChecked == true)
-            {
-                // 33번. 입금 계정만 보이게
-                MainWindow.pf.ReturnCode(txtgrbReceivePayItems, 33, "S");
-                txtgrbCustom.Focus();
-            }
-            else if (tbnPay.IsChecked == true)
-            {
-                // 32번. 출금 계정만 보이게
-                MainWindow.pf.ReturnCode(txtgrbReceivePayItems, 32, "S");
-                txtgrbCustom.Focus();
-            }
-        }
         #endregion
 
         #region (토글버튼 체크 체인지 이벤트) CheckedChange
@@ -659,9 +520,26 @@ namespace WizMes_Alpha_JA
             lbrgrbKCustom.Content = "거래처";
             lblgrbBSITEM.Content = "입출금번호";
 
+            grbdgdInGrid.Visibility = Visibility.Hidden;
+            grbdgdOutGrid.Visibility = Visibility.Visible;
 
             SetComboBox();
 
+            // 2020.01.16 추가 - 토글버튼을 클릭했을 때 데이터그리드가 전환되고, 전환된 그 데이터그리드가 선택이 되어있다면, 그 정보를 볼 수있도록. 
+            var Receive = dgdReceive.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+            if (Receive != null)
+            {
+                this.DataContext = Receive;
+
+                if (Receive.ReceiveNowDateYN == "현금입금")
+                {
+                    cboTransacClass.SelectedValue = "3";
+                }
+                else
+                {
+                    cboTransacClass.SelectedValue = "4";
+                }
+            }
         }
 
         // 출금 클릭.
@@ -673,8 +551,26 @@ namespace WizMes_Alpha_JA
             lbrgrbKCustom.Content = "거래처";
             lblgrbBSITEM.Content = "입출금번호";
 
+            grbdgdOutGrid.Visibility = Visibility.Hidden;
+            grbdgdInGrid.Visibility = Visibility.Visible;
+
             SetComboBox();
 
+            // 2020.01.16 추가 - 토글버튼을 클릭했을 때 데이터그리드가 전환되고, 전환된 그 데이터그리드가 선택이 되어있다면, 그 정보를 볼 수있도록. 
+            var Receive = dgdPayGrid.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+            if (Receive != null)
+            {
+                this.DataContext = Receive;
+
+                if (Receive.ReceiveNowDateYN == "현금지불")
+                {
+                    cboTransacClass.SelectedValue = "1";
+                }
+                else
+                {
+                    cboTransacClass.SelectedValue = "2";
+                }
+            }
         }
 
         #endregion
@@ -687,6 +583,14 @@ namespace WizMes_Alpha_JA
             Wh_Ar_SelectedLastIndex = 0;
             re_Search(Wh_Ar_SelectedLastIndex);
 
+            // 2020.01.16 조회 두번 타는거 제외 
+            //if (tbnReceive.IsChecked == true) // 입금버튼
+            //{
+            //    FillGrid_ReceiveGrid();
+            //}
+            //else if (tbnPay.IsChecked == true) // 출금버튼
+            //{
+            //    FillGrid_tbnPayGrid();
             //}
         }
 
@@ -696,14 +600,25 @@ namespace WizMes_Alpha_JA
         /// <param name="selectedIndex"></param>
         private void re_Search(int selectedIndex)
         {
-
-            FillGrid_ReceiveGrid();
-
-            if (dgdReceiveGrid.Items.Count > 0)
+            if (tbnReceive.IsChecked == true) // 입금버튼
             {
-                dgdReceiveGrid.SelectedIndex = selectedIndex;
-            }
+                FillGrid_ReceiveGrid();
 
+                if (dgdReceive.Items.Count > 0)
+                {
+                    dgdReceive.SelectedIndex = selectedIndex;
+                }
+
+            }
+            else if (tbnPay.IsChecked == true) // 출금버튼
+            {
+                FillGrid_tbnPayGrid();
+
+                if (dgdPayGrid.Items.Count > 0)
+                {
+                    dgdPayGrid.SelectedIndex = selectedIndex;
+                }
+            }
         }
 
 
@@ -711,9 +626,9 @@ namespace WizMes_Alpha_JA
         // 입금용 그리드 채우기.
         private void FillGrid_ReceiveGrid()
         {
-            if (dgdReceiveGrid.Items.Count > 0)
+            if (dgdReceive.Items.Count > 0)
             {
-                dgdReceiveGrid.Items.Clear();
+                dgdReceive.Items.Clear();
             }
 
             //합계변수
@@ -723,11 +638,10 @@ namespace WizMes_Alpha_JA
             try
             {
                 // 매입 / 매출 토글박스 구분.
-               
-                string RPGBN = string.Empty;
+                string bsGbnID = "2";
 
-                if (tbnReceive.IsChecked == true) { RPGBN = "2"; }
-                else if (tbnPay.IsChecked == true) { RPGBN = "1"; }
+                if (tbnReceive.IsChecked == true) { bsGbnID = "2"; }
+                else if (tbnPay.IsChecked == true) { bsGbnID = "1"; }
 
                 // 기간 체크여부 yn.
                 int sBSDate = 0;
@@ -739,12 +653,12 @@ namespace WizMes_Alpha_JA
                 Dictionary<string, object> sqlParameter = new Dictionary<string, object>();
                 sqlParameter.Clear();
 
-                sqlParameter.Add("RPGBN", RPGBN);
+                sqlParameter.Add("RPGBN", bsGbnID);
                 sqlParameter.Add("sBSDate", sBSDate);
                 sqlParameter.Add("sDate", sBSDate == 1 ? dtpSDate.SelectedDate.Value.ToString("yyyyMMdd") : "");
                 sqlParameter.Add("eDate", sBSDate == 1 ? dtpEDate.SelectedDate.Value.ToString("yyyyMMdd") : "");
                 sqlParameter.Add("CustomID", chkCustom.IsChecked == true && txtCustom.Tag != null ? txtCustom.Tag.ToString() : "");
-                sqlParameter.Add("BSItemCode", chkBSItem.IsChecked == true && txtBSItem.Tag != null ? txtBSItem.Tag.ToString() : "");
+                sqlParameter.Add("BSItemCode", chkSaleItems.IsChecked == true && txtSaleItems.Tag != null ? txtSaleItems.Tag.ToString() : "");
                 //sqlParameter.Add("ArticleID", "");
                 //sqlParameter.Add("Article", "");
                 //sqlParameter.Add("OrderNo", "");
@@ -760,7 +674,13 @@ namespace WizMes_Alpha_JA
                     {
                         MessageBox.Show("조회된 데이터가 없습니다.");
 
-                        SearchCount.Text = "검색건수 :";
+                        txtblockSearchCountIn.Text = "      합계 :";
+                        txtblockSearchCashIn.Text = "현금 :";
+                        txtblockSearchCardIn.Text = "카드 :";
+                        txtblockSearchBillIn.Text = "어음 :";
+                        txtblockSearchBankIn.Text = "은행 :";
+                        txtblockSearchDCIn.Text = "감액 :";
+                        txtblockSearchTotalIn.Text = "합계금액 :";
 
                     }
                     else
@@ -771,71 +691,82 @@ namespace WizMes_Alpha_JA
                             var WinAccBuySale = new Win_Acc_Receive_Pay_U_CodeView()
                             {
                                 Num = i + 1,
-                               
+                                IsCheck = false,
 
                                 RPNo = dr["RPNo"].ToString(),
-                                CurrencyUnit = dr["CurrencyUnit"].ToString(),
-                                KCustom = dr["KCustom"].ToString(),
+                                RPGBN = dr["RPGBN"].ToString(),
+                                companyid = dr["companyid"].ToString(),
+                                RPDate = DateTime.ParseExact(dr["RPDate"].ToString(), "yyyyMMdd", null).ToString("yyyy-MM-dd"),
                                 BSItem = dr["BSItem"].ToString(),
-                                RPDate = dr["RPDate"].ToString(),
-                                CompanyID = dr["CompanyID"].ToString(),
 
+                                RPItemCode = dr["RPItemCode"].ToString(),
+                                CurrencyUnit = dr["CurrencyUnit"].ToString(),
+                                CustomID = dr["CustomID"].ToString(),
                                 SalesCharge = dr["SalesCharge"].ToString(),
+                                BankID = dr["BankID"].ToString(),
+                                BankName = dr["BankName"].ToString(),
+
                                 CashAmount = dr["CashAmount"].ToString(),
                                 BillAmount = dr["BillAmount"].ToString(),
                                 BankAmount = dr["BankAmount"].ToString(),
-                                SumAmount = dr["SumAmount"].ToString(),
                                 DCAmount = dr["DCAmount"].ToString(),
-
-                                Comments = dr["Comments"].ToString(),
-                                BankName = dr["BankName"].ToString(),
-                                KCustomName = dr["KCustomName"].ToString(),
                                 BillNo = dr["BillNo"].ToString(),
-                                RPItemCode = dr["RPItemCode"].ToString(),
-                                ReceivePersonName = dr["ReceivePersonName"].ToString(),
 
+                                VATAmount = dr["VATAmount"].ToString(),
+                                ForReceiveBillAmount = dr["ForReceiveBillAmount"].ToString(),
+                                ReceiveNowDateYN = dr["ReceiveNowDateYN"].ToString(),
+                                CardAmount = dr["CardAmount"].ToString(),
+                                ReceivePersonName = dr["ReceivePersonName"].ToString(),
+                                Bank = dr["Bank"].ToString(),
+                                Comments = dr["Comments"].ToString(),
+
+                                OrderID = dr["OrderID"].ToString(),
                                 RefBSNO = dr["RefBSNO"].ToString(),
+                                OrderFlag = dr["OrderFlag"].ToString(),
                                 RefRPItemCode = dr["RefRPItemCode"].ToString(),
                                 RefComments = dr["RefComments"].ToString(),
+
                                 RefAccountYN = dr["RefAccountYN"].ToString(),
                                 RefAmount = dr["RefAmount"].ToString(),
-                                RPGBN = dr["RPGBN"].ToString(),
-                                BankID = dr["BankID"].ToString(),
-                                
+
+                                KCustom = dr["KCustom"].ToString(),
+                                KCustomName = dr["KCustomName"].ToString(),
+
                             };
 
                             SumIn.SumCash += ConvertDouble(WinAccBuySale.CashAmount);
+                            SumIn.SumCard += ConvertDouble(WinAccBuySale.CardAmount);
                             SumIn.SumBill += ConvertDouble(WinAccBuySale.BillAmount);
                             SumIn.SumBank += ConvertDouble(WinAccBuySale.BankAmount);
                             SumIn.SumDC += ConvertDouble(WinAccBuySale.DCAmount);
-                            SumIn.SumAmount = ConvertDouble(WinAccBuySale.SumAmount);
+                            SumIn.SumTotal += ConvertDouble(WinAccBuySale.ForReceiveBillAmount);
 
 
-                            ////거래종류
-                            //if (WinAccBuySale.ReceiveNowDateYN.Trim().Equals("Y") && WinAccBuySale.CurrencyUnit.ToString().Equals("0"))
+                            //거래종류
+                            if (WinAccBuySale.ReceiveNowDateYN.Trim().Equals("Y") && WinAccBuySale.CurrencyUnit.ToString().Equals("0"))
+                            {
+                                WinAccBuySale.ReceiveNowDateYN = "현금입금";
+                                WinAccBuySale.cboReceiveNowDateYN = "4";
+                            }
+                            //else if(WinAccBuySale.ReceiveNowDateYN.Trim().Equals("Y") && WinAccBuySale.CurrencyUnit.ToString().Equals("1"))
                             //{
-                            //    WinAccBuySale.ReceiveNowDateYN = "현금입금";
-                            //    WinAccBuySale.cboReceiveNowDateYN = "4";
+                            //    WinAccBuySale.ReceiveNowDateYN = "외화입금";
+                            //    WinAccBuySale.cboReceiveNowDateYN = "6";
                             //}
-                            ////else if(WinAccBuySale.ReceiveNowDateYN.Trim().Equals("Y") && WinAccBuySale.CurrencyUnit.ToString().Equals("1"))
-                            ////{
-                            ////    WinAccBuySale.ReceiveNowDateYN = "외화입금";
-                            ////    WinAccBuySale.cboReceiveNowDateYN = "6";
-                            ////}
-                            //else
-                            //{
-                            //    WinAccBuySale.ReceiveNowDateYN = "어음입금";
-                            //    WinAccBuySale.cboReceiveNowDateYN = "5";
-                            //}
+                            else
+                            {
+                                WinAccBuySale.ReceiveNowDateYN = "어음입금";
+                                WinAccBuySale.cboReceiveNowDateYN = "5";
+                            }
 
                             // 화폐단위
                             if (WinAccBuySale.CurrencyUnit.Trim().Equals("0"))
                             {
-                                WinAccBuySale.CurrencyUnit = "₩";
+                                WinAccBuySale.CurrencyUnitName = "₩";
                             }
                             else
                             {
-                                WinAccBuySale.CurrencyUnit = "$";
+                                WinAccBuySale.CurrencyUnitName = "$";
                             }
 
                             // 콤마입히기 > 현금
@@ -853,21 +784,228 @@ namespace WizMes_Alpha_JA
                             {
                                 WinAccBuySale.BankAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.BankAmount);
                             }
-                            
-                           
+                            // 콤마입히기 > 카드
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.CardAmount))
+                            {
+                                WinAccBuySale.CardAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.CardAmount);
+                            }
                             // 콤마입히기 > 감액
                             if (Lib.Instance.IsNumOrAnother(WinAccBuySale.DCAmount))
                             {
                                 WinAccBuySale.DCAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.DCAmount);
                             }
-                          
+                            // 콤마입히기 > 합계
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.ForReceiveBillAmount))
+                            {
+                                WinAccBuySale.ForReceiveBillAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.ForReceiveBillAmount);
+                            }
 
-                            dgdReceiveGrid.Items.Add(WinAccBuySale);
+
+                            dgdReceive.Items.Add(WinAccBuySale);
                             i++;
                         }
-                        
-                        SearchCount.Text = " 검색건수 : " + i.ToString() + "건"; ;
 
+                        txtblockSearchCountIn.Text = "      합계 : " + i.ToString() + "건"; ;
+                        txtblockSearchCashIn.Text = "현금 : " + stringFormatN0(SumIn.SumCash) + "원";
+                        txtblockSearchCardIn.Text = "카드 : " + stringFormatN0(SumIn.SumCard) + "원";
+                        txtblockSearchBillIn.Text = "어음 : " + stringFormatN0(SumIn.SumBill) + "원";
+                        txtblockSearchBankIn.Text = "은행 : " + stringFormatN0(SumIn.SumBank) + "원";
+                        txtblockSearchDCIn.Text = "감액 : " + stringFormatN0(SumIn.SumDC) + "원";
+                        txtblockSearchTotalIn.Text = "합계금액 : " + stringFormatN0(SumIn.SumTotal) + "원";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("오류 발생, 오류 내용 : " + ex.ToString());
+            }
+        }
+
+        #endregion
+
+        #region (출금용 그리드 채우기) FillGrid_tbnPayGrid
+        private void FillGrid_tbnPayGrid()
+        {
+            if (dgdPayGrid.Items.Count > 0)
+            {
+                dgdPayGrid.Items.Clear();
+            }
+
+            //합계변수
+            var SumOut = new Win_Acc_Receive_Pay_U_CodeView_Sum();
+
+            try
+            {
+                // 매입 / 매출 토글박스 구분.
+                string bsGbnID = "1";
+
+                // 기간 체크여부 yn.
+                int sBSDate = 0;
+                if (chkPeriod.IsChecked == true) { sBSDate = 1; }
+
+
+
+                DataSet ds = null;
+                Dictionary<string, object> sqlParameter = new Dictionary<string, object>();
+                sqlParameter.Clear();
+
+                sqlParameter.Add("bsGbnID", bsGbnID);
+                sqlParameter.Add("sBSDate", sBSDate);
+                sqlParameter.Add("sDate", sBSDate == 1 ? dtpSDate.SelectedDate.Value.ToString("yyyyMMdd") : "");
+                sqlParameter.Add("eDate", sBSDate == 1 ? dtpEDate.SelectedDate.Value.ToString("yyyyMMdd") : "");
+                sqlParameter.Add("CustomID", chkCustom.IsChecked == true && txtCustom.Tag != null ? txtCustom.Tag.ToString() : "");
+                sqlParameter.Add("BSItemCode", chkSaleItems.IsChecked == true && txtSaleItems.Tag != null ? txtSaleItems.Tag.ToString() : "");
+                //sqlParameter.Add("ArticleID", "");
+                //sqlParameter.Add("Article", "");
+                //sqlParameter.Add("OrderNo", "");
+
+                ds = DataStore.Instance.ProcedureToDataSet("xp_Acc_RP_sReceivePay_WPF", sqlParameter, false);
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    DataTable dt = ds.Tables[0];
+                    int i = 0;
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        MessageBox.Show("조회된 데이터가 없습니다.");
+
+                        txtblockSearchCountOut.Text = "      합계 :";
+                        txtblockSearchCashOut.Text = "현금 :";
+                        txtblockSearchCardOut.Text = "카드 :";
+                        txtblockSearchBillOut.Text = "어음 :";
+                        txtblockSearchBankOut.Text = "은행 :";
+                        txtblockSearchDCOut.Text = "감액 :";
+                        txtblockSearchTotalOut.Text = "합계금액 :";
+                    }
+                    else
+                    {
+                        DataRowCollection drc = dt.Rows;
+                        foreach (DataRow dr in drc)
+                        {
+                            var WinAccBuySale = new Win_Acc_Receive_Pay_U_CodeView()
+                            {
+                                Num = i + 1,
+                                IsCheck = false,
+
+                                RPNo = dr["RPNo"].ToString(),
+                                RPGBN = dr["RPGBN"].ToString(),
+                                companyid = dr["companyid"].ToString(),
+                                RPDate = DateTime.ParseExact(dr["RPDate"].ToString(), "yyyyMMdd", null).ToString("yyyy-MM-dd"),
+                                BSItem = dr["BSItem"].ToString(),
+
+                                RPItemCode = dr["RPItemCode"].ToString(),
+                                CurrencyUnit = dr["CurrencyUnit"].ToString(),
+                                CustomID = dr["CustomID"].ToString(),
+                                SalesCharge = dr["SalesCharge"].ToString(),
+                                BankID = dr["BankID"].ToString(),
+                                BankName = dr["BankName"].ToString(),
+
+                                CashAmount = dr["CashAmount"].ToString(),
+                                BillAmount = dr["BillAmount"].ToString(),
+                                BankAmount = dr["BankAmount"].ToString(),
+                                DCAmount = dr["DCAmount"].ToString(),
+                                BillNo = dr["BillNo"].ToString(),
+
+                                VATAmount = dr["VATAmount"].ToString(),
+                                ForReceiveBillAmount = dr["ForReceiveBillAmount"].ToString(),
+                                ReceiveNowDateYN = dr["ReceiveNowDateYN"].ToString(),
+                                CardAmount = dr["CardAmount"].ToString(),
+                                ReceivePersonName = dr["ReceivePersonName"].ToString(),
+                                Bank = dr["Bank"].ToString(),
+                                Comments = dr["Comments"].ToString(),
+
+                                OrderID = dr["OrderID"].ToString(),
+                                RefBSNO = dr["RefBSNO"].ToString(),
+                                OrderFlag = dr["OrderFlag"].ToString(),
+                                RefRPItemCode = dr["RefRPItemCode"].ToString(),
+                                RefComments = dr["RefComments"].ToString(),
+
+                                RefAccountYN = dr["RefAccountYN"].ToString(),
+                                RefAmount = dr["RefAmount"].ToString(),
+
+                                KCustom = dr["KCustom"].ToString(),
+                                KCustomName = dr["KCustomName"].ToString()
+                            };
+
+                            SumOut.SumCash += ConvertDouble(WinAccBuySale.CashAmount);
+                            SumOut.SumCard += ConvertDouble(WinAccBuySale.CardAmount);
+                            SumOut.SumBill += ConvertDouble(WinAccBuySale.BillAmount);
+                            SumOut.SumBank += ConvertDouble(WinAccBuySale.BankAmount);
+                            SumOut.SumDC += ConvertDouble(WinAccBuySale.DCAmount);
+                            SumOut.SumTotal += ConvertDouble(WinAccBuySale.ForReceiveBillAmount);
+
+
+
+                            //거래종류
+                            if (WinAccBuySale.ReceiveNowDateYN.Trim().Equals("Y") && WinAccBuySale.CurrencyUnit.ToString().Equals("0"))
+                            {
+                                WinAccBuySale.ReceiveNowDateYN = "현금지불";
+                                WinAccBuySale.cboReceiveNowDateYN = "1";
+                            }
+                            //else if(WinAccBuySale.ReceiveNowDateYN.Trim().Equals("Y") && WinAccBuySale.CurrencyUnit.ToString().Equals("1"))
+                            //{
+                            //    WinAccBuySale.ReceiveNowDateYN = "외화지불";
+                            //    WinAccBuySale.cboReceiveNowDateYN = "3";
+                            //}
+                            else
+                            {
+                                WinAccBuySale.ReceiveNowDateYN = "어음지불";
+                                WinAccBuySale.cboReceiveNowDateYN = "2";
+                            }
+
+                            // 화폐단위
+                            if (WinAccBuySale.CurrencyUnit.Trim().Equals("0"))
+                            {
+                                WinAccBuySale.CurrencyUnitName = "₩";
+                            }
+                            else
+                            {
+                                WinAccBuySale.CurrencyUnitName = "$";
+                            }
+
+                            // 콤마입히기 > 현금
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.CashAmount))
+                            {
+                                WinAccBuySale.CashAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.CashAmount);
+                            }
+                            // 콤마입히기 > 어음
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.BillAmount))
+                            {
+                                WinAccBuySale.BillAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.BillAmount);
+                            }
+                            // 콤마입히기 > 은행
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.BankAmount))
+                            {
+                                WinAccBuySale.BankAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.BankAmount);
+                            }
+                            // 콤마입히기 > 카드
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.CardAmount))
+                            {
+                                WinAccBuySale.CardAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.CardAmount);
+                            }
+                            // 콤마입히기 > 감액
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.DCAmount))
+                            {
+                                WinAccBuySale.DCAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.DCAmount);
+                            }
+                            // 콤마입히기 > 합계
+                            if (Lib.Instance.IsNumOrAnother(WinAccBuySale.ForReceiveBillAmount))
+                            {
+                                WinAccBuySale.ForReceiveBillAmount = Lib.Instance.returnNumStringZero(WinAccBuySale.ForReceiveBillAmount);
+                            }
+
+                            dgdPayGrid.Items.Add(WinAccBuySale);
+                            i++;
+                        }
+
+                        txtblockSearchCountOut.Text = "      합계 : " + i.ToString() + "건"; ;
+                        txtblockSearchCashOut.Text = "현금 : " + stringFormatN0(SumOut.SumCash) + "원";
+                        txtblockSearchCardOut.Text = "카드 : " + stringFormatN0(SumOut.SumCard) + "원";
+                        txtblockSearchBillOut.Text = "어음 : " + stringFormatN0(SumOut.SumBill) + "원";
+                        txtblockSearchBankOut.Text = "은행 : " + stringFormatN0(SumOut.SumBank) + "원";
+                        txtblockSearchDCOut.Text = "감액 : " + stringFormatN0(SumOut.SumDC) + "원";
+                        txtblockSearchTotalOut.Text = "합계금액 : " + stringFormatN0(SumOut.SumTotal) + "원";
                     }
                 }
             }
@@ -880,6 +1018,7 @@ namespace WizMes_Alpha_JA
         #endregion
 
 
+
         // 추가버튼 클릭.
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -887,51 +1026,91 @@ namespace WizMes_Alpha_JA
             CantBtnControl();
 
             //2020.09.28, 장가빈, 추가버튼 클릭시 날짜가 금일로 초기화 되지 않도록 요청,
-            dtpDate2.SelectedDate = DateTime.Today;
+            //dtpDate.SelectedDate = DateTime.Today;
 
-            //if (SelectDate != "")
-            //{
-            //    dtpDate2.SelectedDate = DateTime.Parse(SelectDate.Substring(0, 4) + "-" + SelectDate.Substring(4, 2) + "-" + SelectDate.Substring(6, 2));
-            //}
+            if (SelectDate != "")
+            {
+                dtpDate.SelectedDate = DateTime.Parse(SelectDate.Substring(0, 4) + "-" + SelectDate.Substring(4, 2) + "-" + SelectDate.Substring(6, 2));
+            }
 
 
             cboCurrencyUnit.SelectedIndex = 0;
-            cboCompany2.SelectedIndex = 0;
-
+            cboTransacClass.SelectedIndex = 0;
+            cboAccountChoice.SelectedIndex = 0;
 
             InsertOrUpdate = "I";
 
-                if (dgdReceiveGrid.Items.Count > 0)
+            // 추가시 자동 포커스 초기세팅.
+            cboTransacClass.Focus();
+            cboTransacClass.IsDropDownOpen = true;
+
+            if (tbnReceive.IsChecked == true)   // 입금탭이라면,
+            {
+                if (dgdReceive.Items.Count > 0)
                 {
-                    Wh_Ar_SelectedLastIndex = dgdReceiveGrid.SelectedIndex;
+                    Wh_Ar_SelectedLastIndex = dgdReceive.SelectedIndex;
                 }
                 else
                 {
                     Wh_Ar_SelectedLastIndex = 0;
                 }
-            
-            
+            }
+            else if (tbnPay.IsChecked == true)  // 출금탭이라면,
+            {
+                if (dgdPayGrid.Items.Count > 0)
+                {
+                    Wh_Ar_SelectedLastIndex = dgdPayGrid.SelectedIndex;
+                }
+                else
+                {
+                    Wh_Ar_SelectedLastIndex = 0;
+                }
+            }
         }
 
         // 수정버튼 클릭.
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-             if (dgdReceiveGrid.Items.Count < 1)
+            if (tbnReceive.IsChecked == true)
+            {
+                if (dgdReceive.Items.Count < 1)
                 {
                     MessageBox.Show("먼저 검색해 주세요.");
                     return;
                 }
-                var OBJ = dgdReceiveGrid.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+                var OBJ = dgdReceive.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
                 if (OBJ == null)
                 {
                     MessageBox.Show("수정할 항목이 정확히 선택되지 않았습니다.");
                     return;
                 }
-            
+            }
+            else if (tbnPay.IsChecked == true)
+            {
+                if (dgdPayGrid.Items.Count < 1)
+                {
+                    MessageBox.Show("먼저 검색해 주세요.");
+                    return;
+                }
+                var OBJ = dgdPayGrid.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+                if (OBJ == null)
+                {
+                    MessageBox.Show("수정할 항목이 정확히 선택되지 않았습니다.");
+                    return;
+                }
+            }
+
             CantBtnControl();
             InsertOrUpdate = "U";
 
-              Wh_Ar_SelectedLastIndex = dgdReceiveGrid.SelectedIndex;
+            if (tbnReceive.IsChecked == true)
+            {
+                Wh_Ar_SelectedLastIndex = dgdReceive.SelectedIndex;
+            }
+            else if (tbnPay.IsChecked == true)
+            {
+                Wh_Ar_SelectedLastIndex = dgdPayGrid.SelectedIndex;
+            }
 
         }
 
@@ -1080,18 +1259,33 @@ namespace WizMes_Alpha_JA
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             int D_Check = 0;
-           
-                foreach (Win_Acc_Receive_Pay_U_CodeView Win_Acc_Buy_Receive in dgdReceiveGrid.Items)
+            if (tbnReceive.IsChecked == true)
+            {
+                foreach (Win_Acc_Receive_Pay_U_CodeView Win_Acc_Buy_Receive in dgdReceive.Items)
                 {
                     if (Win_Acc_Buy_Receive != null)
                     {
-                        
+                        if (Win_Acc_Buy_Receive.IsCheck == true)
+                        {
                             D_Check++;
-                        
+                        }
                     }
                 }
-            
-           
+            }
+            else if (tbnPay.IsChecked == true)
+            {
+                foreach (Win_Acc_Receive_Pay_U_CodeView Win_Acc_Buy_Receive in dgdPayGrid.Items)
+                {
+                    if (Win_Acc_Buy_Receive != null)
+                    {
+                        if (Win_Acc_Buy_Receive.IsCheck == true)
+                        {
+
+                            D_Check++;
+                        }
+                    }
+                }
+            }
 
 
             if (D_Check == 0)
@@ -1103,25 +1297,48 @@ namespace WizMes_Alpha_JA
             {
                 if (MessageBox.Show("선택하신 항목을 삭제하시겠습니까?", "삭제 전 확인", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                   
-                        if (dgdReceiveGrid.Items.Count > 0 && dgdReceiveGrid.SelectedItem != null)
+                    if (tbnReceive.IsChecked == true)
+                    {
+                        if (dgdReceive.Items.Count > 0 && dgdReceive.SelectedItem != null)
                         {
-                            Wh_Ar_SelectedLastIndex = dgdReceiveGrid.SelectedIndex;
+                            Wh_Ar_SelectedLastIndex = dgdReceive.SelectedIndex;
                         }
-                        foreach (Win_Acc_Receive_Pay_U_CodeView Win_Acc_Buy_Receive in dgdReceiveGrid.Items)
+                        foreach (Win_Acc_Receive_Pay_U_CodeView Win_Acc_Buy_Receive in dgdReceive.Items)
                         {
                             if (Win_Acc_Buy_Receive != null)
                             {
-                                  Delete_Data(Win_Acc_Buy_Receive.RPNo, Win_Acc_Buy_Receive.RPGBN);
-                                
+                                if (Win_Acc_Buy_Receive.IsCheck == true)
+                                {
+                                    Delete_Data(Win_Acc_Buy_Receive.RPNo, Win_Acc_Buy_Receive.RPGBN);
+                                }
                             }
                         }
-                        dgdReceiveGrid.Refresh();
+                        dgdReceive.Refresh();
                         Wh_Ar_SelectedLastIndex -= 1;
                         re_Search(Wh_Ar_SelectedLastIndex);
                         //FillGrid_ReceiveGrid();     // 재검색.
-                    
-                    
+                    }
+                    else if (tbnPay.IsChecked == true)
+                    {
+                        if (dgdPayGrid.Items.Count > 0 && dgdPayGrid.SelectedItem != null)
+                        {
+                            Wh_Ar_SelectedLastIndex = dgdPayGrid.SelectedIndex;
+                        }
+                        foreach (Win_Acc_Receive_Pay_U_CodeView Win_Acc_Buy_Receive in dgdPayGrid.Items)
+                        {
+                            if (Win_Acc_Buy_Receive != null)
+                            {
+                                if (Win_Acc_Buy_Receive.IsCheck == true)
+                                {
+                                    Delete_Data(Win_Acc_Buy_Receive.RPNo, Win_Acc_Buy_Receive.RPGBN);
+                                }
+                            }
+                        }
+                        dgdPayGrid.Refresh();
+                        Wh_Ar_SelectedLastIndex -= 1;
+                        re_Search(Wh_Ar_SelectedLastIndex);
+                        //FillGrid_tbnPayGrid();     // 재검색.
+                    }
                 }
             }
         }
@@ -1190,17 +1407,18 @@ namespace WizMes_Alpha_JA
                     CanBtnControl();
 
                     //2020.09.28, 장가빈, 입력했던 날짜가 다음 번 입력에도 남아있길 원하셔서.
-                    SelectDate = dtpDate2.SelectedDate.Value.ToString("yyyyMMdd");
+                    SelectDate = dtpDate.SelectedDate.Value.ToString("yyyyMMdd");
 
                     RPItemName = string.Empty;      //저장 후에는 비워줘야지 2020.02.22, 장가빈
 
-                   
+                    if (tbnReceive.IsChecked == true)
+                    {
                         if (InsertOrUpdate == "I")     //1. 추가 > 저장했다면,
                         {
-                            if (dgdReceiveGrid.Items.Count > 0)
+                            if (dgdReceive.Items.Count > 0)
                             {
-                                re_Search(dgdReceiveGrid.Items.Count - 1);
-                                dgdReceiveGrid.Focus();
+                                re_Search(dgdReceive.Items.Count - 1);
+                                dgdReceive.Focus();
                             }
                             else
                             { re_Search(0); }
@@ -1208,9 +1426,27 @@ namespace WizMes_Alpha_JA
                         else        //2. 수정 > 저장했다면,
                         {
                             re_Search(Wh_Ar_SelectedLastIndex);
-                            dgdReceiveGrid.Focus();
+                            dgdReceive.Focus();
                         }
-
+                    }
+                    else if (tbnPay.IsChecked == true)
+                    {
+                        if (InsertOrUpdate == "I")     //1. 추가 > 저장했다면,
+                        {
+                            if (dgdPayGrid.Items.Count > 0)
+                            {
+                                re_Search(dgdPayGrid.Items.Count - 1);
+                                dgdPayGrid.Focus();
+                            }
+                            else
+                            { re_Search(0); }
+                        }
+                        else        //2. 수정 > 저장했다면,
+                        {
+                            re_Search(Wh_Ar_SelectedLastIndex);
+                            dgdPayGrid.Focus();
+                        }
+                    }
                 }
             }
         }
@@ -1221,7 +1457,7 @@ namespace WizMes_Alpha_JA
         {
             bool Flag = true;
 
-            if (dtpDate2.SelectedDate == null)
+            if (dtpDate.SelectedDate == null)
             {
                 MessageBox.Show("등록일자가 입력되지 않았습니다. 먼저 일자를 입력해주세요");
                 Flag = false;
@@ -1241,12 +1477,12 @@ namespace WizMes_Alpha_JA
                 Flag = false;
                 return Flag;
             }
-            //if (cboTransacClass.SelectedValue == null)
-            //{
-            //    MessageBox.Show("거래종류가 입력되지 않았습니다. 먼저 거래종류를 입력해주세요");
-            //    Flag = false;
-            //    return Flag;
-            //}
+            if (cboTransacClass.SelectedValue == null)
+            {
+                MessageBox.Show("거래종류가 입력되지 않았습니다. 먼저 거래종류를 입력해주세요");
+                Flag = false;
+                return Flag;
+            }
             //if (txtgrbDiscount.Text == string.Empty || txtgrbDiscount.Text.Length <= 0)
             //{
             //    MessageBox.Show("감액이 입력되지 않았습니다. 먼저 감액을 입력해주세요");
@@ -1291,22 +1527,32 @@ namespace WizMes_Alpha_JA
                 string BSITEM = txtgrbBsItem.Text;
                 string BSItemName = txtgrbBsItem.Text;
 
-              
-                var WinAccBuySale = dgdReceiveGrid.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
-
-                if (WinAccBuySale != null) // 수정1
+                if (RPGBN == "2")
                 {
-                    RPNo = WinAccBuySale.RPNo;
+                    var WinAccBuySale = dgdReceive.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+
+                    if (WinAccBuySale != null) // 수정1
+                    {
+                        RPNo = WinAccBuySale.RPNo;
+                    }
+                }
+                else if (RPGBN == "1")
+                {
+                    var WinAccBuySale = dgdPayGrid.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+
+                    if (WinAccBuySale != null)
+                    {
+                        RPNo = WinAccBuySale.RPNo;
+                    }
                 }
 
-
-                if (txtOrderNo.Tag == null || txtOrderNo.Text.Length <= 0)
+                if (txtOrderNum.Tag == null || txtOrderNum.Text.Length <= 0)
                 {
-                    txtOrderNo.Tag = (object)"";
+                    txtOrderNum.Tag = (object)"";
                 }
-                if (cboBank.Tag == null || cboBank.Text.Length <= 0)
+                if (txtArticle.Tag == null || txtArticle.Text.Length <= 0)
                 {
-                    cboBank.Tag = (object)"";
+                    txtArticle.Tag = (object)"";
                 }
 
 
@@ -1316,7 +1562,6 @@ namespace WizMes_Alpha_JA
                 double D_CardAmount = 0;
                 double D_DCAmount = 0;
                 double D_ReceiveBillAmount = 0;
-                double D_RefAmount = 0;
 
 
                 double.TryParse(txtgrbCash.Text, out D_CashAmount);
@@ -1325,7 +1570,6 @@ namespace WizMes_Alpha_JA
                 double.TryParse(txtgrbCard.Text, out D_CardAmount);
                 double.TryParse(txtgrbDiscount.Text, out D_DCAmount);
                 double.TryParse(txtgrbTotalAmount.Text.Replace(",", ""), out D_ReceiveBillAmount);
-                double.TryParse(txtgrbRefAmount.Text, out D_RefAmount);
 
                 Dictionary<string, object> sqlParameter = new Dictionary<string, object>();
                 sqlParameter.Clear();
@@ -1333,14 +1577,14 @@ namespace WizMes_Alpha_JA
 
                 sqlParameter.Add("RPGBN", RPGBN);                                                      //입금 = 1.
                 sqlParameter.Add("companyid", "0001");                                               // 기본.
-                sqlParameter.Add("RPDate", dtpDate2.SelectedDate.Value.ToString("yyyyMMdd"));
-                sqlParameter.Add("BSItem", txtgrbReceivePayItems.Tag.ToString());       //txtgrbReceivePayItems.Text);  //매입매출번호
-                sqlParameter.Add("RPItemCode", txtgrbReceivePayItems.Tag != null ? txtgrbReceivePayItems.Tag.ToString() : "");
-             
+                sqlParameter.Add("RPDate", dtpDate.SelectedDate.Value.ToString("yyyyMMdd"));
+                sqlParameter.Add("BSItem", !RPItemFindName().Equals("") ? RPItemFindName().ToString().Trim() : "");       //txtgrbReceivePayItems.Text);  //매입매출번호
+                sqlParameter.Add("RPItemCode", txtgrbReceivePayItems.Tag != null ? txtgrbReceivePayItems.Tag.ToString() : "");                 // 계정과목
+
                 sqlParameter.Add("CurrencyUnit", cboCurrencyUnit.SelectedValue.ToString());         // 화폐단위
                 sqlParameter.Add("CustomID", txtgrbCustom.Tag.ToString());                          // 거래처.
-                sqlParameter.Add("SalesCharge", txtgrbSalesCharge.Text);                                                // (     )
-                sqlParameter.Add("BankID", cbogrbBank.SelectedValue != null ? cbogrbBank.SelectedValue.ToString() : "");          // 계좌선택
+                sqlParameter.Add("SalesCharge", "");                                                // (     )
+                sqlParameter.Add("BankID", cboAccountChoice.SelectedValue != null ? cboAccountChoice.SelectedValue.ToString() : "");              // 계좌선택
                 sqlParameter.Add("CashAmount", D_CashAmount);                                       // 현금
 
                 sqlParameter.Add("BillAmount", D_BillAmount);                                       // 어음
@@ -1349,24 +1593,32 @@ namespace WizMes_Alpha_JA
                 sqlParameter.Add("BillNo", txtgrbBankPaperNo.Text);                                 // 어음 번호
                 sqlParameter.Add("VATAmount", 0);                                         //부가세
 
-                sqlParameter.Add("ForReceiveBillAmount", txtgrbTotalAmount.Text);                      // 합계금액
-                sqlParameter.Add("ReceiveNowDateYN","");  // 거래종류
-                sqlParameter.Add("CardAmount", D_CardAmount);                       //카드
-                sqlParameter.Add("ReceivePersonName", txtgrbReceiveName.Text);
-                sqlParameter.Add("Bank", cbogrbBank.SelectedValue != null ? cbogrbBank.SelectedValue.ToString() : "");  
-           
-                sqlParameter.Add("Comments", txtgrbSemiComment.Text);                                   // 비고
-                sqlParameter.Add("OrderID", txtOrderNo.Text);
+                sqlParameter.Add("ForReceiveBillAmount", D_ReceiveBillAmount);                      // 합계금액
+
+                if (RPGBN == "2") //입금일 경우에는 
+                {
+                    sqlParameter.Add("ReceiveNowDateYN", cboTransacClass.SelectedValue.ToString() == "4" ? "Y" : "N");  // 거래종류
+                }
+                else             //출금일 경우에는
+                {
+                    sqlParameter.Add("ReceiveNowDateYN", cboTransacClass.SelectedValue.ToString() == "1" ? "Y" : "N");  // 거래종류
+                }
+
+                sqlParameter.Add("CardAmount", ConvertDouble(txtgrbCard.Text));                       //카드
+                sqlParameter.Add("ReceivePersonName", "");
+                sqlParameter.Add("Bank", txtgrbBankPay.Text); //은행  ??? 
+
+                sqlParameter.Add("Comments", txtgrbComment.Text);                                   // 비고
+                sqlParameter.Add("OrderID", "");
                 sqlParameter.Add("RefBSNO", "");
                 sqlParameter.Add("OrderFlag", 0);
                 sqlParameter.Add("RefRPItemCode", "");
 
-                sqlParameter.Add("RefComments", txtgrbRefComments.Text);                            // 적요(sub비고)
-                sqlParameter.Add("RefAccountYN", cboRefYN.SelectedValue != null ? cboRefYN.SelectedValue.ToString() : "");
-                sqlParameter.Add("RefAmount", D_RefAmount);                                                  //금액
+                sqlParameter.Add("RefComments", txtgrbSemiComment.Text);                            // 적요(sub비고)
+                sqlParameter.Add("RefAccountYN", "");
+                sqlParameter.Add("RefAmount", 0);                                                  //금액
                 sqlParameter.Add("Createuserid", MainWindow.CurrentUser);                           // 생성자.
-
-             /*   sqlParameter.Add("KCustomName", KCustomName.Text.ToString());          */                 //거래처명
+                sqlParameter.Add("KCustomName", KCustomName.Text.ToString());                           //거래처명
 
                 Procedure pro1 = new Procedure();
                 if (InsertOrUpdate == "I")
@@ -1434,13 +1686,14 @@ namespace WizMes_Alpha_JA
         {
             CanBtnControl();
 
-           
+            if (tbnReceive.IsChecked == true)
+            {
                 if (InsertOrUpdate == "I")     //1. 추가 도중 취소했다면.
                 {
-                    if (dgdReceiveGrid.Items.Count > 0)
+                    if (dgdReceive.Items.Count > 0)
                     {
                         re_Search(Wh_Ar_SelectedLastIndex);
-                        dgdReceiveGrid.Focus();
+                        dgdReceive.Focus();
                     }
                     else
                     { re_Search(0); }
@@ -1448,9 +1701,27 @@ namespace WizMes_Alpha_JA
                 else        //2. 수정 도중 취소했다면
                 {
                     re_Search(Wh_Ar_SelectedLastIndex);
-                    dgdReceiveGrid.Focus();
+                    dgdReceive.Focus();
                 }
-
+            }
+            else if (tbnPay.IsChecked == true)
+            {
+                if (InsertOrUpdate == "I")     //1. 추가 도중 취소했다면.
+                {
+                    if (dgdPayGrid.Items.Count > 0)
+                    {
+                        re_Search(Wh_Ar_SelectedLastIndex);
+                        dgdPayGrid.Focus();
+                    }
+                    else
+                    { re_Search(0); }
+                }
+                else        //2. 수정 도중 취소했다면
+                {
+                    re_Search(Wh_Ar_SelectedLastIndex);
+                    dgdPayGrid.Focus();
+                }
+            }
         }
 
         // 닫기버튼 클릭.
@@ -1461,26 +1732,53 @@ namespace WizMes_Alpha_JA
 
 
         // 데이터 그리드 항목 클릭_ SelectionChanged
-        private void dgdReceiveGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dgdOutGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (tbnReceive.IsChecked == true)
             {
-                var WinAccBuySale = dgdReceiveGrid.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+                var WinAccBuySale = dgdReceive.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
                 if (WinAccBuySale != null)
                 {
                     this.DataContext = WinAccBuySale;
 
                     txtgrbReceivePayItems.Tag = WinAccBuySale.RPItemCode;
-                    DateTime aa = DateTime.ParseExact(WinAccBuySale.RPDate, "yyyyMMdd", null);
-                    dtpDate2.SelectedDate = aa;
-                    //WinAccBuySale.RPDate = dtpDate2.SelectedDate.Value.ToString("yyyyMMdd");
 
-
+                    //  2020.01.16 거래구분이
+                    //if (WinAccBuySale.ReceiveNowDateYN == "현금입금")
+                    //{
+                    //    cboTransacClass.SelectedValue = "3";
+                    //}
+                    //else
+                    //{
+                    //    cboTransacClass.SelectedValue = "4";
+                    //}
                 }
             }
         }
- 
-      
+        // 데이터 그리드 항목 클릭_ SelectionChanged
+        private void dgdInGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (tbnPay.IsChecked == true)
+            {
+                var WinAccBuySale = dgdPayGrid.SelectedItem as Win_Acc_Receive_Pay_U_CodeView;
+                if (WinAccBuySale != null)
+                {
+                    this.DataContext = WinAccBuySale;
+
+                    txtgrbReceivePayItems.Tag = WinAccBuySale.RPItemCode;
+
+
+                    //if (WinAccBuySale.ReceiveNowDateYN == "현금지불")
+                    //{
+                    //    cboTransacClass.SelectedValue = "1";
+                    //}
+                    //else
+                    //{
+                    //    cboTransacClass.SelectedValue = "2";
+                    //}
+                }
+            }
+        }
 
         private void btnExcel_Click(object sender, RoutedEventArgs e)
         {
@@ -1491,12 +1789,12 @@ namespace WizMes_Alpha_JA
             if (tbnReceive.IsChecked == true)
             {
                 dgdStr[0] = "입금 등록 리스트";
-                dgdStr[1] = dgdReceiveGrid.Name;
+                dgdStr[1] = dgdReceive.Name;
             }
             else
             {
                 dgdStr[0] = "출금 등록 리스트";
-                dgdStr[1] = dgdReceiveGrid.Name;
+                dgdStr[1] = dgdPayGrid.Name;
             }
 
             ExportExcelxaml ExpExc = new ExportExcelxaml(dgdStr);
@@ -1504,20 +1802,32 @@ namespace WizMes_Alpha_JA
 
             if (ExpExc.DialogResult.HasValue)
             {
-                if (ExpExc.choice.Equals(dgdReceiveGrid.Name))
+                if (ExpExc.choice.Equals(dgdReceive.Name))
                 {
                     if (ExpExc.Check.Equals("Y"))
-                        dt = Lib.Instance.DataGridToDTinHidden(dgdReceiveGrid);
+                        dt = Lib.Instance.DataGridToDTinHidden(dgdReceive);
                     else
-                        dt = Lib.Instance.DataGirdToDataTable(dgdReceiveGrid);
+                        dt = Lib.Instance.DataGirdToDataTable(dgdReceive);
 
-                    Name = dgdReceiveGrid.Name;
+                    Name = dgdReceive.Name;
                     if (Lib.Instance.GenerateExcel(dt, Name))
                         Lib.Instance.excel.Visible = true;
                     else
                         return;
                 }
+                else if (ExpExc.choice.Equals(dgdPayGrid.Name))
+                {
+                    if (ExpExc.Check.Equals("Y"))
+                        dt = Lib.Instance.DataGridToDTinHidden(dgdPayGrid);
+                    else
+                        dt = Lib.Instance.DataGirdToDataTable(dgdPayGrid);
 
+                    Name = dgdPayGrid.Name;
+                    if (Lib.Instance.GenerateExcel(dt, Name))
+                        Lib.Instance.excel.Visible = true;
+                    else
+                        return;
+                }
                 else
                 {
                     if (dt != null)
@@ -1577,10 +1887,18 @@ namespace WizMes_Alpha_JA
         {
             txtgrbReceivePayItems.Focus();
         }
+        //거래처에서 화폐단위로 포커스 이동 
+        private void KCustomName_KeyDown(object sender, EventArgs e)
+        {
+            cboCurrencyUnit.Focus();
+            cboCurrencyUnit.IsDropDownOpen = true;
+        }
+
         // 화폐단위에서 은행명으로 포커스 이동.
         private void cboCurrencyUnit_DropDownClosed(object sender, EventArgs e)
         {
-           
+            cboAccountChoice.Focus();
+            cboAccountChoice.IsDropDownOpen = true;
         }
         // 은행명에서 어음번호로 포커스 이동.
         private void cboAccountChoice_DropDownClosed(object sender, EventArgs e)
@@ -1600,7 +1918,7 @@ namespace WizMes_Alpha_JA
         {
             if (e.Key == Key.Enter)
             {
-                txtgrbReceiveName.Focus();
+                txtgrbComment.Focus();
             }
         }
         // 비고에서 현금으로 포커스 이동
@@ -1616,7 +1934,7 @@ namespace WizMes_Alpha_JA
         {
             if (e.Key == Key.Enter)
             {
-                txtgrbBankPay.Focus();
+                txtgrbCard.Focus();
             }
         }
         // 은행에서 카드로 포커스 이동
@@ -1648,8 +1966,8 @@ namespace WizMes_Alpha_JA
         {
             if (e.Key == Key.Enter)
             {
-                txtgrbReceivePayItems.Focus();
-
+                cboTransacClass.Focus();
+                cboTransacClass.IsDropDownOpen = true;
             }
         }
 
@@ -1782,424 +2100,339 @@ namespace WizMes_Alpha_JA
 
         #endregion 기타 매서드
 
-        ////외화지불, 외화입금을 선택시 화페단위는 $로 변화되도록.
-        //private void CboTransacClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (tbnPay.IsChecked == true)
-        //    {
-        //        if (cboTransacClass.SelectedValue != null)
-        //        {
-        //            if (cboTransacClass.SelectedValue.ToString().Equals("1"))
-        //            {
-        //                cboCurrencyUnit.SelectedValue = "0";  //현금이면 원화
-        //            }
-        //            else if (cboTransacClass.SelectedValue.ToString().Equals("3"))
-        //            {
-        //                cboCurrencyUnit.SelectedValue = "1";  //외화면 미화
-        //            }
-        //            else
-        //            {
-        //                cboCurrencyUnit.SelectedValue = "0";  //어음이면 그냥 원화.
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (cboTransacClass.SelectedValue != null)
-        //        {
-        //            if (cboTransacClass.SelectedValue.ToString().Equals("4"))
-        //            {
-        //                cboCurrencyUnit.SelectedValue = "0";  //현금이면 원화
-        //            }
-        //            else if (cboTransacClass.SelectedValue.ToString().Equals("6"))
-        //            {
-        //                cboCurrencyUnit.SelectedValue = "1";  //외화면 미화
-        //            }
-        //            else
-        //            {
-        //                cboCurrencyUnit.SelectedValue = "0";  //어음이면 그냥 원화.
-        //            }
-        //        }
-        //    }
-
-        //}
-
-        //    //입금 체크 이벤트(합계 계산)
-        //    private void ChkC_Checked_In(object sender, RoutedEventArgs e)
-        //    {
-        //        var SumIn = new Win_Acc_Receive_Pay_U_CodeView_Sum();
-
-        //        int j = 0;
-
-        //        for (int i = 0; i < dgdReceiveGrid.Items.Count; i++)
-        //        {
-        //            var Data = dgdReceiveGrid.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
-
-        //            if (Data.IsCheck == true)
-        //            {
-        //                SumIn.SumCash += ConvertDouble(Data.CashAmount);
-        //                SumIn.SumCard += ConvertDouble(Data.CardAmount);
-        //                SumIn.SumBill += ConvertDouble(Data.BillAmount);
-        //                SumIn.SumBank += ConvertDouble(Data.BankAmount);
-        //                SumIn.SumDC += ConvertDouble(Data.DCAmount);
-        //                SumIn.SumAmount += ConvertDouble(Data.ForReceiveBillAmount);
-
-        //                j = j + 1;
-        //            }
-
-        //            txtblockSearchCountIn.Text = "      합계 : " + j.ToString() + "건"; ;
-        //            txtblockSearchCashIn.Text = "현금 : " + stringFormatN0(SumIn.SumCash) + "원";
-        //            txtblockSearchCardIn.Text = "카드 : " + stringFormatN0(SumIn.SumCard) + "원";
-        //            txtblockSearchBillIn.Text = "어음 : " + stringFormatN0(SumIn.SumBill) + "원";
-        //            txtblockSearchBankIn.Text = "은행 : " + stringFormatN0(SumIn.SumBank) + "원";
-        //            txtblockSearchDCIn.Text = "감액 : " + stringFormatN0(SumIn.SumDC) + "원";
-        //            txtblockSearchTotalIn.Text = "합계금액 : " + stringFormatN0(SumIn.SumAmount) + "원";
-
-        //        }
-        //    }
-
-        //    //입금 체크 해제 이벤트(합계 계산)
-        //    private void ChkC_Unchecked_In(object sender, RoutedEventArgs e)
-        //    {
-        //        var SumIn = new Win_Acc_Receive_Pay_U_CodeView_Sum();
-
-        //        int j = 0;
-
-        //        for (int i = 0; i < dgdReceiveGrid.Items.Count; i++)
-        //        {
-        //            var Data = dgdReceiveGrid.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
-
-        //            if (Data.IsCheck == true)
-        //            {
-        //                SumIn.SumCash += ConvertDouble(Data.CashAmount);
-        //                SumIn.SumCard += ConvertDouble(Data.CardAmount);
-        //                SumIn.SumBill += ConvertDouble(Data.BillAmount);
-        //                SumIn.SumBank += ConvertDouble(Data.BankAmount);
-        //                SumIn.SumDC += ConvertDouble(Data.DCAmount);
-        //                SumIn.SumAmount += ConvertDouble(Data.ForReceiveBillAmount);
-
-        //                j = j + 1;
-        //            }
-
-        //            txtblockSearchCountIn.Text = "      합계 : " + j.ToString() + "건"; ;
-        //            txtblockSearchCashIn.Text = "현금 : " + stringFormatN0(SumIn.SumCash) + "원";
-        //            txtblockSearchCardIn.Text = "카드 : " + stringFormatN0(SumIn.SumCard) + "원";
-        //            txtblockSearchBillIn.Text = "어음 : " + stringFormatN0(SumIn.SumBill) + "원";
-        //            txtblockSearchBankIn.Text = "은행 : " + stringFormatN0(SumIn.SumBank) + "원";
-        //            txtblockSearchDCIn.Text = "감액 : " + stringFormatN0(SumIn.SumDC) + "원";
-        //            txtblockSearchTotalIn.Text = "합계금액 : " + stringFormatN0(SumIn.SumAmount) + "원";
-
-        //        }
-        //    }
-
-        //    //출금 체크 이벤트(합계 계산)
-        //    private void ChkC_Checked_Out(object sender, RoutedEventArgs e)
-        //    {
-        //        var SumOut = new Win_Acc_Receive_Pay_U_CodeView_Sum();
-
-        //        int j = 0;
-
-        //        for (int i = 0; i < dgdPayGrid.Items.Count; i++)
-        //        {
-        //            var Data = dgdPayGrid.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
-
-        //            if (Data.IsCheck == true)
-        //            {
-        //                SumOut.SumCash += ConvertDouble(Data.CashAmount);
-        //                SumOut.SumCard += ConvertDouble(Data.CardAmount);
-        //                SumOut.SumBill += ConvertDouble(Data.BillAmount);
-        //                SumOut.SumBank += ConvertDouble(Data.BankAmount);
-        //                SumOut.SumDC += ConvertDouble(Data.DCAmount);
-        //                SumOut.SumAmount += ConvertDouble(Data.ForReceiveBillAmount);
-
-        //                j = j + 1;
-        //            }
-
-        //            txtblockSearchCountOut.Text = "      합계 : " + j.ToString() + "건"; ;
-        //            txtblockSearchCashOut.Text = "현금 : " + stringFormatN0(SumOut.SumCash) + "원";
-        //            txtblockSearchCardOut.Text = "카드 : " + stringFormatN0(SumOut.SumCard) + "원";
-        //            txtblockSearchBillOut.Text = "어음 : " + stringFormatN0(SumOut.SumBill) + "원";
-        //            txtblockSearchBankOut.Text = "은행 : " + stringFormatN0(SumOut.SumBank) + "원";
-        //            txtblockSearchDCOut.Text = "감액 : " + stringFormatN0(SumOut.SumDC) + "원";
-        //            txtblockSearchTotalOut.Text = "합계금액 : " + stringFormatN0(SumOut.SumAmount) + "원";
-
-        //        }
-        //    }
-
-        //    //출금 체크 해제 이벤트(합계 계산)
-        //    private void ChkC_Unchecked_Out(object sender, RoutedEventArgs e)
-        //    {
-        //        var SumOut = new Win_Acc_Receive_Pay_U_CodeView_Sum();
-
-        //        int j = 0;
-
-        //        for (int i = 0; i < dgdPayGrid.Items.Count; i++)
-        //        {
-        //            var Data = dgdPayGrid.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
-
-        //            if (Data.IsCheck == true)
-        //            {
-        //                SumOut.SumCash += ConvertDouble(Data.CashAmount);
-        //                SumOut.SumCard += ConvertDouble(Data.CardAmount);
-        //                SumOut.SumBill += ConvertDouble(Data.BillAmount);
-        //                SumOut.SumBank += ConvertDouble(Data.BankAmount);
-        //                SumOut.SumDC += ConvertDouble(Data.DCAmount);
-        //                SumOut.SumAmount += ConvertDouble(Data.ForReceiveBillAmount);
-
-        //                j = j + 1;
-        //            }
-
-        //            txtblockSearchCountOut.Text = "      합계 : " + j.ToString() + "건"; ;
-        //            txtblockSearchCashOut.Text = "현금 : " + stringFormatN0(SumOut.SumCash) + "원";
-        //            txtblockSearchCardOut.Text = "카드 : " + stringFormatN0(SumOut.SumCard) + "원";
-        //            txtblockSearchBillOut.Text = "어음 : " + stringFormatN0(SumOut.SumBill) + "원";
-        //            txtblockSearchBankOut.Text = "은행 : " + stringFormatN0(SumOut.SumBank) + "원";
-        //            txtblockSearchDCOut.Text = "감액 : " + stringFormatN0(SumOut.SumDC) + "원";
-        //            txtblockSearchTotalOut.Text = "합계금액 : " + stringFormatN0(SumOut.SumAmount) + "원";
-
-        //        }
-        //    }
-
-        //    //전체선택 텍스트블럭 이벤트
-        //    private void TbkSelectAll_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //    {
-        //        if (chkSelectAll.IsChecked == false)
-        //        {
-        //            chkSelectAll.IsChecked = true;
-        //        }
-        //        else
-        //        {
-        //            chkSelectAll.IsChecked = false;
-        //        }
-        //    }
-
-        //    //전체선택 체크박스 체크
-        //    private void ChkSelectAll_Checked(object sender, RoutedEventArgs e)
-        //    {
-        //        if (tbnPay.IsChecked == true)
-        //        {
-        //            if (dgdPayGrid.Items.Count > 0)
-        //            {
-        //                foreach (Win_Acc_Receive_Pay_U_CodeView RP_Chek in dgdPayGrid.Items)
-        //                {
-        //                    if (RP_Chek != null)
-        //                    {
-        //                        RP_Chek.IsCheck = true;
-        //                    }
-        //                }
-
-        //                dgdPayGrid.Items.Refresh();
-        //            }
-        //        }
-        //        else if (tbnReceive.IsChecked == true)
-        //        {
-        //            if (dgdReceiveGrid.Items.Count > 0)
-        //            {
-        //                foreach (Win_Acc_Receive_Pay_U_CodeView RP_Chek in dgdReceiveGrid.Items)
-        //                {
-        //                    if (RP_Chek != null)
-        //                    {
-        //                        RP_Chek.IsCheck = true;
-        //                    }
-        //                }
-
-        //                dgdReceiveGrid.Items.Refresh();
-        //            }
-        //        }
-        //    }
-
-        //    //전체선택 체크박스 체크해제
-        //    private void ChkSelectAll_Unchecked(object sender, RoutedEventArgs e)
-        //    {
-        //            if (dgdReceiveGrid.Items.Count > 0)
-        //            {
-        //                foreach (Win_Acc_Receive_Pay_U_CodeView RP_Chek in dgdReceiveGrid.Items)
-        //                {
-        //                    if (RP_Chek != null)
-        //                    {
-        //                        RP_Chek.IsCheck = false;
-        //                    }
-        //                }
-
-        //                dgdReceiveGrid.Items.Refresh();
-        //            }
-
-        //    }
-        //}
-
-
-
-
-        class Win_Acc_Receive_Pay_U_CodeView
+        //외화지불, 외화입금을 선택시 화페단위는 $로 변화되도록.
+        private void CboTransacClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            public override string ToString()
+            if (tbnPay.IsChecked == true)
             {
-                return (this.ReportAllProperties());
-            }
-
-            public int Num { get; set; }
-           
-            public string RPDate { get; set; }
-            public string CurrencyUnit { get; set; }
-            public string KCustom { get; set; }
-            public string BSItem { get; set; }
-            public string SalesCharge { get; set; }
-
-            public string CashAmount { get; set; }
-            public string BillAmount { get; set; }
-            public string BankAmount { get; set; }
-
-            public string RSumAmount { get; set; }
-            public string DCAmount { get; set; }
-            public string Comments { get; set; }
-            public string BankName { get; set; }
-            public string CompanyID { get; set; }
-
-            public string RPNo { get; set; }
-            public string RPItemCode { get; set; }
-            public string KCustomName { get; set; }
-            public string RefRPItemCode { get; set; }
-            public string RefComments { get; set; }
-            public string BankID { get; set; }
-
-            public string RefAccountYN { get; set; }            // 부가세
-            public string RefAmount { get; set; }
-            public string BillNo { get; set; }
-            public string RefBSNO { get; set; }
-            public string RPGBN { get; set; }
-            public string SumAmount { get; set; }
-            public string ReceivePersonName { get; set; }
-
-        }
-
-        class RPItemCode
-        {
-            string RPItemName { get; set; }
-        }
-
-        class Win_Acc_Receive_Pay_U_CodeView_Sum
-        {
-            public double SumCash { get; set; }
-            public double SumCard { get; set; }
-            public double SumBill { get; set; }
-            public double SumBank { get; set; }
-            public double SumDC { get; set; }
-            public double SumAmount { get; set; }
-        }
-
-        private void btnPrint_Click(object sender, RoutedEventArgs e)
-        {
-            PrintDialog printDialog = new PrintDialog();
-
-            if (printDialog.ShowDialog().GetValueOrDefault())
-            {
-                FontFamily fontFamily = new FontFamily("나눔고딕코딩");
-
-                Grid grid = new Grid();
-
-                grid.SetValue(FontFamilyProperty, fontFamily);
-                grid.SetValue(FontSizeProperty, 32d);
-
-                for (int i = 0; i < 5; i++)
+                if (cboTransacClass.SelectedValue != null)
                 {
-                    ColumnDefinition columnDefinition = new ColumnDefinition();
-
-                    grid.ColumnDefinitions.Add(columnDefinition);
-
-                    RowDefinition rowDefinition = new RowDefinition();
-
-                    grid.RowDefinitions.Add(rowDefinition);
-                }
-
-                grid.Background = new LinearGradientBrush
-                (
-                    Colors.Gray,
-                    Colors.White,
-                    new Point(0, 0),
-                    new Point(1, 1)
-                );
-
-                for (int i = 0; i < 25; i++)
-                {
-                    Button button = new Button();
-
-                    button.Margin = new Thickness(10);
-                    button.HorizontalAlignment = HorizontalAlignment.Center;
-                    button.VerticalAlignment = VerticalAlignment.Center;
-                    button.Content = $"버튼 {i + 1,0:d2}";
-
-                    grid.Children.Add(button);
-
-                    Grid.SetRow(button, i % 5);
-                    Grid.SetColumn(button, i / 5);
-                }
-
-                grid.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-
-                Point gridPoint = new Point
-                (
-                    (printDialog.PrintableAreaWidth - grid.DesiredSize.Width) / 2,
-                    (printDialog.PrintableAreaHeight - grid.DesiredSize.Height) / 2
-                );
-
-                Canvas.SetLeft(grid, gridPoint.X);
-                Canvas.SetTop(grid, gridPoint.Y);
-
-                Canvas canvas = new Canvas();
-
-                canvas.Width = printDialog.PrintableAreaWidth;
-                canvas.Height = printDialog.PrintableAreaHeight;
-                canvas.Background = null;
-
-                canvas.Children.Add(grid);
-
-                printDialog.PrintVisual(canvas, "Sample");
-            }
-        }
-
-        private void btnSearchMoney_Click(object sender, RoutedEventArgs e)
-        {
-            int i = 0;
-            foreach (MenuViewModel mvm in MainWindow.mMenulist)
-            {
-                if (mvm.Menu.Equals("거래처별  매입/매출 수금/지불 내역서"))
-                {
-                    break;
-                }
-                i++;
-            }
-            try
-            {
-                if (MainWindow.MainMdiContainer.Children.Contains(MainWindow.mMenulist[i].subProgramID as MdiChild))
-                {
-                    (MainWindow.mMenulist[i].subProgramID as MdiChild).Focus();
-                }
-                else
-                {
-                    Type type = Type.GetType("WizMes_Alpha_JA." + MainWindow.mMenulist[i].ProgramID.Trim(), true);
-                    object uie = Activator.CreateInstance(type);
-
-                    MainWindow.mMenulist[i].subProgramID = new MdiChild()
+                    if (cboTransacClass.SelectedValue.ToString().Equals("1"))
                     {
-                        Title = "Alpha [" + MainWindow.mMenulist[i].MenuID.Trim() + "] " + MainWindow.mMenulist[i].Menu.Trim() +
-                                " (→" + MainWindow.mMenulist[i].ProgramID + ")",
-                        Height = SystemParameters.PrimaryScreenHeight * 0.8,
-                        MaxHeight = SystemParameters.PrimaryScreenHeight * 0.85,
-                        Width = SystemParameters.WorkArea.Width * 0.85,
-                        MaxWidth = SystemParameters.WorkArea.Width,
-                        Content = uie as UIElement,
-                        Tag = MainWindow.mMenulist[i]
-                    };
-                    Lib.Instance.AllMenuLogInsert(MainWindow.mMenulist[i].MenuID, MainWindow.mMenulist[i].Menu, MainWindow.mMenulist[i].subProgramID);
-                    MainWindow.MainMdiContainer.Children.Add(MainWindow.mMenulist[i].subProgramID as MdiChild);
+                        cboCurrencyUnit.SelectedValue = "0";  //현금이면 원화
+                    }
+                    else if (cboTransacClass.SelectedValue.ToString().Equals("3"))
+                    {
+                        cboCurrencyUnit.SelectedValue = "1";  //외화면 미화
+                    }
+                    else
+                    {
+                        cboCurrencyUnit.SelectedValue = "0";  //어음이면 그냥 원화.
+                    }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("해당 화면이 존재하지 않습니다.");
+                if (cboTransacClass.SelectedValue != null)
+                {
+                    if (cboTransacClass.SelectedValue.ToString().Equals("4"))
+                    {
+                        cboCurrencyUnit.SelectedValue = "0";  //현금이면 원화
+                    }
+                    else if (cboTransacClass.SelectedValue.ToString().Equals("6"))
+                    {
+                        cboCurrencyUnit.SelectedValue = "1";  //외화면 미화
+                    }
+                    else
+                    {
+                        cboCurrencyUnit.SelectedValue = "0";  //어음이면 그냥 원화.
+                    }
+                }
             }
 
-        } 
+        }
 
+        //입금 체크 이벤트(합계 계산)
+        private void ChkC_Checked_In(object sender, RoutedEventArgs e)
+        {
+            var SumIn = new Win_Acc_Receive_Pay_U_CodeView_Sum();
+
+            int j = 0;
+
+            for (int i = 0; i < dgdReceive.Items.Count; i++)
+            {
+                var Data = dgdReceive.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
+
+                if (Data.IsCheck == true)
+                {
+                    SumIn.SumCash += ConvertDouble(Data.CashAmount);
+                    SumIn.SumCard += ConvertDouble(Data.CardAmount);
+                    SumIn.SumBill += ConvertDouble(Data.BillAmount);
+                    SumIn.SumBank += ConvertDouble(Data.BankAmount);
+                    SumIn.SumDC += ConvertDouble(Data.DCAmount);
+                    SumIn.SumTotal += ConvertDouble(Data.ForReceiveBillAmount);
+
+                    j = j + 1;
+                }
+
+                txtblockSearchCountIn.Text = "      합계 : " + j.ToString() + "건"; ;
+                txtblockSearchCashIn.Text = "현금 : " + stringFormatN0(SumIn.SumCash) + "원";
+                txtblockSearchCardIn.Text = "카드 : " + stringFormatN0(SumIn.SumCard) + "원";
+                txtblockSearchBillIn.Text = "어음 : " + stringFormatN0(SumIn.SumBill) + "원";
+                txtblockSearchBankIn.Text = "은행 : " + stringFormatN0(SumIn.SumBank) + "원";
+                txtblockSearchDCIn.Text = "감액 : " + stringFormatN0(SumIn.SumDC) + "원";
+                txtblockSearchTotalIn.Text = "합계금액 : " + stringFormatN0(SumIn.SumTotal) + "원";
+
+            }
+        }
+
+        //입금 체크 해제 이벤트(합계 계산)
+        private void ChkC_Unchecked_In(object sender, RoutedEventArgs e)
+        {
+            var SumIn = new Win_Acc_Receive_Pay_U_CodeView_Sum();
+
+            int j = 0;
+
+            for (int i = 0; i < dgdReceive.Items.Count; i++)
+            {
+                var Data = dgdReceive.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
+
+                if (Data.IsCheck == true)
+                {
+                    SumIn.SumCash += ConvertDouble(Data.CashAmount);
+                    SumIn.SumCard += ConvertDouble(Data.CardAmount);
+                    SumIn.SumBill += ConvertDouble(Data.BillAmount);
+                    SumIn.SumBank += ConvertDouble(Data.BankAmount);
+                    SumIn.SumDC += ConvertDouble(Data.DCAmount);
+                    SumIn.SumTotal += ConvertDouble(Data.ForReceiveBillAmount);
+
+                    j = j + 1;
+                }
+
+                txtblockSearchCountIn.Text = "      합계 : " + j.ToString() + "건"; ;
+                txtblockSearchCashIn.Text = "현금 : " + stringFormatN0(SumIn.SumCash) + "원";
+                txtblockSearchCardIn.Text = "카드 : " + stringFormatN0(SumIn.SumCard) + "원";
+                txtblockSearchBillIn.Text = "어음 : " + stringFormatN0(SumIn.SumBill) + "원";
+                txtblockSearchBankIn.Text = "은행 : " + stringFormatN0(SumIn.SumBank) + "원";
+                txtblockSearchDCIn.Text = "감액 : " + stringFormatN0(SumIn.SumDC) + "원";
+                txtblockSearchTotalIn.Text = "합계금액 : " + stringFormatN0(SumIn.SumTotal) + "원";
+
+            }
+        }
+
+        //출금 체크 이벤트(합계 계산)
+        private void ChkC_Checked_Out(object sender, RoutedEventArgs e)
+        {
+            var SumOut = new Win_Acc_Receive_Pay_U_CodeView_Sum();
+
+            int j = 0;
+
+            for (int i = 0; i < dgdPayGrid.Items.Count; i++)
+            {
+                var Data = dgdPayGrid.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
+
+                if (Data.IsCheck == true)
+                {
+                    SumOut.SumCash += ConvertDouble(Data.CashAmount);
+                    SumOut.SumCard += ConvertDouble(Data.CardAmount);
+                    SumOut.SumBill += ConvertDouble(Data.BillAmount);
+                    SumOut.SumBank += ConvertDouble(Data.BankAmount);
+                    SumOut.SumDC += ConvertDouble(Data.DCAmount);
+                    SumOut.SumTotal += ConvertDouble(Data.ForReceiveBillAmount);
+
+                    j = j + 1;
+                }
+
+                txtblockSearchCountOut.Text = "      합계 : " + j.ToString() + "건"; ;
+                txtblockSearchCashOut.Text = "현금 : " + stringFormatN0(SumOut.SumCash) + "원";
+                txtblockSearchCardOut.Text = "카드 : " + stringFormatN0(SumOut.SumCard) + "원";
+                txtblockSearchBillOut.Text = "어음 : " + stringFormatN0(SumOut.SumBill) + "원";
+                txtblockSearchBankOut.Text = "은행 : " + stringFormatN0(SumOut.SumBank) + "원";
+                txtblockSearchDCOut.Text = "감액 : " + stringFormatN0(SumOut.SumDC) + "원";
+                txtblockSearchTotalOut.Text = "합계금액 : " + stringFormatN0(SumOut.SumTotal) + "원";
+
+            }
+        }
+
+        //출금 체크 해제 이벤트(합계 계산)
+        private void ChkC_Unchecked_Out(object sender, RoutedEventArgs e)
+        {
+            var SumOut = new Win_Acc_Receive_Pay_U_CodeView_Sum();
+
+            int j = 0;
+
+            for (int i = 0; i < dgdPayGrid.Items.Count; i++)
+            {
+                var Data = dgdPayGrid.Items[i] as Win_Acc_Receive_Pay_U_CodeView;
+
+                if (Data.IsCheck == true)
+                {
+                    SumOut.SumCash += ConvertDouble(Data.CashAmount);
+                    SumOut.SumCard += ConvertDouble(Data.CardAmount);
+                    SumOut.SumBill += ConvertDouble(Data.BillAmount);
+                    SumOut.SumBank += ConvertDouble(Data.BankAmount);
+                    SumOut.SumDC += ConvertDouble(Data.DCAmount);
+                    SumOut.SumTotal += ConvertDouble(Data.ForReceiveBillAmount);
+
+                    j = j + 1;
+                }
+
+                txtblockSearchCountOut.Text = "      합계 : " + j.ToString() + "건"; ;
+                txtblockSearchCashOut.Text = "현금 : " + stringFormatN0(SumOut.SumCash) + "원";
+                txtblockSearchCardOut.Text = "카드 : " + stringFormatN0(SumOut.SumCard) + "원";
+                txtblockSearchBillOut.Text = "어음 : " + stringFormatN0(SumOut.SumBill) + "원";
+                txtblockSearchBankOut.Text = "은행 : " + stringFormatN0(SumOut.SumBank) + "원";
+                txtblockSearchDCOut.Text = "감액 : " + stringFormatN0(SumOut.SumDC) + "원";
+                txtblockSearchTotalOut.Text = "합계금액 : " + stringFormatN0(SumOut.SumTotal) + "원";
+
+            }
+        }
+
+        //전체선택 텍스트블럭 이벤트
+        private void TbkSelectAll_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (chkSelectAll.IsChecked == false)
+            {
+                chkSelectAll.IsChecked = true;
+            }
+            else
+            {
+                chkSelectAll.IsChecked = false;
+            }
+        }
+
+        //전체선택 체크박스 체크
+        private void ChkSelectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            if (tbnPay.IsChecked == true)
+            {
+                if (dgdPayGrid.Items.Count > 0)
+                {
+                    foreach (Win_Acc_Receive_Pay_U_CodeView RP_Chek in dgdPayGrid.Items)
+                    {
+                        if (RP_Chek != null)
+                        {
+                            RP_Chek.IsCheck = true;
+                        }
+                    }
+
+                    dgdPayGrid.Items.Refresh();
+                }
+            }
+            else if (tbnReceive.IsChecked == true)
+            {
+                if (dgdReceive.Items.Count > 0)
+                {
+                    foreach (Win_Acc_Receive_Pay_U_CodeView RP_Chek in dgdReceive.Items)
+                    {
+                        if (RP_Chek != null)
+                        {
+                            RP_Chek.IsCheck = true;
+                        }
+                    }
+
+                    dgdReceive.Items.Refresh();
+                }
+            }
+        }
+
+        //전체선택 체크박스 체크해제
+        private void ChkSelectAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (tbnPay.IsChecked == true)
+            {
+                if (dgdPayGrid.Items.Count > 0)
+                {
+                    foreach (Win_Acc_Receive_Pay_U_CodeView RP_Chek in dgdPayGrid.Items)
+                    {
+                        if (RP_Chek != null)
+                        {
+                            RP_Chek.IsCheck = false;
+                        }
+                    }
+
+                    dgdPayGrid.Items.Refresh();
+                }
+            }
+            else if (tbnReceive.IsChecked == true)
+            {
+                if (dgdReceive.Items.Count > 0)
+                {
+                    foreach (Win_Acc_Receive_Pay_U_CodeView RP_Chek in dgdReceive.Items)
+                    {
+                        if (RP_Chek != null)
+                        {
+                            RP_Chek.IsCheck = false;
+                        }
+                    }
+
+                    dgdReceive.Items.Refresh();
+                }
+            }
+        }
+    }
+
+
+
+
+    class Win_Acc_Receive_Pay_U_CodeView
+    {
+        public override string ToString()
+        {
+            return (this.ReportAllProperties());
+        }
+
+        public int Num { get; set; }
+        public bool IsCheck { get; set; }
+
+        public string RPNo { get; set; }
+        public string RPGBN { get; set; }
+        public string companyid { get; set; }
+        public string RPDate { get; set; }
+        public string BSItem { get; set; }
+
+        public string RPItemCode { get; set; }
+        public string CurrencyUnit { get; set; }
+        public string CurrencyUnitName { get; set; }
+
+        public string CustomID { get; set; }
+        public string SalesCharge { get; set; }
+        public string BankID { get; set; }
+        public string BankName { get; set; }
+
+        public string CashAmount { get; set; }
+        public string BillAmount { get; set; }
+        public string BankAmount { get; set; }
+        public string DCAmount { get; set; }
+        public string BillNo { get; set; }
+
+        public string VATAmount { get; set; }            // 부가세
+        public string ForReceiveBillAmount { get; set; }
+        public string ReceiveNowDateYN { get; set; }
+        public string cboReceiveNowDateYN { get; set; }  //이게 무슨 짓인지 모르겠지만 일단 추가.
+
+
+        public string CardAmount { get; set; }
+        public string ReceivePersonName { get; set; }
+        public string Bank { get; set; } // 은행
+        public string Comments { get; set; }
+
+        public string OrderID { get; set; }
+        public string RefBSNO { get; set; }
+        public string OrderFlag { get; set; }
+        public string RefRPItemCode { get; set; }
+        public string RefComments { get; set; }
+
+        public string RefAccountYN { get; set; }
+        public string RefAmount { get; set; }
+
+
+        public string KCustom { get; set; }
+        public string KCustomName { get; set; }
+    }
+
+    class RPItemCode
+    {
+        string RPItemName { get; set; }
+    }
+
+    class Win_Acc_Receive_Pay_U_CodeView_Sum
+    {
+        public double SumCash { get; set; }
+        public double SumCard { get; set; }
+        public double SumBill { get; set; }
+        public double SumBank { get; set; }
+        public double SumDC { get; set; }
+        public double SumTotal { get; set; }
     }
 }

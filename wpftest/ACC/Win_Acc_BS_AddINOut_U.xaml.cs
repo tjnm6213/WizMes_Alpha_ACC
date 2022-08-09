@@ -625,18 +625,18 @@ namespace WizMes_Alpha_JA
 
                                 BasisYearMon = dr["BasisYearMon"].ToString(),
                                 BSItem = dr["BSItem"].ToString(), // 시작할때ㅡ 여기 두칸은 빈칸으로.
-                                OutDate = dr["OutDate"].ToString(),
+                                OutDate = dr["OutDate"].ToString().Trim(),
                                 OrderNo = dr["OrderNO"].ToString(),
                                 OrderID = dr["OrderID"].ToString(),
                                 OrderSeq = dr["OrderSeq"].ToString(),
 
                                 Article = dr["Article"].ToString(),
                                 KCustom = dr["KCustom"].ToString(),
-                                OutQty = dr["OutQty"].ToString(),
-                                UnitPrice = dr["UnitPrice"].ToString(),
-                                Amount = dr["Amount"].ToString(),
-                                VATAmount = dr["VATAmount"].ToString(),
-                                TotalAmount = dr["TotalAmount"].ToString(),
+                                OutQty = stringFormatN0(dr["OutQty"]),
+                                UnitPrice = stringFormatN0(dr["UnitPrice"]),
+                                Amount = stringFormatN0(dr["Amount"]),
+                                VATAmount = stringFormatN0(dr["VATAmount"]),
+                                TotalAmount = stringFormatN0(dr["TotalAmount"]),
                                 VatINDYN = dr["VatINDYN"].ToString(),
                                 CurrencyUnit = dr["CurrencyUnit"].ToString(),
                                 OrderSpec = dr["OrderSpec"].ToString(),
@@ -1320,12 +1320,13 @@ namespace WizMes_Alpha_JA
         }
 
 
+
+
+
         #endregion
 
+        
     }
-
-
-
 
 
 
@@ -1410,6 +1411,6 @@ namespace WizMes_Alpha_JA
 
     }
 
-
+    
 
 }

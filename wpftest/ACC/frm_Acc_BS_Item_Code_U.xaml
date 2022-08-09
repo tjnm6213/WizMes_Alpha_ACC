@@ -103,22 +103,22 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnSearch"  Grid.Column="2" Margin="1" Click="btnSearch_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{DynamicResource btiSearch}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Source={StaticResource tblSearch},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="btnAdd" Grid.Column="3" Margin="1" Click="btnAdd_Click">
+                    <Button x:Name="btnAdd" Grid.Column="2" Margin="1" Click="btnAdd_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{DynamicResource btiInsert}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding Source={StaticResource tblInsert},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnUpdate" Grid.Column="4" Margin="1" Click="btnUpdate_Click">
+                    <Button x:Name="btnUpdate" Grid.Column="3" Margin="1" Click="btnUpdate_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{DynamicResource btiUpdate}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding Source={StaticResource tblUpdate},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnDelete" Grid.Column="4" Margin="1" Click="btnDelete_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiDelete}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblDelete},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="btnClose" Grid.Column="5" Margin="1" Click="btnClose_Click">
@@ -137,33 +137,12 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <!--<Button x:Name="btnBarCode" Grid.Column="0" Margin="1" Click="btnBarCode_Click" Visibility="Hidden">
+                    <Button x:Name="btnSearch"  Grid.Column="2" Margin="1" Click="btnSearch_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="{DynamicResource btiBarCode}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Source={StaticResource tblBarCode},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>-->
-                    <!--<Button x:Name="btnPrint" Grid.Column="1" Margin="1" Click="btnPrint_Click" Visibility="Hidden">
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{DynamicResource btiPrint}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Source={StaticResource tblPrint},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Button>-->
-                    <Button x:Name="btnExcel" Grid.Column="2" Margin="1" Click="btnExcel_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{DynamicResource btiExcel}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Source={StaticResource tblExcel},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                            <Image Source="{DynamicResource btiSearch}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblSearch},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnDelete" Grid.Column="5" Margin="1" Click="btnDelete_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{DynamicResource btiDelete}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Source={StaticResource tblDelete},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
                     <Button x:Name="btnSave" Grid.Column="3" Margin="1" Visibility="Hidden" Click="btnSave_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{DynamicResource btiSave}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
@@ -176,14 +155,20 @@
                             <TextBlock Text="{Binding Source={StaticResource tblCancle},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
+                    <Button x:Name="btnExcel" Grid.Column="5" Margin="1" Click="btnExcel_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{DynamicResource btiExcel}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={StaticResource tblExcel},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
 
                     <Label x:Name="lblNotUseSrh" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" HorizontalContentAlignment="Center"
                        VerticalContentAlignment="Center" MouseLeftButtonUp="LblNotUseSrh_MouseLeftButtonUp">
                         <StackPanel Orientation="Horizontal">
                             <Viewbox>
-                                <CheckBox x:Name="chkNotUseSrh" Padding="0"/>
+                                <CheckBox x:Name="chkNotUseSrh" Padding="0" />
                             </Viewbox>
-                            <TextBlock Text="사용안함 포함" VerticalAlignment="Center" Margin="-2" Padding="0"/>
+                            <TextBlock Text="사용안함 포함" VerticalAlignment="Center" Margin="-2" Padding="0" />
                         </StackPanel>
                     </Label>
                 </Grid>
@@ -267,10 +252,10 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="99*" />
-                            <ColumnDefinition Width="99*" />
-                            <ColumnDefinition Width="93*" />
-                            <ColumnDefinition Width="154*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.5*" />
 
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Grid.Row="0" Content="관리순서" Margin="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>

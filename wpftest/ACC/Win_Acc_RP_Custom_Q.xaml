@@ -3,18 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WizMes_Alpha_JA"        
-             Loaded="UserControl_Loaded"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:WizMes_Alpha_JA"
+             mc:Ignorable="d" Loaded="UserControl_Loaded"
              d:DesignHeight="620" d:DesignWidth="820">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="88*" />
-            <RowDefinition Height="532*" />
-            <RowDefinition Height="20*" />
+            <RowDefinition Height="88*"/>
+            <RowDefinition Height="532*"/>
         </Grid.RowDefinitions>
         <!-- 전체 중 상단 -->
-        <Grid Grid.Row="0" Background="{DynamicResource WizMes_Alpha_JA}" Margin="2">
+        <Grid Grid.Row="0" Background="{DynamicResource WizMes_Alpha_JA}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80*" />
                 <ColumnDefinition Width="50*" />
@@ -29,14 +27,6 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <!--<Grid Grid.Row="3" Grid.Column="2">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <RadioButton x:Name="date" Grid.Column="0" Click="date_Click">발생일</RadioButton>
-                    <RadioButton x:Name="sellMM" Grid.Column="1" Click="sellMM_Click">매출월</RadioButton>
-                </StackPanel>
-            </Grid>-->
-
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
                 <ToggleButton x:Name="tbnOutware" Margin="1"
                               Checked="tbnOutware_Checked" Unchecked="tbnOutware_Unchecked" >
@@ -93,199 +83,49 @@
                     </Viewbox>
                 </ToggleButton>
             </Grid>
-
-
-            <!--<TextBlock Grid.Row="0" Grid.Column="2" Margin="1" Text="부터" />-->
-            <!--<TextBlock Grid.Row="1" Grid.Column="2" Margin="1" Text="까지" />-->
-            <Grid Grid.Row="0" Grid.Column="2">
+            <Grid Grid.Column="2" Grid.Row="0" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="55*" />
-                    <ColumnDefinition Width="95*" />
+                    <ColumnDefinition Width="65*" />
+                    <ColumnDefinition Width="85*" />
                 </Grid.ColumnDefinitions>
-                <Label x:Name="lblPeriod" Grid.Column="0" MouseLeftButtonUp="lblPeriod_MouseLeftButtonUp" >
-                    <StackPanel Orientation="Horizontal" Margin="-2">
-                        <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkPeriod" VerticalAlignment="Center"
-                                      Checked="chkPeriod_Checked" Unchecked="chkPeriod_Unchecked"/>
+                <Label x:Name="lblDateSrh" Grid.Column="0" Margin="1" VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Left" MouseLeftButtonDown="lblDateSrh_MouseLeftButtonDown">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox VerticalAlignment="Center" Margin="5 0 0 0">
+                            <CheckBox x:Name="chkDateSrh" Checked="chkDateSrh_Checked"
+                                      Unchecked="chkDateSrh_Unchecked" VerticalAlignment="Center" IsEnabled="False"/>
                         </Viewbox>
-                        <TextBlock Text="기준일자" VerticalAlignment="Center" Margin="-5,0,0,0" />
+                        <TextBlock Text="년 도" VerticalAlignment="Center" />
                     </StackPanel>
                 </Label>
-                <DatePicker x:Name="dtpSDate" Grid.Column="1" Padding="0"
-                                    local:DatePickerMonthCalendar.IsMonthYear="True"
-                                    local:DatePickerDateFormat.DateFormat="yyyy-MM-dd"/>
+                <DatePicker x:Name="dtpSDate" Grid.Column="1" Padding="0" IsEnabled="True"
+                            local:DatePickerMonthCalendar.IsYear="True"
+                            local:DatePickerDateFormat.DateFormat="yyyy"/>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="2">
+            <Grid Grid.Column="3" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*" />
+                    <ColumnDefinition Width="85*" />
+                </Grid.ColumnDefinitions>
+                <!--<DatePicker x:Name="dtpEDate" Grid.Column="1" Padding="0" IsEnabled="True"
+                            local:DatePickerMonthCalendar.IsMonthYear="True"
+                            local:DatePickerDateFormat.DateFormat="yyyy-MM"/>-->
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="1.33*" />
+                    <ColumnDefinition Width="1.33*" />
                 </Grid.ColumnDefinitions>
-                
-
-                <!--<DatePicker x:Name="dtpEDate" Grid.Column="1" Padding="0"
-                                    local:DatePickerMonthCalendar.IsMonthYear="True"
-                                    local:DatePickerDateFormat.DateFormat="yyyy-MM-dd"/>-->
+              
+                <Button x:Name="btnLastYear" Grid.Column="2" Content="전년" Margin="1" Click="btnLastYear_Click" />
+                <Button x:Name="btnThisYear" Grid.Column="3" Content="금년" Margin="1" Click="btnThisYear_Click" />
             </Grid>
-            <Grid Grid.Column="2" Grid.Row="2" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button x:Name="btnLastMonth" Grid.Column="0" HorizontalContentAlignment="Center" 
-                        VerticalContentAlignment="Center" Click="btnLastYear_Click" >
-                    <TextBlock Text="전년" Margin="-2" />
-                </Button>
-                <Button x:Name="btnThisMonth" Grid.Column="1" HorizontalContentAlignment="Center" 
-                        VerticalContentAlignment="Center" Click="btnThisYear_Click" >
-                    <TextBlock Text="금년" Margin="-2" />
-                </Button>
-                <!--<Button x:Name="btnYesterday" Grid.Column="2" HorizontalContentAlignment="Center" 
-                        VerticalContentAlignment="Center" Click="btnYesterday_Click" >
-                    <TextBlock Text="전일" Margin="-2" />
-                </Button>
-                <Button x:Name="btnToday" Grid.Column="3" HorizontalContentAlignment="Center" 
-                        VerticalContentAlignment="Center" Click="btnToday_Click" >
-                    <TextBlock Text="금일" Margin="-2" />
-                </Button>-->
-            </Grid>
-
-            <!--<Grid Grid.Row="0" Grid.Column="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="95*" />
-                    <ColumnDefinition Width="95*" />
-                    <ColumnDefinition Width="20*" />
-                </Grid.ColumnDefinitions>
-                <Label x:Name="lblCompany" Grid.Column="0" VerticalContentAlignment="Center" 
-                       MouseLeftButtonUp="lblCompany_MouseLeftButtonUp">
-                    <StackPanel Orientation="Horizontal" Margin="-2">
-                        <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkCompany"  VerticalAlignment="Center"
-                                      Checked="chkCompany_Checked" Unchecked="chkCompany_Unchecked"/>
-                        </Viewbox>
-                        <TextBlock Text="매출사업장" VerticalAlignment="Center" Margin="-5,0,0,0"/>
-                    </StackPanel>
-                </Label>
-
-                <ComboBox x:Name="cboCompany" Grid.Column="1" IsEnabled="True" Visibility="Visible"
-                          Background="White"/>
-                --><!--<Button x:Name="btnPfCustom" Grid.Column="2" IsEnabled="False" Click="btnPfCustom_Click" >
-                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
-                </Button>--><!--
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="95*"/>
-                    <ColumnDefinition Width="95*" />
-                    <ColumnDefinition Width="20*" />
-                </Grid.ColumnDefinitions>
-                <Label x:Name="lblCustom" Grid.Row="0" Grid.Column="0"
-                       VerticalContentAlignment="Center" MouseLeftButtonUp="lblCustom_MouseLeftButtonUp">
-                    <StackPanel Orientation="Horizontal" Margin="-2">
-                        <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkCustom" VerticalAlignment="Center"
-                                       Checked="chkCustom_Checked" Unchecked="chkCustom_Unchecked"/>
-                        </Viewbox>
-                        <TextBlock Text="수금처(약)" VerticalAlignment="Center" Margin="-5,0,0,0" />
-                    </StackPanel>
-                </Label>
-                <TextBox x:Name="txtCustom" Grid.Column="1"
-                         IsEnabled="False" Keyboard.KeyDown="txtCustom_KeyDown"/>
-                <Button x:Name="btnpfCustom" Grid.Column="2" IsEnabled="False" Click="btnPfCustom_Click" Visibility="Visible">
-                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
-                </Button>
-            </Grid>
-            <Grid Grid.Row="2" Grid.Column="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="95*" />
-                    <ColumnDefinition Width="95*" />
-                    <ColumnDefinition Width="20*" />
-                </Grid.ColumnDefinitions>
-
-                --><!--지불 입금계정--><!--
-                <Label x:Name="lblMiddle" Grid.Column="0" VerticalContentAlignment="Center"  Visibility="Visible"
-                        >
-                    <StackPanel Orientation="Horizontal" Margin="-2">
-                        <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkMiddle"  VerticalAlignment="Center"
-                                      Checked="ChkMiddle_Checked" Unchecked="ChkMiddle_Unchecked"/>
-                        </Viewbox>
-                        <TextBlock x:Name="tbkMiddle" Text="출금계정" VerticalAlignment="Center" Margin="-5,0,0,0"/>
-                    </StackPanel>
-                </Label>
-                <TextBox x:Name="txtMiddle" Grid.Column="1" Visibility="Hidden"
-                         IsEnabled="False" />
-                <Button x:Name="btnPfMiddle" Grid.Column="2" IsEnabled="False" Click="btnPfMiddle_Click" Visibility="Hidden">
-                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
-                </Button>
-
-                 --><!--수급일때 입금계정--><!--
-                <Label x:Name="lblBSItem" Grid.Column="0" VerticalContentAlignment="Center"  Visibility="Visible"
-                        >
-                    <StackPanel Orientation="Horizontal" Margin="-2">
-                        <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkBSItem"  VerticalAlignment="Center"
-                                      Checked="chkBSItem_Checked" Unchecked="chkBSItem_Unchecked"/>
-                        </Viewbox>
-                        <TextBlock x:Name="tbkBSItem" Text="입금계정" VerticalAlignment="Center" Margin="-5,0,0,0"/>
-                    </StackPanel>
-                </Label>
-                <TextBox x:Name="txtBSItem" Grid.Column="1" Visibility="Visible"
-                         IsEnabled="False" />
-                <Button x:Name="btnPfBSItem" Grid.Column="2" IsEnabled="False" Click="btnPfBSItem_Click" Visibility="Visible">
-                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
-                </Button>
-
-            </Grid>
-            <Grid Grid.Row="3" Grid.Column="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="95*" />
-                    <ColumnDefinition Width="95*" />
-                    <ColumnDefinition Width="20*" />
-                </Grid.ColumnDefinitions>
-                <Label x:Name="lblSalesCharge"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
-                       MouseLeftButtonUp="lblSalesCharge_MouseLeftButtonUp" >
-                    <StackPanel Orientation="Horizontal" Margin="-2">
-                        <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkSalesCharge"  VerticalAlignment="Center"
-                                      Checked="chkSalesCharge_Checked" Unchecked="chkSalesCharge_Unchecked"/>
-                        </Viewbox>
-                        <TextBlock x:Name="tbkSalesCharge" Text="영업사원" VerticalAlignment="Center" Margin="-5,0,0,0"/>
-                    </StackPanel>
-                </Label>
-                <TextBox x:Name="txtSalesCharge"  Grid.Column="1" IsEnabled="False" Visibility="Visible"
-                         Keyboard.KeyDown="txtSalesCharge_KeyDown"/>
-                <Button x:Name="btnPfSalesCharge" Grid.Column="2" IsEnabled="False" Click="btnPfSalesCharge_Click" Visibility="Visible">
-                    <Image Source="{DynamicResource btiPlusFind}" Style="{DynamicResource imgPlusFind}"/>
-                </Button>
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="95*"/>
-                    <ColumnDefinition Width="95*"/>
-                    <ColumnDefinition Width="20*"/>
-                </Grid.ColumnDefinitions>
-                <Label x:Name="lblMoney"  Grid.Column="0" VerticalContentAlignment="Center" Visibility="Visible"
-                       MouseLeftButtonUp="lblMoney_MouseLeftButtonUp" >
-                    <StackPanel Orientation="Horizontal" Margin="-2">
-                        <Viewbox VerticalAlignment="Center">
-                            <CheckBox x:Name="chkMoney"  VerticalAlignment="Center"
-                                      Checked="chkMoney_Checked" Unchecked="chkMoney_Unchecked"/>
-                        </Viewbox>
-                        <TextBlock x:Name="tbkMoney" Text="화폐" VerticalAlignment="Center" Margin="-5,0,0,0"/>
-                    </StackPanel>
-                </Label>
-                <ComboBox x:Name="cboMoney" Grid.Column="1" IsEnabled="True" Visibility="Visible"
-                          Background="White"/>
-            </Grid>-->
 
             
 
-
-
-
-            <Grid Grid.Column="6" Grid.RowSpan="4">
+            <Grid Grid.Column="5" Grid.RowSpan="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -296,35 +136,28 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
-                    <Button x:Name="btnSearch" Grid.Column="0"  Click="btnSearch_Click" >
-                        <StackPanel Orientation="Horizontal" Margin="-2">
+                    <Button x:Name="btnSearch" Grid.Column="0" Margin="1" Click="btnSearch_Click">
+                        <StackPanel Orientation="Horizontal">
                             <Image Source="{DynamicResource btiSearch}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding Source={StaticResource tblSearch},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <!--<Button x:Name="btnClose" Grid.Column="1" Click="btnClose_Click" >
-                        <StackPanel Orientation="Horizontal" Margin="-2">
+                    <Button x:Name="btnClose" Grid.Column="1" Margin="1" Click="btnClose_Click">
+                        <StackPanel Orientation="Horizontal">
                             <Image Source="{DynamicResource btiClose}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding Source={StaticResource tblClose},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
                         </StackPanel>
-                    </Button>-->
+                    </Button>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnExcel" Grid.Column="0" Click="btnExcel_Click">
-                        <StackPanel Orientation="Horizontal" Margin="-2">
+                    <Button x:Name="btnExcel" Grid.Column="1" Margin="1" Click="btnExcel_Click">
+                        <StackPanel Orientation="Horizontal">
                             <Image Source="{DynamicResource btiExcel}" Style="{DynamicResource imgSize}" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding Source={StaticResource tblExcel},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="btnPrint" Grid.Column="1" Click="btnPrint_Click">
-                        <StackPanel Orientation="Horizontal" Margin="-2">
-                            <Image Source="{DynamicResource btiPrint}"  VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Source={StaticResource tblPrint},Mode=OneWay,Path=Text}" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </Grid>
@@ -332,51 +165,575 @@
         </Grid>
         <!-- //전체 중 상단 -->
 
-
         <!-- 전체 중 하단 -->
-        <GroupBox x:Name="grbdgdOutGrid" Grid.Row="1" Margin="1" Visibility="Visible" Header="수금 및 매출 조회" BorderBrush="Gray">
-            <Grid Grid.Row="1">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid x:Name="gridMainHeader">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="18" />
+                </Grid.ColumnDefinitions>
+                <ScrollViewer Grid.Column="0" x:Name="dgdMainHeader" HorizontalScrollBarVisibility="Hidden" 
+                              ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding ElementName=Num, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=CompanyID, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSGBN, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=customID, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=KCustom, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=CurrencyUnit, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=InitRemainAmount, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount01, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount01, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount01, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount01, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount02, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount02, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount02, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount02, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount04, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount01, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount01, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount01, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount05, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount05, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount05, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount05, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount03, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount07, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount07, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount07, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount07, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount08, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount08, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount08, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount08, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount09, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount09, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount09, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount09, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount10, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount10, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount10, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount10, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount11, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount11, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount11, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount11, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount12, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount12, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount12, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount12, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPSumAmount13, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RPDCAmount13, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=BSTotalAmount13, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=RemainAmount13, Path=ActualWidth}" />
+                        </Grid.ColumnDefinitions>
+                        <DataGridColumnHeader Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Content="No"  />
+                        <DataGridColumnHeader Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Content="업체명" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Content="전년&#10;잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="4" x:Name="dgdHeader1" Content="1월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="3" Content="입금액"  />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="4" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="5" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="6" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="4" x:Name="dgdHeader2" Content="2월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="7" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="8" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="9" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="10" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="11" Grid.ColumnSpan="4" x:Name="dgdHeader3" Content="3월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="11" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="12" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="13" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="14" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="15" Grid.ColumnSpan="4" x:Name="dgdHeader4" Content="4월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="15" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="16" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="17" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="18" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="19" Grid.ColumnSpan="4" x:Name="dgdHeader5" Content="5월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="19" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="20" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="21" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="22" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="23" Grid.ColumnSpan="4" x:Name="dgdHeader6" Content="6월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="23" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="24" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="25" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="26" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="27" Grid.ColumnSpan="4" x:Name="dgdHeader7" Content="7월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="27" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="28" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="29" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="30" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="31" Grid.ColumnSpan="4" x:Name="dgdHeader8" Content="8월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="31" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="32" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="33" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="34" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="35" Grid.ColumnSpan="4" x:Name="dgdHeader9" Content="9월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="35" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="36" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="37" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="38" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="39" Grid.ColumnSpan="4" x:Name="dgdHeader10" Content="10월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="39" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="40" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="41" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="42" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="43" Grid.ColumnSpan="4" x:Name="dgdHeader11" Content="11월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="43" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="44" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="45" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="46" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="47" Grid.ColumnSpan="4" x:Name="dgdHeader12" Content="12월" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="47" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="48" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="49" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="50" Content="잔액" />
+                        <DataGridColumnHeader Grid.Row="0" Grid.Column="47" Grid.ColumnSpan="4" x:Name="dgdHeader13" Content="누계" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="47" Content="입금액" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="48" Content="매출할인" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="49" Content="매출계(부가세포함)" />
+                        <DataGridColumnHeader Grid.Row="1" Grid.Column="50" Content="잔액" />
 
-
-                <DataGrid  x:Name="dgdOutSummaryGrid" 
-                           IsReadOnly="True" Grid.Row="0" SelectionChanged="dgdOutGrid_SelectionChanged">
-                    <DataGrid.RowStyle>
-                        <Style TargetType="DataGridRow">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=ColorLightLightGray}" Value="true">
-                                    <Setter Property="Background" Value="WhiteSmoke" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=ColorLightGray}" Value="true">
-                                    <Setter Property="Background" Value="Silver" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=ColorGray}" Value="true">
-                                    <Setter Property="Background" Value="Gray" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.RowStyle>
-
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="dgdtxtcolNum"  Width="0.05*" Binding="{Binding Num}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom" Header="업체명" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount" Header="전년잔액" Width="*" Binding="{Binding YYYYMM}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom2" Header="1월 입금액" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount2" Header="1월 매출할인" Width="*" Binding="{Binding YYYYMM}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolCustom3" Header="1월 매출계(부가세포함)" Width="*" Binding="{Binding YYYY}" />
-                        <DataGridTextColumn x:Name="dgdtxtcolAmount3" Header="1월잔액" Width="*" Binding="{Binding YYYYMM}"/>
-                        <DataGridTextColumn x:Name="dgdtxtcolX3"  Width="0.05*" />
-
-                    </DataGrid.Columns>
-                </DataGrid>
+                    </Grid>
+                </ScrollViewer>
             </Grid>
-        </GroupBox>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="       **잔액란 더블클릭시, 매입/매출 수금/지불 잔액 내용을 조회할 수 있습니다." />
-            <TextBlock x:Name="SearchCount" Grid.Column="1" Text="검색건수: "/>
+            <DataGrid Grid.Row="1" x:Name="dgdMain" HeadersVisibility="None" ScrollViewer.PanningMode="VerticalFirst"
+                      ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False"
+                      >
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=ArticleTotal_Color}" Value="true">
+                                <Setter Property="Background" Value="#D8D8D8" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Total_Color}" Value="true">
+                                <Setter Property="Background" Value="#BDBDBD" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="Num" MinWidth="40">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Num}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="KCustom" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding KCustom}" VerticalAlignment="Center" TextAlignment="Left" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="InitRemainAmount" MinWidth="40">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding InitRemainAmount}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount01" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount01}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount01" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount01}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount01" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount01}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount01" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount01}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount02" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount02}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount02" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount02}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount02" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount02}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount02" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount02}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount03" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount03}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount03" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount03}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount03" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount03}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount03" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount03}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount04" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount04}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount04" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount04}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount04" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount04}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount04" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount04}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount05" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount05}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount05" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount05}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount05" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount05}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount05" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount05}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount06" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount06}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount06" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount06}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount06" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount06}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount06" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount06}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount07" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount07}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount07" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount07}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount07" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount07}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount07" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount07}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount08" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount08}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount08" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount08}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount08" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount08}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount08" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount08}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn x:Name="RPSumAmount09" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount09}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount09" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount09}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount09" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount09}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount09" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount09}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount10" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount10}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount10" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount10}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount10" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount10}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount10" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount10}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount11" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount11}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount11" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount11}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount11" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount11}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount11" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount11}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount12" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount12}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount12" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount12}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount12" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount12}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount12" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount12}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="RPSumAmount13" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPSumAmount13}" VerticalAlignment="Center" TextAlignment="Center" Padding="5 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RPDCAmount13" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RPDCAmount13}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="BSTotalAmount13" MinWidth="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BSTotalAmount13}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="RemainAmount13" MinWidth="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RemainAmount13}" VerticalAlignment="Center" TextAlignment="Right" Padding="5 0 3 0" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                 
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </UserControl>

@@ -489,11 +489,11 @@ namespace WizMes_Alpha_JA
 
                                 BSDate = dr["BSDate"].ToString(),
                                 Article = dr["Article"].ToString(),
-                                qty = dr["qty"].ToString(),
-                                UnitPrice = dr["UnitPrice"].ToString(),
-                                BSSumAmount = dr["BSSumAmount"].ToString(),
+                                qty = stringFormatN0(dr["qty"]),
+                                UnitPrice = stringFormatN0(dr["UnitPrice"]),
+                                BSSumAmount = stringFormatN0(dr["BSSumAmount"]),
 
-                                initRemainAmount = dr["initRemainAmount"].ToString(),
+                                initRemainAmount = stringFormatN0(dr["initRemainAmount"]),
                                 comments = dr["comments"].ToString(),
 
                             };

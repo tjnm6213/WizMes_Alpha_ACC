@@ -492,7 +492,6 @@ namespace WizMes_Alpha_JA
                 dgdSumGrid.Items.Clear();
             }
 
-            var WinAccBuySalesSumQ = new Win_Acc_BuySales_SumQ_CodeView();
 
             try
             {
@@ -557,31 +556,35 @@ namespace WizMes_Alpha_JA
                            
                             {
                                 customShort = dr["customShort"].ToString(),
-                                qty = dr["qty"].ToString(),
-                                rtnQty = dr["rtnQty"].ToString(),
-                                RtnPcnt = dr["RtnPcnt"].ToString(),
-                                AvgPrice = dr["AvgPrice"].ToString(),
+                                qty = stringFormatN0(dr["qty"]),
+                                rtnQty = stringFormatN0(dr["rtnQty"]),
+                                RtnPcnt = stringFormatN0(dr["RtnPcnt"]),
+                                AvgPrice = stringFormatN0(dr["AvgPrice"]),
                                 CurrencyUnitname = dr["CurrencyUnitname"].ToString(),
-                                Amount = dr["Amount"].ToString(),
-                                VATAmount = dr["VATAmount"].ToString(),
-                                RtnAmount = dr["RtnAmount"].ToString(),
-                                InitRemainAmount = dr["InitRemainAmount"].ToString(),
-                                RPAMOUNT = dr["RPAMOUNT"].ToString(),
-                                RPDCAmount = dr["RPDCAmount"].ToString(),
-                                RPDCAmountPcnt = dr["RPDCAmountPcnt"].ToString(),
-                                RemainAmount = dr["RemainAmount"].ToString()
+                                Amount = stringFormatN0(dr["Amount"]),
+                                VATAmount = stringFormatN0(dr["VATAmount"]),
+                                RtnAmount = stringFormatN0(dr["RtnAmount"]),
+                                InitRemainAmount = stringFormatN0(dr["InitRemainAmount"]),
+                                RPAMOUNT = stringFormatN0(dr["RPAMOUNT"]),
+                                RPDCAmount = stringFormatN0(dr["RPDCAmount"]),
+                                RPDCAmountPcnt = stringFormatN0(dr["RPDCAmountPcnt"]),
+                                RemainAmount = stringFormatN0(dr["RemainAmount"]),
+                                gbn = stringFormatN0(dr["gbn"]),
+                                TotalAmount = stringFormatN0(dr["TotalAmount"]),
+                             
                         
                             };
                             //하단 그리드에 합계 낼때 
 
-                                WinAccBuySalesSumQ.Sumqty += ConvertDouble(WinAccBuySalesQ.qty);
-                                WinAccBuySalesSumQ.SumAvgPrice += ConvertDouble(WinAccBuySalesQ.AvgPrice);
-                                WinAccBuySalesSumQ.SumAmount += ConvertDouble(WinAccBuySalesQ.Amount);
-                                WinAccBuySalesSumQ.SumRtnAmount += ConvertDouble(WinAccBuySalesQ.RtnAmount);
-                                WinAccBuySalesSumQ.SumRPAMOUNT += ConvertDouble(WinAccBuySalesQ.RPAMOUNT);
-                                WinAccBuySalesSumQ.SumRPDCAmount += ConvertDouble(WinAccBuySalesQ.RPDCAmount);
-                                WinAccBuySalesSumQ.RPDCAmountPcnt += ConvertDouble(WinAccBuySalesQ.RPDCAmountPcnt);
-                            WinAccBuySalesSumQ.CurrencyUnitname = WinAccBuySalesQ.CurrencyUnitname;
+                            if (!WinAccBuySalesQ.gbn.Trim().Equals("9"))
+                            {
+                                dgdBuySaleGrid.Items.Add(WinAccBuySalesQ);
+                            }
+                            // 총계
+                            else
+                            {
+                                dgdSumGrid.Items.Add(WinAccBuySalesQ);
+                            }
 
 
                             // 콤마입히기 > 수량
@@ -599,11 +602,9 @@ namespace WizMes_Alpha_JA
                                 {
                                 WinAccBuySalesQ.Amount = Lib.Instance.returnNumStringZero(WinAccBuySalesQ.Amount);
                                 }
-                            dgdBuySaleGrid.Items.Add(WinAccBuySalesQ);
+                        
 
                         }
-                        dgdSumGrid.Items.Add(WinAccBuySalesSumQ);
-
 
                     }
                 }
@@ -1313,21 +1314,13 @@ namespace WizMes_Alpha_JA
         public string RPDCAmount { get; set; }
         public string RPDCAmountPcnt { get; set; }
         public string RemainAmount { get; set; }
-    
+        public string gbn { get; set; }
+        public string SumAmount { get; set; }
+        public string TotalAmount { get; set; }
+
     }
 
-    class Win_Acc_BuySales_SumQ_CodeView
-    {
-        public double Sumqty { get; set; }
-        public double SumAvgPrice { get; set; }
-        public double SumAmount { get; set; }
-        public double SumRtnAmount { get; set; }
-        public double SumRPAMOUNT { get; set; }
-        public double SumRPDCAmount { get; set; }
-        public string CurrencyUnitname { get; set; }
-        public double RPDCAmountPcnt { get; set; }
-    
-    }
+   
 
 
 }

@@ -563,18 +563,18 @@ namespace WizMes_Alpha_JA
                                 bsItemName = dr["bsItemName"].ToString(),
                                 article = dr["article"].ToString(),
 
-                                qty = dr["qty"].ToString(),
-                                rtnqty = dr["rtnqty"].ToString(),
-                                rtnpcnt = dr["rtnpcnt"].ToString(),
-                                avgprice = dr["avgprice"].ToString(),
+                                qty = stringFormatN0(dr["qty"]),
+                                rtnqty = stringFormatN0(dr["rtnqty"]),
+                                rtnpcnt = stringFormatN0(dr["rtnpcnt"]),
+                                avgprice = stringFormatN0(dr["avgprice"]),
                                 CurrencyUnit = dr["CurrencyUnit"].ToString(),
 
-                                Amount = dr["Amount"].ToString(),
-                                VATAmount = dr["VATAmount"].ToString(),
-                                RtnAmount = dr["RtnAmount"].ToString(),
-                                RPAMOUNT = dr["RPAMOUNT"].ToString(),
-                                RPDCAmount = dr["RPDCAmount"].ToString(),
-                                RPDCAmountpcnt = dr["RPDCAmountpcnt"].ToString()
+                                Amount = stringFormatN0(dr["Amount"]),
+                                VATAmount = stringFormatN0(dr["VATAmount"]),
+                                RtnAmount = stringFormatN0(dr["RtnAmount"]),
+                                RPAMOUNT = stringFormatN0(dr["RPAMOUNT"]),
+                                RPDCAmount = stringFormatN0(dr["RPDCAmount"]),
+                                RPDCAmountpcnt = stringFormatN0(dr["RPDCAmountpcnt"])
 
                             };
                             //하단 그리드에 합계 낼때 

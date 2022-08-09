@@ -581,7 +581,7 @@ namespace WizMes_Alpha_JA
                                 CustomID = dr["CustomID"].ToString(),
                                 ArticleKind = dr["ArticleKind"].ToString(),
                                 Article = dr["Article"].ToString(),
-                                Qty = dr["Qty"].ToString(),
+                                Qty = stringFormatN0(dr["Qty"]),
                                 Per = "0.00"
                             };
                             // 콤마입히기 > 합계금액

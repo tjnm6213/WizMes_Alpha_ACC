@@ -467,6 +467,10 @@ namespace WizMes_Alpha_JA
         // 매출 클릭.
         private void tbnOutware_CheckedChange()
         {
+            if (dgSum.Items.Count > 0)
+            {
+                dgSum.Items.Clear();
+            }
             this.DataContext = null;
 
             tbkBSItem.Text = "매출항목";
@@ -483,6 +487,11 @@ namespace WizMes_Alpha_JA
         // 매입 클릭.
         private void tbnStuffin_CheckedChange()
         {
+            if (dgSum.Items.Count > 0)
+            {
+                dgSum.Items.Clear();
+            }
+
             this.DataContext = null;
 
             tbkBSItem.Text = "매입항목";
@@ -495,7 +504,7 @@ namespace WizMes_Alpha_JA
             grbdgdInGrid.Visibility = Visibility.Visible;
             sellMM.Visibility = Visibility.Hidden;
             buyMM.Visibility = Visibility.Visible;
-            txtblockSearchTotalOut.Refresh();
+            //txtblockSearchTotalOut.Refresh();
 
         }
 
@@ -585,10 +594,10 @@ namespace WizMes_Alpha_JA
                                 Num = i + 1,
                                 IsCheck = false,
 
-                                Count = dr["건수"].ToString(),
-                                SumQty = dr["수량"].ToString(),
-                                SumTotalAmount = dr["매출량"].ToString(),
-                                Sumdollar = dr["￦"].ToString()
+                                Count = stringFormatN0(dr["건수"]),
+                                SumQty = stringFormatN0(dr["수량"]),
+                                SumTotalAmount = stringFormatN0(dr["매출량"]),
+                                Sumdollar = stringFormatN0(dr["￦"])
                                 
                             };
                            
@@ -613,7 +622,7 @@ namespace WizMes_Alpha_JA
                             i++;
                         }
 
-                        txtblockSearchTotalOut.Text = "      합계 : " + i.ToString() + "건";
+                        //txtblockSearchTotalOut.Text = "      합계 : " + i.ToString() + "건";
                         //txtblockSearchAmountOut.Text = "금액 : " + stringFormatN0(SumOut.SumAmount) + "원";
                         //txtblockSearchVATOut.Text = "부가세 : " + stringFormatN0(SumOut.SumVatAmount) + "원";
                         //txtblockSearchTotalOut.Text = "합계금액 : " + stringFormatN0(SumOut.SumTotalAmount) +"원";
@@ -650,6 +659,11 @@ namespace WizMes_Alpha_JA
             if (dgdOutGrid.Items.Count > 0)
             {
                 dgdOutGrid.Items.Clear();
+            }
+
+            if (dgSum.Items.Count > 0)
+            {
+                dgSum.Items.Clear();
             }
 
             try
@@ -714,12 +728,12 @@ namespace WizMes_Alpha_JA
                                 CustomNat = dr["CustomNat"].ToString(),
                                 SalesChargeName = dr["SalesChargeName"].ToString(),
                                 CustomShort = dr["CustomShort"].ToString(),
-                                QTY = dr["QTY"].ToString(),
-                                UnitPrice = dr["UnitPrice"].ToString(),
-                                AMOUNT = dr["Amount"].ToString(),
-                                VATAmount = dr["VATAmount"].ToString(),
-                                INOUTNO = dr["INOUTNO"].ToString(),
-                                TotalAmount = dr["TotalAmount"].ToString(),
+                                QTY = stringFormatN0(dr["QTY"]),
+                                UnitPrice = stringFormatN0(dr["UnitPrice"]),
+                                AMOUNT = stringFormatN0(dr["Amount"]),
+                                VATAmount = stringFormatN0(dr["VATAmount"]),
+                                INOUTNO = dr["InOutNo"].ToString(),
+                                TotalAmount = stringFormatN0(dr["TotalAmount"]),
                                 Color = dr["Color"].ToString(),
                                 CompanyName = dr["CompanyName"].ToString(),
                                 BasisYearMon = dr["BasisYearMon"].ToString(),
@@ -792,7 +806,7 @@ namespace WizMes_Alpha_JA
                             i++;
                         }
 
-                        txtblockSearchTotalOut.Text = "      합계 : " + i.ToString() + "건";
+                        //txtblockSearchTotalOut.Text = "      합계 : " + i.ToString() + "건";
                         //txtblockSearchAmountOut.Text = "금액 : " + stringFormatN0(SumOut.SumAmount) + "원";
                         //txtblockSearchVATOut.Text = "부가세 : " + stringFormatN0(SumOut.SumVatAmount) + "원";
                         //txtblockSearchTotalOut.Text = "합계금액 : " + stringFormatN0(SumOut.SumTotalAmount) +"원";
@@ -825,6 +839,10 @@ namespace WizMes_Alpha_JA
             if (dgdInGrid.Items.Count > 0)
             {
                 dgdInGrid.Items.Clear();
+            }
+            if (dgSum.Items.Count > 0)
+            {
+                dgSum.Items.Clear();
             }
 
             try
@@ -890,12 +908,12 @@ namespace WizMes_Alpha_JA
                                 CustomNat = dr["CustomNat"].ToString(),
                                 SalesChargeName = dr["SalesChargeName"].ToString(),
                                 CustomShort = dr["CustomShort"].ToString(),
-                                QTY = dr["QTY"].ToString(),
-                                UnitPrice = dr["UnitPrice"].ToString(),
-                                AMOUNT = dr["Amount"].ToString(),
-                                VATAmount = dr["VATAmount"].ToString(),
-                                INOUTNO = dr["INOUTNO"].ToString(),
-                                TotalAmount = dr["TotalAmount"].ToString(),
+                                QTY = stringFormatN0(dr["QTY"]),
+                                UnitPrice = stringFormatN0(dr["UnitPrice"]),
+                                AMOUNT = stringFormatN0(dr["Amount"]),
+                                VATAmount = stringFormatN0(dr["VATAmount"]),
+                                INOUTNO = dr["InOutNo"].ToString(),
+                                TotalAmount = stringFormatN0(dr["TotalAmount"]),
                                 Color = dr["Color"].ToString(),
                                 CompanyName = dr["CompanyName"].ToString(),
                                 BasisYearMon = dr["BasisYearMon"].ToString(),
@@ -966,7 +984,7 @@ namespace WizMes_Alpha_JA
                             i++;
                         }
 
-                        txtblockSearchTotalOut.Text = "      검색건수 : " + i.ToString() + "건";
+                        //txtblockSearchTotalOut.Text = "      검색건수 : " + i.ToString() + "건";
                         //txtblockSearchAmountIn.Text = "금액 : " + stringFormatN0(SumIn.SumAmount) + "원";
                         //txtblockSearchVATIn.Text = "부가세 : " + stringFormatN0(SumIn.SumVatAmount) + "원";
                         //txtblockSearchTotalIn.Text = "합계금액 : " + stringFormatN0(SumIn.SumTotalAmount) + "원";

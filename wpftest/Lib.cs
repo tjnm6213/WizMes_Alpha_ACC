@@ -134,13 +134,13 @@ namespace WizMes_Alpha_JA
 
         /// <summary>
         /// 올해 Datetime 리스트 형식
-        /// list[0] 올해1월1일, list[1] 현재일자
+        /// list[0] 올해1월1일, list[1] 올해 12월 31일
         /// </summary>
         /// <returns></returns>
         public List<DateTime> BringThisYearDatetimeFormat()
         {
             DateTime dFirstDayOfThisYear = new DateTime(DateTime.Now.Year, 1, 1);
-            DateTime dToday = DateTime.Today;
+            DateTime dToday = new DateTime(DateTime.Now.Year, 12, 31);
 
             List<DateTime> ld = new List<DateTime>();
             ld.Add(dFirstDayOfThisYear);
