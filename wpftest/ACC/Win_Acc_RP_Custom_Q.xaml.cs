@@ -283,7 +283,7 @@ namespace WizMes_Alpha_JA
                                 KCustom = dr["KCustom"].ToString(),
                                 CurrencyUnit = dr["CurrencyUnit"].ToString(),
 
-                                InitRemainAmount = dr["InitRemainAmount"].ToString(),
+                                InitRemainAmount = stringFormatN0(dr["InitRemainAmount"]),
                                 RPSumAmount01 = stringFormatN0(dr["RPSumAmount01"]),
                                 RPDCAmount01 = stringFormatN0(dr["RPDCAmount01"]),
                                 BSTotalAmount01 = stringFormatN0(dr["BSTotalAmount01"]),
